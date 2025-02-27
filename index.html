@@ -1,1 +1,1078 @@
-Hello World
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - William Eduardo Huera Ortiz</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin: 30px 0 20px;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .profile-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .profile-info div {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 20px;
+        }
+        
+        .profile-info strong {
+            display: inline-block;
+            width: 120px;
+            color: var(--dark-color);
+        }
+        
+        .section {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .skill-bars {
+            margin: 20px 0;
+        }
+        
+        .skill-bar {
+            margin-bottom: 15px;
+        }
+        
+        .skill-name {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .skill-level {
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .skill-percent {
+            height: 100%;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+        }
+        
+        .project {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .project:last-child {
+            border-bottom: none;
+        }
+        
+        .project-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .project-details {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .project-details dt {
+            font-weight: bold;
+            color: var(--dark-color);
+        }
+        
+        .companies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .company {
+            flex: 1;
+            min-width: 250px;
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .company-date {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .company-name {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+        
+        .chart {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            .chart {
+                width: 48%;
+            }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 30px;
+        }
+        
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>William Eduardo Huera Ortiz</h1>
+            <p>Arquitecto de software / Arquitecto IT / Lider Técnico / Desarrollador Senior</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Datos Básicos -->
+        <section class="section">
+            <h2>Datos Básicos</h2>
+            <div class="profile-info">
+                <div>
+                    <p><strong>Nombre:</strong> William Eduardo Huera Ortiz</p>
+                    <p><strong>C.I:</strong> 1712740644</p>
+                    <p><strong>Dirección:</strong> Manglar Alto OE1-98</p>
+                    <p><strong>Teléfono:</strong> 0995331328</p>
+                </div>
+                <div>
+                    <p><strong>Estado Civil:</strong> Casado</p>
+                    <p><strong>Edad:</strong> 43 años</p>
+                    <p><strong>Email:</strong> <a href="mailto:eduardohuera@gmail.com">eduardohuera@gmail.com</a> / <a href="mailto:whuera@gmail.com">whuera@gmail.com</a></p>
+                    <p><strong>LinkedIn:</strong> <a href="https://ec.linkedin.com/in/williamhuera" target="_blank">https://ec.linkedin.com/in/williamhuera</a></p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Datos Estudios -->
+        <section class="section">
+            <h2>Formación Académica</h2>
+            <div class="education">
+                <p><strong>Ingeniería de Sistemas</strong><br>
+                Universidad: E.S.P.E</p>
+                
+                <p><strong>Tecnología en Administración de Empresas</strong><br>
+                Universidad: E.S.P.E.<br>
+                en curso</p>
+            </div>
+        </section>
+        
+        <!-- Datos Profesionales -->
+        <section class="section">
+            <h2>Perfil Profesional</h2>
+            
+            <h3>Área Software</h3>
+            <p><strong>Descripción Perfil:</strong> Arquitecto de software / Arquitecto IT / Lider Técnico / Desarrollador Senior</p>
+            <p><strong>Experiencia:</strong> +10 años en Desarrollo e implementación de Software</p>
+            <p><strong>Perfil Técnico:</strong> Arquitecto, Desarrollador Senior en tecnologías Java, manejo de herramientas IBM para arquitectura de Software basada en servicios (SOA). Manejo de Herramientas de programación de última generación (Java / C# / Python / C++ / Shell / Html / Javascript / WebServices)</p>
+            
+            <h3>Área Servidores</h3>
+            <p><strong>Perfil:</strong> Administrador de servidores Linux, Windows</p>
+            <p><strong>Perfil Técnico:</strong> manejo de servidores Windows y Linux, manejo de configuraciones de networking, administración de usuarios, administración del Internet y Servidores Web, mail, FTP</p>
+            
+            <h3>Area Networking / Telecomunicaciones</h3>
+            <p><strong>Perfil:</strong> Técnico Senior en redes Wireless y microonda para puntos de acceso y clientes</p>
+            <p><strong>Descripción Perfil Técnico:</strong> manejo de ruteadores CISCO de última generación para redes Wireless de largo alcance con antenas microonda para clientes remotos, técnico en instalación de redes de largo alcance y remotas (puntos de rebote), administrador de redes para ISP's, administración y manejo de servidores Linux</p>
+            
+            <h3>Seguridad Informática</h3>
+            <p><strong>Perfil:</strong> Técnico en instalación servidores (seguros) Linux, especialista en seguridad informática con uso de la distribución de Kali linux, uso de la suite completa para testeo, optimización y búsqueda de fallos de seguridad, a nivel de configuración del servidor, a nivel de red, a nivel de aplicaciones.</p>
+            
+            <h3>SysAdmin</h3>
+            <p><strong>Perfil:</strong> Técnico Sysadmin en administración y operación de servidores Linux (RedHat / Centos / Fedora), tanto para administración de aplicaciones así como administración de servidores Web (Jboss / Tomcat / WebLogic / Websphere), y administración de red y recursos del servidor y del sistema operativo.</p>
+        </section>
+        
+        <!-- Estadísticas -->
+        <section class="section">
+            <h2>Estadísticas y Habilidades</h2>
+            
+            <div class="chart-container">
+                <div class="chart">
+                    <h3>Lenguajes de Programación</h3>
+                    <div class="skill-bars">
+                        <div class="skill-bar">
+                            <span class="skill-name">Java</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 98%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">PL/SQL</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">SOA</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 93%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">PHP</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">C#</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">JavaScript</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart">
+                    <h3>Conocimiento en Administración de Servidores</h3>
+                    <div class="skill-bars">
+                        <div class="skill-bar">
+                            <span class="skill-name">Kali Linux</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">Linux RedHat</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">Fedora</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">Centos</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">Windows Server</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart">
+                    <h3>Conocimientos en Tecnologías de la Información</h3>
+                    <div class="skill-bars">
+                        <div class="skill-bar">
+                            <span class="skill-name">Arquitectura de Software</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">Integrador de Aplicaciones</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 98%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">Telecomunicaciones</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">Sysadmin</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 93%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">Seguridad Informática</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart">
+                    <h3>Análisis de Conocimientos</h3>
+                    <div class="skill-bars">
+                        <div class="skill-bar">
+                            <span class="skill-name">Arquitecto de Software</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">Especialista en Seguridades</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">Administrador de Redes</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <span class="skill-name">Administrador de Servidores e infraestructura</span>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Experiencia Profesional -->
+        <section class="section">
+            <h2>Experiencia Profesional</h2>
+            
+            <p>Tengo experiencia en proyectos de desarrollo de software, he participado en múltiples proyectos de gran envergadura en los cuales he tenido diferentes roles, Arquitecto IT / Proyect Lider / Jefe Desarrollo / Lider Técnico / Analista Senior, He formado parte del equipo Core-Middleware para la empresa TATA dentro del Proyecto cambio de de plataforma Core para el Banco Pichincha donde he participado en diferentes etapas para las entregas de los diferentes Hitos.</p>
+            
+            <h3>Proyectos Relevantes</h3>
+            
+            <div class="project">
+                <div class="project-title">Proyecto Tarjeta Prepago Banco Pichincha</div>
+                <dl class="project-details">
+                    <dt>Cliente:</dt>
+                    <dd>Banco Pichincha</dd>
+                    
+                    <dt>Países:</dt>
+                    <dd>Ecuador</dd>
+                    
+                    <dt>Periodo:</dt>
+                    <dd>2019-2020</dd>
+                    
+                    <dt>Rol:</dt>
+                    <dd>Líder Técnico / Desarrollador Senior</dd>
+                </dl>
+                
+                <p><strong>Descripción:</strong> Implementación del producto "Tarjeta Prepago para Banco Pichincha mediante el swith transaccional Banred"</p>
+                
+                <p><strong>Servicio al Usuario Final:</strong> Proveer del producto "Tarjeta Prepago" de Banco Pichincha a todos sus clientes, en base al segmento y clasificación que el Banco tiene de los usuarios, y a través de los canales ATM, CNB, implementar el servicio para que los usuarios dispongan de este medio de pago de forma sencilla y automática, y puedan realizar transacciones de retiro y avance de efectivo desde cualquier canal que el Banco tiene desplegado para sus usuarios.</p>
+                
+                <p><strong>Plataformas de implementación:</strong> Banco Pchincha: Core / Middleware / IB10 / Banred: Switch Transaccional, Base24 – EPS, UP</p>
+                
+                <p><strong>Lenguajes y plataformas de desarrollo:</strong></p>
+                <ul>
+                    <li>API Java: Web Services (SOAP / Rest)</li>
+                    <li>API UP: Endpoints / Web Services (SOAP) / Rest</li>
+                    <li>BackEnd Base24-EPS: Ruteo transaccional / C++</li>
+                    <li>BackEnd Base Datos: Oracle (PLSql)</li>
+                </ul>
+                
+                <p><strong>IDE's Desarrollo:</strong></p>
+                <ul>
+                    <li>Switch: ACI GUI Desktop / UP Builder</li>
+                    <li>Java: STS (spring tool suite) / Intellij</li>
+                    <li>C++: Intellij</li>
+                    <li>Base Datos: Sqldeveloper / Toad</li>
+                </ul>
+                
+                <p><strong>Destacados:</strong> Proyecto entregado de acuerdo al cronograma, con la integración tanto de Banco Pichincha, así como del switch transaccional</p>
+            </div>
+            
+            <div class="project">
+                <div class="project-title">Proyecto Integración Remesadora MoneyGram / Banco Pichincha</div>
+                <dl class="project-details">
+                    <dt>Cliente:</dt>
+                    <dd>Banco Pichincha / MoneyGram</dd>
+                    
+                    <dt>Países:</dt>
+                    <dd>Ecuador - EEUU</dd>
+                    
+                    <dt>Periodo:</dt>
+                    <dd>Marzo 2019 - Noviembre 2019</dd>
+                    
+                    <dt>Rol:</dt>
+                    <dd>Líder Técnico / Desarrollador Senior</dd>
+                </dl>
+                
+                <p><strong>Descripción:</strong> Implementación del servicio de integración con Banco Pichincha y Remesadora MoneyGram, proyecto dividido en fase / Hitos, principales Hitos a realizar:</p>
+                <ul>
+                    <li>Generar módulo para el control de agentes de pagos hacia MoneyGram.</li>
+                    <li>Generar conexión con el bus de servicio, para el envío y pago de remesas al exterior en efectivo.</li>
+                    <li>Generar conexión con el bus de servicio, para el pago de remesas enviadas por MoneyGram, ventanilla o CNB (efectivo).</li>
+                    <li>Generar conexiones con MoneyGram, para el envío y recepción de remesas.</li>
+                    <li>Realizar la afectación contable en las cuentas de Banco.</li>
+                </ul>
+                
+                <p><strong>Servicio al Usuario Final:</strong> Proveer del servicio de la remesadora BWise a través de los canales de Banco Pichincha, Implementar el servicio de envío y pago en efectivo de remesas al exterior, y la recepción y pago en efectivo de remesas desde el exterior, en los canales ventanilla y CNB de Banco Pichincha.</p>
+                
+                <p><strong>Plataformas de implementación:</strong> Banco Pchincha: Core / Middleware / IB10 / Banred: Switch Transaccional, Base24 – EPS, UP / Remesadore BWise: Core / Middleware</p>
+                
+                <p><strong>Lenguajes y plataformas de desarrollo:</strong></p>
+                <ul>
+                    <li>API Java: Web Services (SOAP / Rest)</li>
+                    <li>API UP: Endpoints / Web Services (SOAP) / Rest</li>
+                    <li>BackEnd Base24-EPS: Ruteo transaccional / C++</li>
+                </ul>
+                
+                <p><strong>IDE's Desarrollo:</strong></p>
+                <ul>
+                    <li>Switch: ACI GUI Desktop / UP Builder</li>
+                    <li>Java: STS (spring tool suite) / Intellij</li>
+                    <li>Test Webservices: SoapUI pro / Postman</li>
+                    <li>C++: Intellij</li>
+                    <li>Base Datos: Sqldeveloper / Toad</li>
+                </ul>
+                
+                <p><strong>Destacados:</strong> Proyecto entregado de acuerdo al cronograma, con la integración tanto de Banco Pichincha, asi como del switch transaccional</p>
+            </div>
+            
+            <div class="project">
+                <div class="project-title">Proyecto Modulo de autenticación y seguridad Banco Davivienda</div>
+                <dl class="project-details">
+                    <dt>Cliente:</dt>
+                    <dd>Grupo Banco Davivienda</dd>
+                    
+                    <dt>Países:</dt>
+                    <dd>Colombia - Panamá</dd>
+                    
+                    <dt>Periodo:</dt>
+                    <dd>2016-2018</dd>
+                    
+                    <dt>Rol:</dt>
+                    <dd>Desarrollador Senior</dd>
+                </dl>
+                
+                <p><strong>Descripción:</strong> Implementación del módulo de seguridad en la banca electrónica para el portal de usuarios (empresas / personas)</p>
+                
+                <p><strong>Servicio al Usuario Final:</strong> Proveer del servicio de Banca electrónica (módulo de autenticación y seguridad), para los usuarios y clientes del Banco</p>
+                
+                <p><strong>Plataformas de implementación:</strong> Banco Davivienda: Core / Middleware / Cluster Jboss / Cluster Oracle</p>
+                
+                <p><strong>Lenguajes y plataformas de desarrollo:</strong></p>
+                <ul>
+                    <li>Capa de implementación móvil: Java / Webcontainer</li>
+                    <li>Front: Java JSF / HTML / Angular</li>
+                    <li>Middleware: Java framework spring boot, Web Services (SOAP / Rest)</li>
+                    <li>Mensajeria Java: Apache Kafka</li>
+                    <li>API Seguridad: Endpoint RSA</li>
+                    <li>BackEnd: BDD Oracle (PLSQL)</li>
+                </ul>
+                
+                <p><strong>IDE's Desarrollo:</strong></p>
+                <ul>
+                    <li>Java: STS (spring tool suite) / Intellij</li>
+                    <li>Test Webservices: SoapUI pro / Postman</li>
+                    <li>Base Datos: Sqldeveloper / Toad</li>
+                </ul>
+                
+                <p><strong>Destacados:</strong> Proyecto entregado de acuerdo al cronograma, con la integración tanto de Banco Davivienda / RSA (porveedor del API de seguridad y tokens)</p>
+            </div>
+            
+            <div class="project">
+                <div class="project-title">Proyecto Core Banco Pichincha</div>
+                <dl class="project-details">
+                    <dt>Cliente:</dt>
+                    <dd>Banco Pichincha</dd>
+                    
+                    <dt>Países:</dt>
+                    <dd>Ecuador - España</dd>
+                    
+                    <dt>Periodo:</dt>
+                    <dd>2009-2014</dd>
+                    
+                    <dt>Rol:</dt>
+                    <dd>Líder Técnico / Desarrollador Senior</dd>
+                </dl>
+                
+                <p><strong>Descripción:</strong> Implementación y desarrollo del nuevo core bancario para banco Pichincha y despliegue de nuevos servicios e integración con sus sistemas legacy tanto de préstamos y créditos.</p>
+                
+                <p><strong>Servicio al Usuario Final:</strong> Nuevos servicios y Banca electrónica moderna adaptada a los requisitos de usuarios (personas / empresa) y también usuario interno Banco Pichincha</p>
+                
+                <p><strong>Plataformas de implementación:</strong> Banco Pichincha: Core / Middleware / IB10 (Bus de servicios)</p>
+                
+                <p><strong>Lenguajes y plataformas de desarrollo:</strong></p>
+                <ul>
+                    <li>Front: IBM Portal / Java portlets</li>
+                    <li>Middleware: IBM Websphere API Java Web Services (SOAP / Rest) en cluster</li>
+                    <li>BackEnd Mensajería / Ruteo: IBM Message Broker</li>
+                    <li>BackEnd Base Datos: Cluster Oracle</li>
+                </ul>
+                
+                <p><strong>IDE's Desarrollo:</strong></p>
+                <ul>
+                    <li>IBM: Webshepe integrator Developer</li>
+                    <li>Java: STS (spring tool suite) / Intellij</li>
+                    <li>Base Datos: Sqldeveloper / Toad</li>
+                </ul>
+                
+                <p><strong>Destacados:</strong> Proyecto entregado e implementado por fases, 4 años de desarrollo e integración con las diferentes plataformas que maneja el Banco.</p>
+                
+                <p>Para los Hitos I,II forme parte del equipo Portal en donde estuve a cargo de los siguientes módulos:</p>
+                <ul>
+                    <li>Alertas del Cliente</li>
+                    <li>Alertas del Asesor</li>
+                    <li>Posición Consolidada</li>
+                    <li>Interacciones del Cliente</li>
+                    <li>Indicadores del Cliente</li>
+                </ul>
+                <p>Y también colabore en la construcción de múltiples componentes del modulo de Mantenimiento de Clientes</p>
+                
+                <p>Para el módulo de alertas del Cliente desarrolle los siguientes componentes:</p>
+                <ul>
+                    <li>Componentes de Base de Datos (paquetes, Store Procedures y funciones) hechas para Oracle 9</li>
+                    <li>Componentes de Middleware Orquestación de Servicios</li>
+                    <li>Componentes PortletFactory para Front Portal</li>
+                    <li>Componentes Visuales y JSON para Front Portal</li>
+                    <li>Despliegue de portlet en Portal Banco Pichincha</li>
+                </ul>
+                
+                <p>Para el módulo de alertas del Asesor desarrolle los siguientes componentes:</p>
+                <ul>
+                    <li>Componentes de Base de Datos (paquetes, Store Procedures y funciones) hechas para Oracle 9</li>
+                    <li>Componentes de Middleware Orquestación de Servicios</li>
+                    <li>Componentes PortletFactory para Front Portal</li>
+                    <li>Componentes Visuales y JSON para Front Portal</li>
+                    <li>Despliegue de portlet en Portal Banco Pichincha</li>
+                </ul>
+                
+                <p>Para el modulo de Posición Consolidada desarrolle lo siguientes componentes:</p>
+                <ul>
+                    <li>Componentes Middleware</li>
+                    <li>Componentes PortletFactory</li>
+                    <li>Componentes Visuales y DOJO para Front Portal</li>
+                    <li>Despliegue de portlet en Portal Banco Pichincha</li>
+                </ul>
+                
+                <p>Para el modulo de Interacciones del Cliente</p>
+                <ul>
+                    <li>Componentes de Base de Datos (paquetes, Store Procedures y funciones) hechas para Oracle 9</li>
+                    <li>Componentes PortletFactory para Front Portal</li>
+                    <li>Componentes Visuales y JSON para Front Portal</li>
+                    <li>Despliegue de portlet en Portal Banco Pichincha</li>
+                </ul>
+                
+                <p>Para el modulo Indicadores del Cliente</p>
+                <ul>
+                    <li>Componentes PortletFactory para Front Portal</li>
+                    <li>Componentes Visuales y DOJO para Front Portal</li>
+                    <li>Despliegue de portlet en Portal Banco Pichincha</li>
+                </ul>
+                
+                <p>Para el modulo Mantenimiento de Clientes</p>
+                <ul>
+                    <li>Componentes PortletFactory para Front Portal</li>
+                    <li>Componentes Visuales y JSON para Front Portal</li>
+                </ul>
+                
+                <p>Para los Hitos IV he formado parte del equipo middleware donde he desarrollado y he dado mantenimiento y corrección de errores de servicios que son consumidos tanto por legacies y para BPM</p>
+                
+                <p>Todos estos componentes Middleware contienen conexión a Bases de Datos y Transacciones Bancs y en algunos homologación de usuario Siglo-Bancs. Todos estos componentes son Core-Middleware del Banco Pichincha</p>
+                <p>Dentro del ciclo en el equipo Middleware también diseñe e implemente la Herramienta de Monitoreo de WebService para Tarjetas para uso interno y de BPM basada en tecnologías Java y JSF.</p>
+                
+                <p>También he ganado experiencia en el desarrollo de aplicaciones Desktop y Web por más de 6 años, en herramientas WebSphere y Java, así como también en el desarrollo de aplicación desktop hechas con PowerBuilder, Java e integración de aplicación Desktop-Web para el Sistema e-nsurance de Seguros para las empresas de seguros "Seguros Colonial, CoopSeguros, AIG Metropolitana del Ecuador"</p>
+                <p>También como profesional independiente tengo varias empresas en donde se ha instalado software tanto de facturación, inventarios, procesos clínicos etc.</p>
+            </div>
+        </section>
+        
+        <!-- Conocimientos en Tecnologías de la Información -->
+        <section class="section">
+            <h2>Conocimientos en Tecnologías de la Información</h2>
+            
+            <table>
+                <tr>
+                    <th>Hardware</th>
+                    <th>Software</th>
+                    <th>Herramientas de Desarrollo</th>
+                    <th>Metodologías</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>IBM WebSphere</td>
+                    <td>WebSphere Integrator Developer V6.2</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>IBM WebSphere Portal</td>
+                    <td>PortletFactory Desing / Portal Administration</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>IBM Message Broker</td>
+                    <td>Eclipse ToolKit</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>IBM WebSphere Application Server</td>
+                    <td>WID</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>IBM Portlet Factory</td>
+                    <td>Eclipse / PortletFactory V6.1.2</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>IBM Rational Architect</td>
+                    <td>Rational Architect V6.0</td>
+                    <td>UML</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Java EE</td>
+                    <td>Eclipse/NetBeans/RedHat Studio</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Java Web JSF, Java JSP</td>
+                    <td>WebSphere Integrator Developer / Eclipse / Netbeans</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Java 2EE</td>
+                    <td>Netbeans / Eclipse</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Java ME</td>
+                    <td>Eclipse / Netbeans</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Oracle 8</td>
+                    <td>Jdeveloper, Toad V9.5, PLSqlDeveloper</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Oracle 9i</td>
+                    <td>Jdeveloper, Toad, PLSqlDeveloper</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Oracle 10g</td>
+                    <td>Toad, PLSqlDeveloper</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Sybase ASE</td>
+                    <td>SQL Central</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Sybase SQLAnywhere</td>
+                    <td>SQL Central</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>SQLServer</td>
+                    <td>SQL Managed</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Sybase PowerBuilder V10.5</td>
+                    <td>PowerBuilder / Enterprice Aplication Server</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Sybase PowerBuilder V11.5</td>
+                    <td>PowerBuilder</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Sybase PowerBuilder V12</td>
+                    <td>PowerBuilder / Expression Blend</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>PHP</td>
+                    <td>PHP Editor /Eclipse</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>HTML</td>
+                    <td>Adobe Dreamweaver</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>.Net</td>
+                    <td>Visual Studio</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>SERVER HP PROLIANT SERIES ML</td>
+                    <td>Windows 2003 Server Administration</td>
+                    <td>Windows Server Administration</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>SERVER HP PROLIANT SERIES 6000 / IBM</td>
+                    <td>Linux RED HAT V5.0</td>
+                    <td>RED HAT Administration</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>DELL SERVER</td>
+                    <td>Linux UBUNTU SERVER</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>CISCO</td>
+                    <td>Network management Software</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>CISCO AIRONET</td>
+                    <td>CISCO Administration / Linux</td>
+                    <td>Linux / Network management Software WhatsUp</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>TELETRONICS</td>
+                    <td>Linux Administration network</td>
+                    <td>Network management Software WhatsUp</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>WIRELESS CISCO</td>
+                    <td>Linux Administration network</td>
+                    <td>Linux / Network management Software WhatsUp</td>
+                    <td></td>
+                </tr>
+            </table>
+        </section>
+        
+        <!-- Certificaciones y Cursos -->
+        <section class="section">
+            <h2>Certificaciones y Cursos</h2>
+            
+            <table>
+                <tr>
+                    <th>Empresa o Instituto</th>
+                    <th>Especialización</th>
+                </tr>
+                <tr>
+                    <td>Sun Oracle</td>
+                    <td>Java JSF Web Applications</td>
+                </tr>
+                <tr>
+                    <td>TANDI Corp</td>
+                    <td>Java EE Web Applications</td>
+                </tr>
+                <tr>
+                    <td>TANDI Corp / E.S.P.E.</td>
+                    <td>Java 2EE Desktop Applications</td>
+                </tr>
+                <tr>
+                    <td>Sybase</td>
+                    <td>PowerBuilder Desktop Systems and Web Applications</td>
+                </tr>
+                <tr>
+                    <td>IMB</td>
+                    <td>Arquitectura Orientada a Servicios WebServices / Soap</td>
+                </tr>
+                <tr>
+                    <td>IBM</td>
+                    <td>Arquitectura Orientada a Servicios MessageBroker WebServices / Java</td>
+                </tr>
+                <tr>
+                    <td>IBM</td>
+                    <td>Arquitectura Orientada a Servicios PortletFactory Java / WebApplications</td>
+                </tr>
+                <tr>
+                    <td>IBM</td>
+                    <td>Arquitectura Orientada a Servicios Portal Java / WebApplications</td>
+                </tr>
+            </table>
+            
+            <table>
+                <tr>
+                    <th>Professional Society / Certification</th>
+                    <th>Member Since / Date Certified</th>
+                </tr>
+                <tr>
+                    <td>Sybase Suite PowerBuilder and SQLAnywhere</td>
+                    <td>ISUG Member</td>
+                </tr>
+                <tr>
+                    <td>WebSphere Integrator Developer / WebServices and Integrations</td>
+                    <td>IBM</td>
+                </tr>
+                <tr>
+                    <td>WebSphere Integrator Developer / WebApplications</td>
+                    <td>IBM</td>
+                </tr>
+                <tr>
+                    <td>WebSphere PortletFactory / WebApplications</td>
+                    <td>IBM</td>
+                </tr>
+            </table>
+            
+            <h3>Ultimos Cursos / Entrenamientos</h3>
+            <table>
+                <tr>
+                    <th>Cursos</th>
+                    <th>Empresa</th>
+                    <th>Referencia</th>
+                    <th>Tiempo</th>
+                </tr>
+                <tr>
+                    <td>IBM WebSphere Process Server V7.0</td>
+                    <td>IBM</td>
+                    <td></td>
+                    <td>3 meses</td>
+                </tr>
+                <tr>
+                    <td>IBM WebSphere message Broker V7.0</td>
+                    <td>IBM</td>
+                    <td></td>
+                    <td>3 meses</td>
+                </tr>
+                <tr>
+                    <td>JAVA WebServices</td>
+                    <td>IBM</td>
+                    <td></td>
+                    <td>3 meses</td>
+                </tr>
+                <tr>
+                    <td>Habilidades Gerenciales</td>
+                    <td>Joseph Company</td>
+                    <td></td>
+                    <td>4 meses</td>
+                </tr>
+            </table>
+        </section>
+        
+        <!-- Empresas en las cuales he prestado mis servicios -->
+        <section class="section">
+            <h2>Empresas en las cuales he prestado mis servicios</h2>
+            
+            <div class="companies">
+                <div class="company">
+                    <div class="company-date">2018-2020</div>
+                    <div class="company-name">Banred</div>
+                    <div class="company-role">Administrador Proyectos / Desarrollador Senior</div>
+                </div>
+                
+                <div class="company">
+                    <div class="company-date">2016-2018</div>
+                    <div class="company-name">Mobilpymes</div>
+                    <div class="company-role">Consultor Senior</div>
+                </div>
+                
+                <div class="company">
+                    <div class="company-date">2016</div>
+                    <div class="company-name">FISA GROUP</div>
+                    <div class="company-role">Analista / Desarrollador Senior</div>
+                </div>
+                
+                <div class="company">
+                    <div class="company-date">2014-2015</div>
+                    <div class="company-name">TODO1 Services</div>
+                    <div class="company-role">Desarrollador Senior</div>
+                </div>
+                
+                <div class="company">
+                    <div class="company-date">2012-2013</div>
+                    <div class="company-name">DinersClub</div>
+                    <div class="company-role">Lider Técnico / Jefe Desarrollo Software</div>
+                </div>
+                
+                <div class="company">
+                    <div class="company-date">2013-2013</div>
+                    <div class="company-name">BIESS</div>
+                    <div class="company-role">Analista Senior Java</div>
+                </div>
+                
+                <div class="company">
+                    <div class="company-date">2011</div>
+                    <div class="company-name">Cobiscorp</div>
+                    <div class="company-role">Arquitecto IT</div>
+                </div>
+                
+                <div class="company">
+                    <div class="company-date">2008</div>
+                    <div class="company-name">TATA Consultancy Services</div>
+                    <div class="company-role">Analista IT</div>
+                </div>
+                
+                <div class="company">
+                    <div class="company-date">2006-2007</div>
+                    <div class="company-name">Seguros Colonial</div>
+                    <div class="company-role">Analista IT</div>
+                </div>
+                
+                <div class="company">
+                    <div class="company-date">2006</div>
+                    <div class="company-name">Coop Seguros</div>
+                    <div class="company-role">Arquitecto IT</div>
+                </div>
+                
+                <div class="company">
+                    <div class="company-date">2005</div>
+                    <div class="company-name">AIG Metropolitana</div>
+                    <div class="company-role">Developer</div>
+                </div>
+                
+                <div class="company">
+                    <div class="company-date">2009</div>
+                    <div class="company-name">Ministerio de Obras públicas y Transporte</div>
+                    <div class="company-role">Arquitecto IT</div>
+                </div>
+                
+                <div class="company">
+                    <div class="company-date">2004-2005</div>
+                    <div class="company-name">Cybercom</div>
+                    <div class="company-role">Técnico en Telecomunicaciones Wireless / Redes Microonda</div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 William Eduardo Huera Ortiz - Curriculum Vitae</p>
+        </div>
+    </footer>
+</body>
+</html>

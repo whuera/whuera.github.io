@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colombia Projects - Portfolio Dashboard</title>
+    <style>
+        :root {
+            --color-bg: #ffffff;
+            --color-text: #24292e;
+            --color-primary: #0366d6;
+            --color-secondary: #6a737d;
+            --color-border: #e1e4e8;
+            --color-hover: #f6f8fa;
+            --color-active: #0366d6;
+            --color-active-text: #ffffff;
+            --color-success: #2ea44f;
+            --color-danger: #cb2431;
+            --color-warning: #f9c513;
+            --border-radius: 6px;
+            --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            line-height: 1.5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .project-card {
+            background-color: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        
+        .project-title {
+            margin-bottom: 8px;
+        }
+        
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .meta-label {
+            font-size: 12px;
+            color: var(--color-secondary);
+        }
+        
+        .meta-value {
+            font-weight: 500;
+        }
+        
+        .project-description {
+            margin-bottom: 16px;
+        }
+        
+        .project-section {
+            margin-bottom: 16px;
+        }
+        
+        .project-section h3 {
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tech-tag {
+            background-color: var(--color-hover);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Projects in Colombia 🇨🇴</h1>
+        
+        <a href="index.html" class="back-link">
+            ← Back to Dashboard
+        </a>
+
+        <!-- Project 1 -->
+        <div class="project-card">
+            <div class="project-header">
+                <div>
+                    <h2 class="project-title">Modulo de autenticación y seguridad Banco Davivienda</h2>
+                    <div class="project-client">Cliente: Grupo Banco Davivienda</div>
+                </div>
+            </div>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Países</span>
+                    <span class="meta-value">Colombia - Panamá</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Periodo</span>
+                    <span class="meta-value">2016-2018</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Rol</span>
+                    <span class="meta-value">Desarrollador Senior</span>
+                </div>
+            </div>
+            
+            <div class="project-description">
+                <p>Implementación del módulo de seguridad en la banca electrónica para el portal de usuarios (empresas / personas)</p>
+            </div>
+            
+            <div class="project-section">
+                <h3>Servicio al Usuario Final</h3>
+                <p>Proveer del servicio de Banca electrónica (módulo de autenticación y seguridad), para los usuarios y clientes del Banco</p>
+            </div>
+            
+            <div class="project-section">
+                <h3>Plataformas de implementación</h3>
+                <p>Banco Davivienda: Core / Middleware / Cluster Jboss / Cluster Oracle</p>
+            </div>
+            
+            <div class="project-section">
+                <h3>Tecnologías</h3>
+                <div class="tech-list">
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">Webcontainer</span>
+                    <span class="tech-tag">JSF</span>
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">Angular</span>
+                    <span class="tech-tag">Spring Boot</span>
+                    <span class="tech-tag">Web Services (SOAP / Rest)</span>
+                    <span class="tech-tag">Apache Kafka</span>
+                    <span class="tech-tag">RSA</span>
+                    <span class="tech-tag">Oracle (PLSQL)</span>
+                </div>
+            </div>
+            
+            <div class="project-section">
+                <h3>Destacados</h3>
+                <p>Proyecto entregado de acuerdo al cronograma, con la integración tanto de Banco Davivienda / RSA (porveedor del API de seguridad y tokens)</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

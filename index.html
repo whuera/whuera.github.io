@@ -24,10 +24,11 @@
                 <span style="color: var(--menu-text)">CV - William Eduardo Huera Ortiz</span>
             </div>
             <div class="toolbar-right">
-                <button class="download-btn" id="downloadPdf">
+                <a href="CV Resume William Huera.pdf" download="CV Resume William Huera.pdf" class="download-btn"
+                    id="downloadPdf" style="text-decoration: none;">
                     <i class="fas fa-download"></i>
                     Download PDF
-                </button>
+                </a>
             </div>
         </div>
         <div class="tabs-bar">
@@ -118,29 +119,6 @@
     </footer>
 
     <script>
-        document
-            .getElementById("downloadPdf")
-            .addEventListener("click", function () {
-                const filename = "CV_William_Eduardo_Huera_Ortiz.pdf";
-                const downloadBtn = document.querySelector(".download-btn");
-                downloadBtn.style.display = "none";
-
-                const options = {
-                    margin: 10,
-                    filename: filename,
-                    image: { type: "jpeg", quality: 0.98 },
-                    html2canvas: { scale: 2, useCORS: true },
-                    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-                };
-
-                html2pdf()
-                    .from(document.body)
-                    .set(options)
-                    .save()
-                    .then(function () {
-                        downloadBtn.style.display = "flex";
-                    });
-            });
 
         document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
             anchor.addEventListener("click", function (e) {

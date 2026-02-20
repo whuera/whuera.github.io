@@ -757,3 +757,232 @@ footer {
     transform: translateY(0);
   }
 }
+
+/* ============================== */
+/* Responsive - Tablet (<=768px) */
+/* ============================== */
+@media (max-width: 768px) {
+
+  /* Sidebar becomes overlay, hidden by default */
+  .sidebar {
+    width: 250px;
+    transform: translateX(-100%);
+    z-index: 1100;
+    background: rgba(13, 17, 23, 0.95);
+  }
+
+  .sidebar:not(.hidden) {
+    transform: translateX(0);
+  }
+
+  /* Container takes full width */
+  .container {
+    margin-left: 0;
+    padding: 20px 16px;
+    margin-bottom: 50px;
+  }
+
+  /* Tabs bar no padding-left */
+  .tabs-bar {
+    padding-left: 0;
+    overflow-x: auto;
+  }
+
+  .tab {
+    padding: 0 16px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  /* Top bar adjustments */
+  .top-bar {
+    padding: 0 12px;
+  }
+
+  .toolbar-left span {
+    font-size: 0.85rem;
+  }
+
+  .download-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  /* Section spacing */
+  .section {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  /* Profile info stacks vertically */
+  .profile-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Skill charts stack */
+  .chart-container {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tables scroll horizontally */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  th,
+  td {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  /* Role cards */
+  .role-card {
+    padding: 16px;
+  }
+
+  .role-card h3 {
+    font-size: 1.1rem;
+  }
+
+  /* KPI cards */
+  .kpi-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Country cards */
+  .country-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Modal */
+  .modal-content.glass-card {
+    width: 95%;
+    padding: 16px;
+  }
+
+  .modal-body iframe {
+    height: 350px;
+  }
+
+  /* Footer */
+  footer {
+    font-size: 0.7rem;
+    padding: 4px;
+  }
+
+  /* Cert buttons */
+  .cert-btn {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+}
+
+/* ============================== */
+/* Responsive - Phone (<=480px) */
+/* ============================== */
+@media (max-width: 480px) {
+
+  .container {
+    padding: 12px 10px;
+  }
+
+  .top-bar {
+    padding: 0 8px;
+    height: 50px;
+  }
+
+  :root {
+    --top-bar-height: 50px;
+    --tab-height: 40px;
+  }
+
+  .toolbar-left span {
+    font-size: 0.75rem;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .download-btn {
+    padding: 5px 8px;
+    font-size: 0.7rem;
+    gap: 4px;
+  }
+
+  .tab {
+    padding: 0 10px;
+    font-size: 0.8rem;
+  }
+
+  .section {
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+  }
+
+  .role-card h3 {
+    font-size: 1rem;
+    gap: 6px;
+  }
+
+  .skill-name {
+    font-size: 0.82rem;
+  }
+
+  .skill-label {
+    font-size: 0.7rem;
+  }
+
+  .stars {
+    font-size: 0.82rem;
+  }
+
+  /* KPI cards single column */
+  .kpi-container {
+    grid-template-columns: 1fr;
+  }
+
+  /* Modal full width */
+  .modal-content.glass-card {
+    width: 98%;
+    max-width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .modal-body iframe {
+    height: 280px;
+  }
+
+  /* Decorative orbs smaller */
+  body::before,
+  body::after {
+    width: 250px;
+    height: 250px;
+  }
+
+  /* Nav items */
+  .nav-item {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+}

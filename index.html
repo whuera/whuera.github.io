@@ -133,13 +133,27 @@
         const sidebar = document.querySelector(".sidebar");
         const container = document.querySelector(".container");
 
+        // Start sidebar hidden on mobile
+        function checkMobile() {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.add("hidden");
+                container.style.marginLeft = "0";
+            }
+        }
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+
         toggleMenuButton.addEventListener("click", () => {
             sidebar.classList.toggle("hidden");
-            if (sidebar.classList.contains("hidden")) {
-                container.style.marginLeft = "0"; // Ajusta el margen cuando el menú está oculto
-            } else {
-                container.style.marginLeft = "var(--sidebar-width)"; // Restaura el margen cuando el menú está visible
+            if (window.innerWidth > 768) {
+                // Desktop: push content
+                if (sidebar.classList.contains("hidden")) {
+                    container.style.marginLeft = "0";
+                } else {
+                    container.style.marginLeft = "var(--sidebar-width)";
+                }
             }
+            // Mobile: sidebar overlays, no margin change
         });
 
         const portfolioTab = document.getElementById("portfolioTab");

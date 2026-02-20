@@ -283,8 +283,12 @@
                             <th>Entidad Certificadora</th>
                             <th>Certificado</th>
                         </tr>
-                        <tr><td>Java EE / JSF Web Applications</td><td>Sun Oracle / TANDI Corp</td><td>-</td></tr>
-                        <tr><td>Arquitectura SOA, WebServices, Integración</td><td>IBM</td><td>-</td></tr>
+                        <tr><td>Java EE / JSF Web Applications</td><td>Sun Oracle / TANDI Corp</td>
+                            <td><button class="cert-btn" onclick="openCertModal('https://github.com/whuera/IBM-certificates')"><i class="fas fa-external-link-alt"></i> Ver Repositorio</button></td>
+                            </tr>
+                        <tr><td>Arquitectura SOA, WebServices, Integración</td><td>IBM</td>
+                            <td><button class="cert-btn" onclick="openCertModal('https://github.com/whuera/IBM-certificates')"><i class="fas fa-external-link-alt"></i> Ver Repositorio</button></td>
+                            </tr>
                         <tr>
                             <td>WebSphere PortletFactory & Process Server</td>
                             <td>IBM</td>
@@ -300,32 +304,14 @@
                             <td>ACI</td>
                             <td><button class="cert-btn" onclick="openCertModal('https://raw.githubusercontent.com/whuera/aci-certificates/master/Certificados_B24_eps_UP_Framework_William_Huera.pdf')"><i class="fas fa-eye"></i> Ver Certificado</button></td>
                         </tr>
+                        <tr>
+                            <td>B24 eps & UPF Certificates</td>
+                            <td>ACI</td>
+                            <td><button class="cert-btn" onclick="openCertModal('https://github.com/whuera/aci-certificates')"><i class="fas fa-external-link-alt"></i> Ver Repositorio</button></td>
+                        </tr>
                     </table>
                 </section>
             `;
-
-            // Initialize 3D Tilt Effect on cards via Vanilla JavaScript
-            setTimeout(() => {
-                const cards = document.querySelectorAll('.role-card');
-                cards.forEach(card => {
-                    card.addEventListener('mousemove', e => {
-                        const rect = card.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        const centerX = rect.width / 2;
-                        const centerY = rect.height / 2;
-
-                        const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg
-                        const rotateY = ((x - centerX) / centerX) * 10;
-
-                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                    });
-
-                    card.addEventListener('mouseleave', () => {
-                        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                    });
-                });
-            }, 100);
         }
 
         // Función para cargar contenido dinámico del portfolio
@@ -366,11 +352,16 @@
         });
 
         // Modal Logic
-        function openCertModal(pdfUrl) {
+        function openCertModal(docUrl) {
+            if (!docUrl.toLowerCase().endsWith('.pdf')) {
+                // Return generic links like Github repos in a new tab instead of iframe to prevent blocked frames
+                window.open(docUrl, '_blank');
+                return;
+            }
             const modal = document.getElementById('certModal');
             const iframe = document.getElementById('certIframe');
             // Usando google docs viewer para bypassear las cabeceras de descarga de raw github y poder embeder el pdf en un iframe
-            iframe.src = `https://docs.google.com/gview?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
+            iframe.src = `https://docs.google.com/gview?url=${encodeURIComponent(docUrl)}&embedded=true`;
             modal.style.display = 'flex';
         }
 

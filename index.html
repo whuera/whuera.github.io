@@ -1,615 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CV - William Eduardo Huera Ortiz</title>
-    <style>
-      :root {
-          --primary-color: ##f9f9f9;
-          --secondary-color: #0969da;
-          --accent-color: #f6f8fa;
-          --light-color: #f6f8fa;
-          --dark-color: #24292f;
-          --text-color: #24292f;
-          --border-color: #d0d7de;
-          --menu-text: #57606a;
-          --top-bar-height: 48px;
-          --sidebar-width: 240px;
-          --tab-height: 35px;
-      }
-
-      * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-      }
-
-      body {
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-          line-height: 1.6;
-          color: var(--text-color);
-          background-color: var(--primary-color);
-          padding-top: calc(var(--top-bar-height) + var(--tab-height));
-      }
-
-      .container {
-          <!-- max-width: 1200px; -->
-          margin: 0 auto;
-          padding: 20px;
-          margin-left: var(--sidebar-width);
-          transition: margin-left 0.3s ease-in-out;
-      }
-
-      header {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 1000;
-          background-color: var(--primary-color);
-      }
-
-      .top-bar {
-          height: var(--top-bar-height);
-          background-color: var(--primary-color);
-          border-bottom: 1px solid var(--border-color);
-          padding: 0 16px;
-          display: flex;
-          align-items: center;
-      }
-
-      .tabs-bar {
-          height: var(--tab-height);
-          background-color: var(--light-color);
-          display: flex;
-          align-items: center;
-          padding-left: var(--sidebar-width);
-          border-bottom: 1px solid var(--border-color);
-      }
-
-      .tab {
-          padding: 0 16px;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          background-color: var(--primary-color);
-          color: var(--text-color);
-          border-right: 1px solid var(--border-color);
-          cursor: pointer; /* Cambia el cursor a "manito" */
-      }
-
-      .tab:hover {
-          background-color: var(--accent-color); /* Opcional: efecto hover */
-      }
-
-      .toolbar-left {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-      }
-
-      .toolbar-right {
-          margin-left: auto;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-      }
-
-      .toolbar-button {
-          background-color: transparent;
-          color: var(--text-color);
-          border: none;
-          padding: 6px 12px;
-          font-size: 0.875rem;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          cursor: pointer;
-          transition: all 0.2s;
-      }
-
-      .toolbar-button:hover {
-          background-color: var(--accent-color);
-      }
-
-      .download-btn {
-          background-color: var(--secondary-color);
-          color: white;
-          border: none;
-          padding: 6px 12px;
-          border-radius: 6px;
-          font-size: 0.875rem;
-          font-weight: 500;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          cursor: pointer;
-      }
-
-      .download-btn:hover {
-          background-color: #0550ae;
-      }
-
-      h1, h2, h3 {
-          color: var(--dark-color);
-      }
-
-      h2 {
-          font-size: 1.8rem;
-          border-bottom: 1px solid var(--border-color);
-          padding-bottom: 10px;
-          margin: 30px 0 20px;
-      }
-
-      h3 {
-          font-size: 1.4rem;
-          margin: 20px 0 10px;
-          color: var(--secondary-color);
-      }
-
-      p {
-          margin-bottom: 15px;
-      }
-
-      .profile-info {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          margin-bottom: 30px;
-      }
-
-      .profile-info div {
-          flex: 1;
-          min-width: 300px;
-          margin-bottom: 20px;
-      }
-
-      .profile-info strong {
-          display: inline-block;
-          width: 120px;
-          color: var(--dark-color);
-          font-weight: 600;
-      }
-
-      .section {
-          background-color: var(--primary-color);
-          padding: 25px;
-          margin-bottom: 30px;
-          border-radius: 6px;
-          border: 1px solid var(--border-color);
-          box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-      }
-
-      .skill-bars {
-          margin: 20px 0;
-      }
-
-      .skill-bar {
-          margin-bottom: 15px;
-      }
-
-      .skill-name {
-          display: block;
-          margin-bottom: 5px;
-          font-weight: 600;
-      }
-
-      .skill-level {
-          height: 10px;
-          background-color: var(--light-color);
-          border-radius: 5px;
-          overflow: hidden;
-      }
-
-      .skill-percent {
-          height: 100%;
-          background-color: var(--secondary-color);
-          border-radius: 5px;
-      }
-
-      .project {
-          margin-bottom: 30px;
-          padding-bottom: 20px;
-          border-bottom: 1px solid var(--border-color);
-      }
-
-      .project:last-child {
-          border-bottom: none;
-      }
-
-      .project-title {
-          font-weight: 600;
-          color: var(--dark-color);
-          font-size: 1.2rem;
-          margin-bottom: 10px;
-      }
-
-      .project-details {
-          display: grid;
-          grid-template-columns: 150px 1fr;
-          gap: 10px;
-          margin-bottom: 15px;
-      }
-
-      .project-details dt {
-          font-weight: 600;
-          color: var(--dark-color);
-      }
-
-      .companies {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 20px;
-      }
-
-      .company {
-          flex: 1;
-          min-width: 250px;
-          background-color: var(--light-color);
-          padding: 15px;
-          border-radius: 6px;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-          border: 1px solid var(--border-color);
-      }
-
-      .company-date {
-          font-weight: 600;
-          color: var(--secondary-color);
-      }
-
-      .company-name {
-          font-weight: 600;
-          margin: 5px 0;
-      }
-
-      table {
-          width: 100%;
-          border-collapse: collapse;
-          margin: 20px 0;
-          border-color: var(--border-color);
-      }
-
-      table, th, td {
-          border: 1px solid var(--border-color);
-      }
-
-      th, td {
-          padding: 12px;
-          text-align: left;
-      }
-
-      th {
-          background-color: var(--light-color);
-          color: var(--dark-color);
-          font-weight: 600;
-      }
-
-      tr:nth-child(even) {
-          background-color: var(--light-color);
-      }
-
-      .chart-container {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          margin: 30px 0;
-      }
-
-      .chart {
-          width: 100%;
-          margin-bottom: 30px;
-      }
-
-      @media (min-width: 768px) {
-          .chart {
-              width: 48%;
-          }
-      }
-
-      footer {
-          position: fixed; /* Hace que el footer sea estático */
-          bottom: 0; /* Lo fija en la parte inferior */
-          width: 100%; /* Asegura que ocupe todo el ancho de la página */
-          text-align: center;
-          padding: 0px;
-          background-color: var(--light-color);
-          color: var(--dark-color);
-          border-top: 1px solid var(--border-color);
-          z-index: 1000; /* Asegura que esté por encima de otros elementos */
-      }
-
-      a {
-          color: var(--secondary-color);
-          text-decoration: none;
-      }
-
-      a:hover {
-          text-decoration: underline;
-      }
-
-      .sidebar {
-          width: var(--sidebar-width);
-          height: 100vh;
-          position: fixed;
-          left: 0;
-          top: calc(var(--top-bar-height) + var(--tab-height));
-          background-color: var(--light-color);
-          border-right: 1px solid var(--border-color); /* Línea vertical */
-          display: flex;
-          flex-direction: column;
-          padding: 1rem 0;
-          transition: transform 0.3s ease-in-out;
-      }
-
-      .sidebar.hidden {
-          transform: translateX(-100%);
-          transition: transform 0.3s ease-in-out;
-      }
-
-      .nav-item {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          padding: 0.5rem 1rem;
-          color: var(--menu-text);
-          text-decoration: none;
-          font-size: 0.9rem;
-          transition: color 0.3s;
-          gap: 8px;
-      }
-
-      .nav-item:hover {
-          background-color: var(--primary-color);
-          color: var(--secondary-color);
-      }
-
-      .nav-icon {
-          font-size: 1rem;
-          width: 16px;
-          text-align: center;
-      }
-
-      ul {
-          padding-left: 20px;
-          margin-bottom: 15px;
-      }
-
-      li {
-          margin-bottom: 5px;
-      }
-
-      @media (max-width: 768px) {
-          :root {
-              --sidebar-width: 50px;
-          }
-
-          .nav-item span {
-              display: none;
-          }
-
-          .container {
-              margin-left: var(--sidebar-width);
-              padding: 15px;
-          }
-
-          body {
-              padding-top: 120px; /* Ajusta este valor para dispositivos móviles */
-          }
-
-          .top-bar .container {
-              flex-direction: column;
-              align-items: flex-start;
-          }
-
-          .toolbar-left, .toolbar-right {
-              width: 100%;
-          }
-
-          .download-btn {
-              margin-top: 10px;
-          }
-      }
-
-      @media print {
-          body {
-              background-color: white;
-              color: black;
-          }
-
-          .sidebar, .top-bar, .tabs-bar {
-              display: none;
-          }
-
-          body {
-              padding-top: 0;
-          }
-
-          .container {
-              margin-left: 0;
-              max-width: 100%;
-          }
-
-          .section {
-              background-color: white;
-              border: none;
-              page-break-inside: avoid;
-          }
-
-          h2, h3 {
-              color: black;
-          }
-      }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Include Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <!-- Include html2pdf library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
+</head>
+
+<body>
     <header>
-      <div class="top-bar">
-        <div class="toolbar-left">
-          <button class="toolbar-button" id="toggleMenu">
-            <i class="fas fa-bars"></i>
-          </button>
-          <span style="color: var(--menu-text)"
-            >CV - William Eduardo Huera Ortiz</span
-          >
+        <div class="top-bar">
+            <div class="toolbar-left">
+                <button class="toolbar-button" id="toggleMenu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <span style="color: var(--menu-text)">CV - William Eduardo Huera Ortiz</span>
+            </div>
+            <div class="toolbar-right">
+                <button class="download-btn" id="downloadPdf">
+                    <i class="fas fa-download"></i>
+                    Download PDF
+                </button>
+            </div>
         </div>
-        <div class="toolbar-right">
-          <button class="download-btn" id="downloadPdf">
-            <i class="fas fa-download"></i>
-            Download PDF
-          </button>
+        <div class="tabs-bar">
+            <div class="tab" id="cvTab">
+                <i class="fas fa-file-alt"></i>
+                &nbsp;Curriculum Vitae
+            </div>
+            <div class="tab" id="portfolioTab">
+                <i class="fas fa-file-alt"></i>
+                &nbsp;Portfolio de Proyectos
+            </div>
         </div>
-      </div>
-      <div class="tabs-bar">
-        <div class="tab" id="cvTab">
-          <i class="fas fa-file-alt"></i>
-          &nbsp;Curriculum Vitae
-        </div>
-        <div class="tab" id="portfolioTab">
-          <i class="fas fa-file-alt"></i>
-          &nbsp;Portfolio de Proyectos
-        </div>
-      </div>
     </header>
 
     <nav class="sidebar">
-      <a href="#" class="nav-item">
-        <i class="fas fa-chevron-up nav-icon"></i>
-        <span>Inicio</span>
-      </a>
-      <a href="#about" class="nav-item">
-        <i class="fas fa-user nav-icon"></i>
-        <span>Perfil</span>
-      </a>
-      <a href="#education" class="nav-item">
-        <i class="fas fa-graduation-cap nav-icon"></i>
-        <span>Educación</span>
-      </a>
-      <a href="#experience" class="nav-item">
-        <i class="fas fa-briefcase nav-icon"></i>
-        <span>Experiencia</span>
-      </a>
-      <a href="#skills" class="nav-item">
-        <i class="fas fa-code nav-icon"></i>
-        <span>Habilidades</span>
-      </a>
-      <a href="#cursos" class="nav-item">
-        <i class="fas fa-chalkboard-teacher nav-icon"></i>
-        <span>Certificaciones y Cursos</span>
-      </a>
-      <a href="#contact" class="nav-item">
-        <i class="fas fa-envelope nav-icon"></i>
-        <span>Contacto</span>
-      </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-chevron-up nav-icon"></i>
+            <span>Inicio</span>
+        </a>
+        <a href="#about" class="nav-item">
+            <i class="fas fa-user nav-icon"></i>
+            <span>Perfil</span>
+        </a>
+        <a href="#education" class="nav-item">
+            <i class="fas fa-graduation-cap nav-icon"></i>
+            <span>Educación</span>
+        </a>
+        <a href="#experience" class="nav-item">
+            <i class="fas fa-briefcase nav-icon"></i>
+            <span>Experiencia</span>
+        </a>
+        <a href="#skills" class="nav-item">
+            <i class="fas fa-code nav-icon"></i>
+            <span>Habilidades</span>
+        </a>
+        <a href="#cursos" class="nav-item">
+            <i class="fas fa-chalkboard-teacher nav-icon"></i>
+            <span>Certificaciones y Cursos</span>
+        </a>
+        <a href="#contact" class="nav-item">
+            <i class="fas fa-envelope nav-icon"></i>
+            <span>Contacto</span>
+        </a>
     </nav>
 
     <div class="container">
-      <!-- Contenedor para cargar dinámicamente el contenido -->
-      <div id="dynamicContent">
-        <!-- Contenido inicial del Curriculum Vitae -->
-        <section id="about">
-          <h2>Perfil</h2>
-          <p>Descripción breve sobre el perfil profesional.</p>
-        </section>
-        <section id="education">
-          <h2>Educación</h2>
-          <ul>
-            <li><strong>Universidad:</strong> Nombre de la universidad</li>
-            <li><strong>Título:</strong> Nombre del título</li>
-          </ul>
-        </section>
-        <section id="experience">
-          <h2>Experiencia</h2>
-          <ul>
-            <li><strong>Empresa:</strong> Nombre de la empresa</li>
-            <li><strong>Rol:</strong> Descripción del rol</li>
-          </ul>
-        </section>
-        <section id="skills">
-          <h2>Habilidades</h2>
-          <ul>
-            <li>Habilidad 1</li>
-            <li>Habilidad 2</li>
-          </ul>
-        </section>
-        <section id="contact">
-          <h2>Contacto</h2>
-          <p>Email: ejemplo@correo.com</p>
-        </section>
-      </div>
+        <!-- Contenedor para cargar dinámicamente el contenido -->
+        <div id="dynamicContent">
+            <!-- Contenido inicial del Curriculum Vitae -->
+            <section id="about">
+                <h2>Perfil</h2>
+                <p>Descripción breve sobre el perfil profesional.</p>
+            </section>
+            <section id="education">
+                <h2>Educación</h2>
+                <ul>
+                    <li><strong>Universidad:</strong> Nombre de la universidad</li>
+                    <li><strong>Título:</strong> Nombre del título</li>
+                </ul>
+            </section>
+            <section id="experience">
+                <h2>Experiencia</h2>
+                <ul>
+                    <li><strong>Empresa:</strong> Nombre de la empresa</li>
+                    <li><strong>Rol:</strong> Descripción del rol</li>
+                </ul>
+            </section>
+            <section id="skills">
+                <h2>Habilidades</h2>
+                <ul>
+                    <li>Habilidad 1</li>
+                    <li>Habilidad 2</li>
+                </ul>
+            </section>
+            <section id="contact">
+                <h2>Contacto</h2>
+                <p>Email: ejemplo@correo.com</p>
+            </section>
+        </div>
     </div>
 
     <footer>
-      <div class="container">
-        <p>&copy; 2023 William Eduardo Huera Ortiz - Curriculum Vitae</p>
-      </div>
+        <div class="">
+            <br>
+            <p>&copy; 2026 William Eduardo Huera Ortiz - Curriculum Vitae</p>
+            <br>
+        </div>
     </footer>
 
     <script>
-      document
-        .getElementById("downloadPdf")
-        .addEventListener("click", function () {
-          const filename = "CV_William_Eduardo_Huera_Ortiz.pdf";
-          const downloadBtn = document.querySelector(".download-btn");
-          downloadBtn.style.display = "none";
+        document
+            .getElementById("downloadPdf")
+            .addEventListener("click", function () {
+                const filename = "CV_William_Eduardo_Huera_Ortiz.pdf";
+                const downloadBtn = document.querySelector(".download-btn");
+                downloadBtn.style.display = "none";
 
-          const options = {
-            margin: 10,
-            filename: filename,
-            image: { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true },
-            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-          };
+                const options = {
+                    margin: 10,
+                    filename: filename,
+                    image: { type: "jpeg", quality: 0.98 },
+                    html2canvas: { scale: 2, useCORS: true },
+                    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+                };
 
-          html2pdf()
-            .from(document.body)
-            .set(options)
-            .save()
-            .then(function () {
-              downloadBtn.style.display = "flex";
+                html2pdf()
+                    .from(document.body)
+                    .set(options)
+                    .save()
+                    .then(function () {
+                        downloadBtn.style.display = "flex";
+                    });
+            });
+
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener("click", function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute("href")).scrollIntoView({
+                    behavior: "smooth",
+                });
             });
         });
 
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute("href")).scrollIntoView({
-            behavior: "smooth",
-          });
+        const toggleMenuButton = document.getElementById("toggleMenu");
+        const sidebar = document.querySelector(".sidebar");
+        const container = document.querySelector(".container");
+
+        toggleMenuButton.addEventListener("click", () => {
+            sidebar.classList.toggle("hidden");
+            if (sidebar.classList.contains("hidden")) {
+                container.style.marginLeft = "0"; // Ajusta el margen cuando el menú está oculto
+            } else {
+                container.style.marginLeft = "var(--sidebar-width)"; // Restaura el margen cuando el menú está visible
+            }
         });
-      });
 
-      const toggleMenuButton = document.getElementById("toggleMenu");
-      const sidebar = document.querySelector(".sidebar");
-      const container = document.querySelector(".container");
+        const portfolioTab = document.getElementById("portfolioTab");
+        const cvTab = document.getElementById("cvTab");
+        const dynamicContent = document.getElementById("dynamicContent");
 
-      toggleMenuButton.addEventListener("click", () => {
-        sidebar.classList.toggle("hidden");
-        if (sidebar.classList.contains("hidden")) {
-          container.style.marginLeft = "0"; // Ajusta el margen cuando el menú está oculto
-        } else {
-          container.style.marginLeft = "var(--sidebar-width)"; // Restaura el margen cuando el menú está visible
-        }
-      });
-
-      const portfolioTab = document.getElementById("portfolioTab");
-      const cvTab = document.getElementById("cvTab");
-      const dynamicContent = document.getElementById("dynamicContent");
-
-      // Función para cargar el contenido del currículum
-      function loadCvContent() {
-        dynamicContent.innerHTML = `
+        // Función para cargar el contenido del currículum
+        function loadCvContent() {
+            dynamicContent.innerHTML = `
                 <!-- Datos Básicos -->
-                <section class="section" id="about">
+                <section class="section" id="about" style="animation-delay: 0.1s;">
                     <h2>Datos Básicos</h2>
                     <div class="profile-info">
                         <div>
@@ -627,345 +190,152 @@
                     </div>
                 </section>            
                 <!-- Datos Estudios -->
-                <section class="section" id="education">
+                <section class="section" id="education" style="animation-delay: 0.2s;">
                     <h2>Formación Académica</h2>
-                    <div class="education">
-                        <p><strong>Ingeniería de Sistemas</strong><br>
-                        Universidad: E.S.P.E</p>
-                        
-                        <p><strong>Tecnología en Administración de Empresas</strong><br>
-                        Universidad: E.S.P.E.<br>
-                        en curso</p>
-
-                        <p><strong>Diplomado Cloud Computing</strong><br>
-                        Udla Ecuador<br>
-                        finalizado</p>
-
-                        <p><strong>Data Scientist</strong><br>
-                        IPP Chile<br>
-                        finalizado</p>
+                    <div class="profile-info">
+                        <p><strong>Ingeniería de Sistemas</strong><br>Universidad: E.S.P.E</p>
+                        <p><strong>Tecnología Administración</strong><br>Universidad: E.S.P.E. (en curso)</p>
+                        <p><strong>Diplomado Cloud Computing</strong><br>Udla Ecuador (finalizado)</p>
+                        <p><strong>Data Scientist</strong><br>IPP Chile (finalizado)</p>
                     </div>
                 </section>
-                <!-- Datos Profesionales -->
-                <section class="section" id="experience">
-                    <h2>Perfil Profesional</h2>
+                <!-- Datos Profesionales / Enfoque -->
+                <section class="section" id="experience" style="animation-delay: 0.3s;">
+                    <h2>Perfil Profesional & Especialidades</h2>
+                    <p style="font-size: 1.1rem; color: #8b949e; margin-bottom: 30px;">
+                      Diseño e implemento soluciones tecnológicas modernas y resilientes enfocadas en la experiencia de usuario y arquitectura de alto rendimiento.
+                    </p>
                     
-                    <h3>Área Software</h3>
-                    <p><strong>Descripción Perfil:</strong> Arquitecto de software / Arquitecto IT / Lider Técnico / Desarrollador Senior</p>
-                    <p><strong>Experiencia:</strong> +10 años en Desarrollo e implementación de Software</p>
-                    <p><strong>Perfil Técnico:</strong> Arquitecto, Desarrollador Senior en tecnologías Java, manejo de herramientas IBM para arquitectura de Software basada en servicios (SOA). Manejo de Herramientas de programación de última generación (Java / C# / Python / C++ / Shell / Html / Javascript / WebServices)</p>
+                    <div class="role-card">
+                        <h3><i class="fas fa-network-wired"></i> Arquitecto Transaccional</h3>
+                        <p><strong>Enfoque:</strong> Diseño de sistemas distribuidos, microservicios y procesamiento de alta concurrencia.</p>
+                        <p>Experto en optimización de bases de datos, manejo de transacciones complejas, integridad de datos y creación de ecosistemas Backend resilientes (Java, Python, PL/SQL, SOA). Diseño de plataformas garantizando tolerancia a fallos y latencia ultrabaja.</p>
+                    </div>
+
+                    <div class="role-card">
+                        <h3><i class="fas fa-layer-group"></i> Arquitecto de Soluciones</h3>
+                        <p><strong>Enfoque:</strong> Integración End-to-End, Cloud Computing y Estrategia Tecnológica.</p>
+                        <p>Planeación y ejecución de arquitecturas completas aprovechando AWS, Azure y despliegues modernos (Vercel, Cloud Run). Implementación de portales web avanzados con UI/UX de vanguardia, sistemas de integración (IBM WebSphere, APIs) y control estricto de seguridad de aplicaciones e infraestructura.</p>
+                    </div>
                     
-                    <h3>Área Servidores</h3>
-                    <p><strong>Perfil:</strong> Administrador de servidores Linux, Windows</p>
-                    <p><strong>Perfil Técnico:</strong> manejo de servidores Windows y Linux, manejo de configuraciones de networking, administración de usuarios, administración del Internet y Servidores Web, mail, FTP</p>
+                    <div class="role-card">
+                        <h3><i class="fas fa-brain"></i> Experto IA</h3>
+                        <p><strong>Enfoque:</strong> Soluciones cognitivas, automatización inteligente y Data Science.</p>
+                        <p>Implementación de estrategias basadas en Inteligencia Artificial y Machine Learning. Desarrollo de flujos automatizados con LLMs locales y de nube, generación de prompts avanzados, integración de IA en flujos de trabajo tradicionales y automatización mediante agentes cognitivos.</p>
+                    </div>
                     
-                    <h3>Area Networking / Telecomunicaciones</h3>
-                    <p><strong>Perfil:</strong> Técnico Senior en redes Wireless y microonda para puntos de acceso y clientes</p>
-                    <p><strong>Descripción Perfil Técnico:</strong> manejo de ruteadores CISCO de última generación para redes Wireless de largo alcance con antenas microonda para clientes remotos, técnico en instalación de redes de largo alcance y remotas (puntos de rebote), administrador de redes para ISP's, administración y manejo de servidores Linux</p>
-                    
-                    <h3>Seguridad Informática</h3>
-                    <p><strong>Perfil:</strong> Técnico en instalación servidores (seguros) Linux, especialista en seguridad informática con uso de la distribución de Kali linux, uso de la suite completa para testeo, optimización y búsqueda de fallos de seguridad, a nivel de configuración del servidor, a nivel de red, a nivel de aplicaciones.</p>
-                    
-                    <h3>SysAdmin</h3>
-                    <p><strong>Perfil:</strong> Técnico Sysadmin en administración y operación de servidores Linux (RedHat / Centos / Fedora), tanto para administración de aplicaciones así como administración de servidores Web (Jboss / Tomcat / WebLogic / Websphere), y administración de red y recursos del servidor y del sistema operativo.</p>
+                    <div class="role-card">
+                        <h3><i class="fas fa-shield-alt"></i> Seguridad & Sysadmin</h3>
+                        <p><strong>Enfoque:</strong> Operación continua, networking y hardening de servidores.</p>
+                        <p>Especialista en seguridad informática (Kali Linux), testeo y optimización de fallos de seguridad. Administración de servidores Linux/Windows, telecomunicaciones y configuración segura de networking a gran escala.</p>
+                    </div>
                 </section>
                 <!-- Estadísticas -->
-                <section class="section" id="skills">
+                <section class="section" id="skills" style="animation-delay: 0.4s;">
                     <h2>Estadísticas y Habilidades</h2>
                     
                     <div class="chart-container">
                         <div class="chart">
-                            <h3>Lenguajes de Programación</h3>
-                            <div class="skill-bars">
-                                <div class="skill-bar">
-                                    <span class="skill-name">Java</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 98%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">PL/SQL</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 95%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">SOA</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 93%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">PHP</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 90%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">C#</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 88%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">JavaScript</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 85%;"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <h3>Lenguajes & Backend</h3>
+                            <div class="skill-bar"><span class="skill-name">Java & Spring</span><div class="skill-level"><div class="skill-percent" style="width: 98%;"></div></div></div>
+                            <div class="skill-bar"><span class="skill-name">Python & Data Science</span><div class="skill-level"><div class="skill-percent" style="width: 90%;"></div></div></div>
+                            <div class="skill-bar"><span class="skill-name">PL/SQL & Bases de Datos</span><div class="skill-level"><div class="skill-percent" style="width: 95%;"></div></div></div>
+                            <div class="skill-bar"><span class="skill-name">Arquitectura SOA / Integración</span><div class="skill-level"><div class="skill-percent" style="width: 93%;"></div></div></div>
                         </div>
                         
                         <div class="chart">
-                            <h3>Conocimiento en Administración de Servidores</h3>
-                            <div class="skill-bars">
-                                <div class="skill-bar">
-                                    <span class="skill-name">Kali Linux</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 100%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">Linux RedHat</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 95%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">Fedora</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 90%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">Centos</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 85%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">Windows Server</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 80%;"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <h3>Frontend & UI/UX</h3>
+                            <div class="skill-bar"><span class="skill-name">JavaScript / TypeScript</span><div class="skill-level"><div class="skill-percent" style="width: 88%;"></div></div></div>
+                            <div class="skill-bar"><span class="skill-name">Diseño Moderno (Glassmorphism, 3D)</span><div class="skill-level"><div class="skill-percent" style="width: 90%;"></div></div></div>
+                            <div class="skill-bar"><span class="skill-name">Animaciones & Microinteracciones</span><div class="skill-level"><div class="skill-percent" style="width: 85%;"></div></div></div>
+                            <div class="skill-bar"><span class="skill-name">C# / PHP / HTML</span><div class="skill-level"><div class="skill-percent" style="width: 85%;"></div></div></div>
                         </div>
                         
                         <div class="chart">
-                            <h3>Conocimientos en Tecnologías de la Información</h3>
-                            <div class="skill-bars">
-                                <div class="skill-bar">
-                                    <span class="skill-name">Arquitectura de Software</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 100%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">Integrador de Aplicaciones</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 98%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">Telecomunicaciones</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 95%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">Sysadmin</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 93%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">Seguridad Informática</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 90%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="chart">
-                            <h3>Análisis de Conocimientos</h3>
-                            <div class="skill-bars">
-                                <div class="skill-bar">
-                                    <span class="skill-name">Arquitecto de Software</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 95%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">Especialista en Seguridades</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 90%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">Administrador de Redes</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 85%;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-bar">
-                                    <span class="skill-name">Administrador de Servidores e infraestructura</span>
-                                    <div class="skill-level">
-                                        <div class="skill-percent" style="width: 80%;"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <h3>Infraestructura & Cloud</h3>
+                            <div class="skill-bar"><span class="skill-name">Linux (RedHat, Centos, Kali)</span><div class="skill-level"><div class="skill-percent" style="width: 95%;"></div></div></div>
+                            <div class="skill-bar"><span class="skill-name">Cloud AWS / Azure / GCP</span><div class="skill-level"><div class="skill-percent" style="width: 90%;"></div></div></div>
+                            <div class="skill-bar"><span class="skill-name">Seguridad Informática</span><div class="skill-level"><div class="skill-percent" style="width: 90%;"></div></div></div>
+                            <div class="skill-bar"><span class="skill-name">Networking / Telecomunicaciones</span><div class="skill-level"><div class="skill-percent" style="width: 95%;"></div></div></div>
                         </div>
                     </div>
                 </section>
-                 <!-- Certificaciones y Cursos -->
-                <section class="section" id="cursos">
-                    <h2>Certificaciones y Cursos</h2>
-                    
+                <!-- Certificaciones y Cursos -->
+                <section class="section" id="cursos" style="animation-delay: 0.5s;">
+                    <h2>Certificaciones Destacadas</h2>
                     <table>
                         <tr>
-                            <th>Empresa o Instituto</th>
-                            <th>Especialización</th>
+                            <th>Tecnología / Rol</th>
+                            <th>Entidad Certificadora</th>
                         </tr>
-                        <tr>
-                            <td>Sun Oracle</td>
-                            <td>Java JSF Web Applications</td>
-                        </tr>
-                        <tr>
-                            <td>TANDI Corp</td>
-                            <td>Java EE Web Applications</td>
-                        </tr>
-                        <tr>
-                            <td>TANDI Corp / E.S.P.E.</td>
-                            <td>Java 2EE Desktop Applications</td>
-                        </tr>
-                        <tr>
-                            <td>Sybase</td>
-                            <td>PowerBuilder Desktop Systems and Web Applications</td>
-                        </tr>
-                        <tr>
-                            <td>IMB</td>
-                            <td>Arquitectura Orientada a Servicios WebServices / Soap</td>
-                        </tr>
-                        <tr>
-                            <td>IBM</td>
-                            <td>Arquitectura Orientada a Servicios MessageBroker WebServices / Java</td>
-                        </tr>
-                        <tr>
-                            <td>IBM</td>
-                            <td>Arquitectura Orientada a Servicios PortletFactory Java / WebApplications</td>
-                        </tr>
-                        <tr>
-                            <td>IBM</td>
-                            <td>Arquitectura Orientada a Servicios Portal Java / WebApplications</td>
-                        </tr>
-                    </table>
-                    
-                    <table>
-                        <tr>
-                            <th>Professional Society / Certification</th>
-                            <th>Member Since / Date Certified</th>
-                        </tr>
-                        <tr>
-                            <td>Sybase Suite PowerBuilder and SQLAnywhere</td>
-                            <td>ISUG Member</td>
-                        </tr>
-                        <tr>
-                            <td>WebSphere Integrator Developer / WebServices and Integrations</td>
-                            <td>IBM</td>
-                        </tr>
-                        <tr>
-                            <td>WebSphere Integrator Developer / WebApplications</td>
-                            <td>IBM</td>
-                        </tr>
-                        <tr>
-                            <td>WebSphere PortletFactory / WebApplications</td>
-                            <td>IBM</td>
-                        </tr>
-                    </table>
-                    
-                    <h3>Ultimos Cursos / Entrenamientos</h3>
-                    <table>
-                        <tr>
-                            <th>Cursos</th>
-                            <th>Empresa</th>
-                            <th>Referencia</th>
-                            <th>Tiempo</th>
-                        </tr>
-                        <tr>
-                            <td>IBM WebSphere Process Server V7.0</td>
-                            <td>IBM</td>
-                            <td></td>
-                            <td>3 meses</td>
-                        </tr>
-                        <tr>
-                            <td>IBM WebSphere message Broker V7.0</td>
-                            <td>IBM</td>
-                            <td></td>
-                            <td>3 meses</td>
-                        </tr>
-                        <tr>
-                            <td>JAVA WebServices</td>
-                            <td>IBM</td>
-                            <td></td>
-                            <td>3 meses</td>
-                        </tr>
-                        <tr>
-                            <td>Habilidades Gerenciales</td>
-                            <td>Joseph Company</td>
-                            <td></td>
-                            <td>4 meses</td>
-                        </tr>
+                        <tr><td>Java EE / JSF Web Applications</td><td>Sun Oracle / TANDI Corp</td></tr>
+                        <tr><td>Arquitectura SOA, WebServices, Integración</td><td>IBM</td></tr>
+                        <tr><td>WebSphere PortletFactory & Process Server</td><td>IBM</td></tr>
                     </table>
                 </section>
-                <section id="contact">
-                    <h2>Contacto</h2>
-                    <p><strong>Nombre:</strong> William Eduardo Huera Ortiz</p>
-                    <p><strong>Teléfono:</strong> 0995331328</p>
-                    <p><p><strong>Email:</strong> <a href="mailto:whuera@gmail.com">whuera@gmail.com</a></p>
-                    <p><strong>LinkedIn:</strong> <a href="https://ec.linkedin.com/in/williamhuera" target="_blank">https://ec.linkedin.com/in/williamhuera</a></p>
-                    <hr>
-                    </section>
             `;
-      }
 
-      // Función para cargar contenido dinámico del portfolio
-      function loadPortfolioContent() {
-        fetch("index_fp.html")
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Error al cargar la página");
-            }
-            return response.text();
-          })
-          .then((html) => {
-            // Inserta el contenido en el contenedor dinámico
-            dynamicContent.innerHTML = html;
-
-            // Espera a que el contenido se cargue completamente y luego inicializa el chart
+            // Initialize 3D Tilt Effect on cards via Vanilla JavaScript
             setTimeout(() => {
-                initializeChart();
-            }, 0);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-            dynamicContent.innerHTML = "<p>Error al cargar el contenido.</p>";
-          });
-      }
+                const cards = document.querySelectorAll('.role-card');
+                cards.forEach(card => {
+                    card.addEventListener('mousemove', e => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
 
-     
+                        const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg
+                        const rotateY = ((x - centerX) / centerX) * 10;
 
-      // Cargar contenido al hacer clic en la pestaña "Portfolio de Proyectos"
-      portfolioTab.addEventListener("click", loadPortfolioContent);
+                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                    });
 
-      // Cargar contenido al hacer clic en la pestaña "Curriculum Vitae"
-      cvTab.addEventListener("click", loadCvContent);
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                    });
+                });
+            }, 100);
+        }
 
-      // Cargar contenido automáticamente al cargar la página
-      document.addEventListener("DOMContentLoaded", () => {
-        loadCvContent(); // Carga el currículum por defecto al iniciar la página
-      });
+        // Función para cargar contenido dinámico del portfolio
+        function loadPortfolioContent() {
+            fetch("index_fp.html")
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Error al cargar la página");
+                    }
+                    return response.text();
+                })
+                .then((html) => {
+                    // Inserta el contenido en el contenedor dinámico
+                    dynamicContent.innerHTML = html;
+
+                    // Espera a que el contenido se cargue completamente y luego inicializa el chart
+                    setTimeout(() => {
+                        initializeChart();
+                    }, 0);
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    dynamicContent.innerHTML = "<p>Error al cargar el contenido.</p>";
+                });
+        }
+
+
+
+        // Cargar contenido al hacer clic en la pestaña "Portfolio de Proyectos"
+        portfolioTab.addEventListener("click", loadPortfolioContent);
+
+        // Cargar contenido al hacer clic en la pestaña "Curriculum Vitae"
+        cvTab.addEventListener("click", loadCvContent);
+
+        // Cargar contenido automáticamente al cargar la página
+        document.addEventListener("DOMContentLoaded", () => {
+            loadCvContent(); // Carga el currículum por defecto al iniciar la página
+        });
     </script>
-  </body>
+</body>
+
 </html>

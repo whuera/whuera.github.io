@@ -1,79 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Dashboard - Projects by Country</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Portfolio Dashboard - Projects by Country</h1>
-        
-        <!-- KPI Cards -->
-        <div class="kpi-container">
-            <div class="kpi-card">
-                <div class="kpi-icon">📊</div>
-                <div class="kpi-content">
-                    <div class="kpi-title">Total Projects</div>
-                    <div class="kpi-value">6</div>
-                </div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-icon">🌎</div>
-                <div class="kpi-content">
-                    <div class="kpi-title">Countries</div>
-                    <div class="kpi-value">4</div>
-                </div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-icon">👥</div>
-                <div class="kpi-content">
-                    <div class="kpi-title">Clients</div>
-                    <div class="kpi-value">3</div>
-                </div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-icon">📅</div>
-                <div class="kpi-content">
-                    <div class="kpi-title">Years Active</div>
-                    <div class="kpi-value">11</div>
-                </div>
+<div class="section" style="animation-delay: 0.1s;">
+    <h2>Portfolio Dashboard - Projects by Country</h2>
+
+    <!-- KPI Cards -->
+    <div class="kpi-container">
+        <div class="kpi-card glass-card">
+            <div class="kpi-icon"><i class="fas fa-chart-bar"></i></div>
+            <div class="kpi-content">
+                <div class="kpi-title">Total Projects</div>
+                <div class="kpi-value">6</div>
             </div>
         </div>
-
-        <!-- Countries Grid -->
-        <div class="countries-grid">
-            <div class="country-card" onclick="window.location.href='ecuador.html'">
-                <div class="country-icon">🇪🇨</div>
-                <div class="country-content">
-                    <h3>Ecuador</h3>
-                    <p>3 Projects</p>
-                </div>
+        <div class="kpi-card glass-card">
+            <div class="kpi-icon"><i class="fas fa-globe-americas"></i></div>
+            <div class="kpi-content">
+                <div class="kpi-title">Countries</div>
+                <div class="kpi-value">4</div>
             </div>
-            <div class="country-card" onclick="window.location.href='colombia.html'">
-                <div class="country-icon">🇨🇴</div>
-                <div class="country-content">
-                    <h3>Colombia</h3>
-                    <p>1 Project</p>
-                </div>
+        </div>
+        <div class="kpi-card glass-card">
+            <div class="kpi-icon"><i class="fas fa-users"></i></div>
+            <div class="kpi-content">
+                <div class="kpi-title">Clients</div>
+                <div class="kpi-value">3</div>
             </div>
-            <div class="country-card" onclick="window.location.href='panama.html'">
-                <div class="country-icon">🇵🇦</div>
-                <div class="country-content">
-                    <h3>Panama</h3>
-                    <p>1 Project</p>
-                </div>
-            </div>
-            <div class="country-card" onclick="window.location.href='spain.html'">
-                <div class="country-icon">🇪🇸</div>
-                <div class="country-content">
-                    <h3>Spain</h3>
-                    <p>1 Project</p>
-                </div>
+        </div>
+        <div class="kpi-card glass-card">
+            <div class="kpi-icon"><i class="fas fa-calendar-alt"></i></div>
+            <div class="kpi-content">
+                <div class="kpi-title">Years Active</div>
+                <div class="kpi-value">11</div>
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+
+<div class="section" style="animation-delay: 0.2s;">
+    <h3>Countries Breakdown</h3>
+    <!-- Countries Grid -->
+    <div class="countries-grid">
+        <div class="country-card glass-card" onclick="window.location.href='ecuador.html'">
+            <div class="country-icon"><img src="https://flagcdn.com/w40/ec.png" alt="Ecuador"></div>
+            <div class="country-content">
+                <h4>Ecuador</h4>
+                <p>3 Projects</p>
+            </div>
+        </div>
+        <div class="country-card glass-card" onclick="window.location.href='colombia.html'">
+            <div class="country-icon"><img src="https://flagcdn.com/w40/co.png" alt="Colombia"></div>
+            <div class="country-content">
+                <h4>Colombia</h4>
+                <p>1 Project</p>
+            </div>
+        </div>
+        <div class="country-card glass-card" onclick="window.location.href='panama.html'">
+            <div class="country-icon"><img src="https://flagcdn.com/w40/pa.png" alt="Panama"></div>
+            <div class="country-content">
+                <h4>Panama</h4>
+                <p>1 Project</p>
+            </div>
+        </div>
+        <div class="country-card glass-card" onclick="window.location.href='spain.html'">
+            <div class="country-icon"><img src="https://flagcdn.com/w40/es.png" alt="Spain"></div>
+            <div class="country-content">
+                <h4>Spain</h4>
+                <p>1 Project</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Initialize 3D Tilt Effect on newly loaded cards
+    setTimeout(() => {
+        const cards = document.querySelectorAll('.glass-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+    }, 100);
+</script>

@@ -388,45 +388,43 @@ h3 {
   margin-bottom: 16px;
 }
 
-.skill-name {
-  display: block;
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 8px;
+}
+
+.skill-name {
   font-weight: 500;
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  margin-bottom: 0;
 }
 
-.skill-level {
-  height: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  overflow: hidden;
-  position: relative;
+.skill-label {
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.skill-percent {
-  height: 100%;
-  background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
-  border-radius: 4px;
-  position: relative;
-  box-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
+.stars {
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 0.95rem;
+  display: flex;
+  gap: 4px;
 }
 
-.skill-percent::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  animation: shine 2.5s infinite ease-in-out;
+.stars i.active {
+  color: #ffca28;
+  filter: drop-shadow(0 0 5px rgba(255, 202, 40, 0.6));
 }
 
-@keyframes shine {
-  100% {
-    left: 200%;
-  }
+.stars i.half {
+  color: #ffca28;
+  filter: drop-shadow(0 0 5px rgba(255, 202, 40, 0.6));
 }
 
 /* Dashboard KPI & Country Cards */
@@ -672,4 +670,92 @@ footer {
   text-align: center;
   pointer-events: none;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Modals & Certificates */
+.cert-btn {
+  background: rgba(31, 111, 235, 0.15);
+  border: 1px solid var(--accent-color);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+}
+
+.cert-btn:hover {
+  background: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(31, 111, 235, 0.4);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: var(--glass-blur);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content.glass-card {
+  background: linear-gradient(135deg, rgba(30, 30, 35, 0.9), rgba(15, 15, 20, 0.9));
+  border: 1px solid var(--glass-border);
+  padding: 24px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 900px;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.modal-header {
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 10px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: var(--secondary-color);
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-modal:hover {
+  color: #ff5555;
+}
+
+.modal-body iframe {
+  border-radius: 8px;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -85,6 +85,126 @@ body::after {
   animation: floatOrb2 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* LED Circuit Blinking Effect */
+.led-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.led-group-1 {
+  background-image:
+    radial-gradient(6px 6px at 10% 15%, #58a6ff, rgba(88, 166, 255, 0.4) 40%, transparent 70%),
+    radial-gradient(8px 8px at 25% 45%, #58a6ff, rgba(88, 166, 255, 0.3) 40%, transparent 70%),
+    radial-gradient(5px 5px at 40% 80%, #4090ef, rgba(31, 111, 235, 0.4) 40%, transparent 70%),
+    radial-gradient(7px 7px at 55% 20%, #58a6ff, rgba(88, 166, 255, 0.3) 40%, transparent 70%),
+    radial-gradient(6px 6px at 70% 60%, #4090ef, rgba(31, 111, 235, 0.5) 40%, transparent 70%),
+    radial-gradient(8px 8px at 85% 35%, #58a6ff, rgba(88, 166, 255, 0.4) 40%, transparent 70%),
+    radial-gradient(5px 5px at 15% 70%, #58a6ff, rgba(88, 166, 255, 0.3) 40%, transparent 70%),
+    radial-gradient(7px 7px at 92% 85%, #4090ef, rgba(31, 111, 235, 0.4) 40%, transparent 70%),
+    radial-gradient(6px 6px at 50% 50%, #58a6ff, rgba(88, 166, 255, 0.3) 40%, transparent 70%),
+    radial-gradient(5px 5px at 3% 92%, #4090ef, rgba(31, 111, 235, 0.4) 40%, transparent 70%);
+  animation: ledBlink1 3s ease-in-out infinite;
+}
+
+.led-group-2 {
+  background-image:
+    radial-gradient(7px 7px at 5% 50%, #a371f7, rgba(163, 113, 247, 0.4) 40%, transparent 70%),
+    radial-gradient(6px 6px at 20% 25%, #a371f7, rgba(163, 113, 247, 0.3) 40%, transparent 70%),
+    radial-gradient(8px 8px at 35% 65%, #a371f7, rgba(163, 113, 247, 0.4) 40%, transparent 70%),
+    radial-gradient(5px 5px at 50% 90%, #a371f7, rgba(163, 113, 247, 0.3) 40%, transparent 70%),
+    radial-gradient(7px 7px at 65% 10%, #a371f7, rgba(163, 113, 247, 0.5) 40%, transparent 70%),
+    radial-gradient(6px 6px at 78% 50%, #a371f7, rgba(163, 113, 247, 0.3) 40%, transparent 70%),
+    radial-gradient(8px 8px at 88% 75%, #a371f7, rgba(163, 113, 247, 0.4) 40%, transparent 70%),
+    radial-gradient(5px 5px at 45% 40%, #a371f7, rgba(163, 113, 247, 0.3) 40%, transparent 70%);
+  animation: ledBlink2 4s ease-in-out infinite;
+}
+
+.led-group-3 {
+  background-image:
+    radial-gradient(6px 6px at 8% 88%, #ff6b6b, rgba(255, 107, 107, 0.4) 40%, transparent 70%),
+    radial-gradient(7px 7px at 30% 10%, #00c896, rgba(0, 200, 150, 0.4) 40%, transparent 70%),
+    radial-gradient(8px 8px at 48% 55%, #ffc832, rgba(255, 200, 50, 0.4) 40%, transparent 70%),
+    radial-gradient(6px 6px at 62% 38%, #00c896, rgba(0, 200, 150, 0.4) 40%, transparent 70%),
+    radial-gradient(7px 7px at 75% 82%, #ff6b6b, rgba(255, 107, 107, 0.4) 40%, transparent 70%),
+    radial-gradient(5px 5px at 95% 15%, #ffc832, rgba(255, 200, 50, 0.4) 40%, transparent 70%),
+    radial-gradient(6px 6px at 18% 32%, #00c896, rgba(0, 200, 150, 0.3) 40%, transparent 70%),
+    radial-gradient(7px 7px at 82% 92%, #ff6b6b, rgba(255, 107, 107, 0.3) 40%, transparent 70%);
+  animation: ledBlink3 5s ease-in-out infinite;
+}
+
+@keyframes ledBlink1 {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  75% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes ledBlink2 {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.9;
+  }
+
+  40% {
+    opacity: 0;
+  }
+
+  65% {
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 0;
+  }
+}
+
+@keyframes ledBlink3 {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.7;
+  }
+
+  35% {
+    opacity: 0;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 0;
+  }
+}
+
 @keyframes floatOrb1 {
   0% {
     transform: translate(0, 0) scale(1);

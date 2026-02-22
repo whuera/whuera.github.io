@@ -16,10 +16,39 @@
 
 <body>
     <!-- LED Circuit Animation Overlay -->
-    <div class="led-overlay led-group-1"></div>
-    <div class="led-overlay led-group-2"></div>
-    <div class="led-overlay led-group-3"></div>
-
+    <div class="led-overlay" id="ledContainer"></div>
+    <script>
+        (function () {
+            const container = document.getElementById('ledContainer');
+            const colors = [
+                '#58a6ff', '#58a6ff', '#58a6ff',   // blue (dominant)
+                '#4090ef', '#4090ef',               // deep blue
+                '#a371f7', '#a371f7',               // purple
+                '#00c896',                          // green
+                '#ff6b6b',                          // red
+                '#ffc832'                           // yellow
+            ];
+            for (let i = 0; i < 200; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'led-dot';
+                const size = 4 + Math.random() * 5;           // 4-9px
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const speed = 2 + Math.random() * 4;          // 2-6s
+                const delay = Math.random() * 5;              // 0-5s delay
+                dot.style.cssText = `
+                    width: ${size}px; height: ${size}px;
+                    left: ${x}%; top: ${y}%;
+                    background: ${color};
+                    box-shadow: 0 0 ${size * 2}px ${color}, 0 0 ${size * 4}px ${color}40;
+                    --led-speed: ${speed}s;
+                    --led-delay: ${delay}s;
+                `;
+                container.appendChild(dot);
+            }
+        })();
+    </script>
     <header>
         <div class="top-bar">
             <div class="toolbar-left">

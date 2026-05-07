@@ -14,7 +14,7 @@
             <div class="kpi-icon"><i class="fas fa-globe-americas"></i></div>
             <div class="kpi-content">
                 <div class="kpi-title">Countries</div>
-                <div class="kpi-value">4</div>
+                <div class="kpi-value">7</div>
             </div>
         </div>
         <div class="kpi-card glass-card">
@@ -29,6 +29,50 @@
             <div class="kpi-content">
                 <div class="kpi-title">Years Active</div>
                 <div class="kpi-value">11</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section world-map-section">
+    <h3><i class="fas fa-globe" style="color: var(--secondary-color); margin-right: 8px;"></i>Presencia Global</h3>
+    <div class="glass-card world-map-card">
+        <div id="worldMapContainer">
+            <svg id="worldMap"></svg>
+            <div id="mapTooltip" class="map-tooltip"></div>
+        </div>
+        <div class="map-legend">
+            <div class="legend-item" onclick="window.location.href='ecuador.html'">
+                <span class="legend-dot" style="background:#4e79a7;box-shadow:0 0 6px #4e79a7aa"></span>
+                <span>Ecuador</span>
+                <span class="legend-count">3</span>
+            </div>
+            <div class="legend-item" onclick="window.location.href='colombia.html'">
+                <span class="legend-dot" style="background:#76b7b2;box-shadow:0 0 6px #76b7b2aa"></span>
+                <span>Colombia</span>
+                <span class="legend-count">1</span>
+            </div>
+            <div class="legend-item" onclick="window.location.href='panama.html'">
+                <span class="legend-dot" style="background:#e15759;box-shadow:0 0 6px #e15759aa"></span>
+                <span>Panamá</span>
+                <span class="legend-count">1</span>
+            </div>
+            <div class="legend-item" onclick="window.location.href='spain.html'">
+                <span class="legend-dot" style="background:#5470c6;box-shadow:0 0 6px #5470c6aa"></span>
+                <span>España</span>
+                <span class="legend-count">1</span>
+            </div>
+            <div class="legend-item" onclick="window.location.href='chile.html'">
+                <span class="legend-dot" style="background:#59a14f;box-shadow:0 0 6px #59a14faa"></span>
+                <span>Chile</span>
+            </div>
+            <div class="legend-item" onclick="window.location.href='costarica.html'">
+                <span class="legend-dot" style="background:#f28e2b;box-shadow:0 0 6px #f28e2baa"></span>
+                <span>Costa Rica</span>
+            </div>
+            <div class="legend-item" onclick="window.location.href='argentina.html'">
+                <span class="legend-dot" style="background:#edc948;box-shadow:0 0 6px #edc948aa"></span>
+                <span>Argentina</span>
             </div>
         </div>
     </div>
@@ -66,13 +110,34 @@
                 <p>1 Project</p>
             </div>
         </div>
+        <div class="country-card glass-card" onclick="window.location.href='chile.html'">
+            <div class="country-icon"><img src="https://flagcdn.com/w40/cl.png" alt="Chile"></div>
+            <div class="country-content">
+                <h4>Chile</h4>
+                <p>Proyectos</p>
+            </div>
+        </div>
+        <div class="country-card glass-card" onclick="window.location.href='costarica.html'">
+            <div class="country-icon"><img src="https://flagcdn.com/w40/cr.png" alt="Costa Rica"></div>
+            <div class="country-content">
+                <h4>Costa Rica</h4>
+                <p>Proyectos</p>
+            </div>
+        </div>
+        <div class="country-card glass-card" onclick="window.location.href='argentina.html'">
+            <div class="country-icon"><img src="https://flagcdn.com/w40/ar.png" alt="Argentina"></div>
+            <div class="country-content">
+                <h4>Argentina</h4>
+                <p>Proyectos</p>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
     // Initialize 3D Tilt Effect on newly loaded cards
     setTimeout(() => {
-        const cards = document.querySelectorAll('.glass-card');
+        const cards = document.querySelectorAll('.glass-card:not(.world-map-card)');
         cards.forEach(card => {
             card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();

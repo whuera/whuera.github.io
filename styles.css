@@ -1,3 +1,107 @@
+/* ============================== */
+/* World Map                      */
+/* ============================== */
+.world-map-card {
+    padding: 20px;
+    overflow: hidden;
+}
+
+#worldMapContainer {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+#worldMap {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.map-tooltip {
+    position: absolute;
+    display: none;
+    background: rgba(13, 17, 23, 0.92);
+    border: 1px solid rgba(88, 166, 255, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #c9d1d9;
+    padding: 8px 13px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    pointer-events: none;
+    z-index: 20;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    line-height: 1.6;
+}
+
+.map-tooltip strong {
+    color: #58a6ff;
+    font-size: 0.88rem;
+    display: block;
+}
+
+.map-legend {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.legend-item:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.1);
+}
+
+.legend-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.legend-count {
+    background: rgba(88,166,255,0.12);
+    border-radius: 12px;
+    padding: 1px 8px;
+    font-size: 0.73rem;
+    color: #58a6ff;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* Pulse animation for map markers */
+@keyframes mapPulse {
+    0%   { opacity: 0.8; transform: scale(1);   }
+    100% { opacity: 0;   transform: scale(2.8); }
+}
+
+.pulse-ring {
+    animation: mapPulse 2s ease-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
 /* Variables de color */
 :root {
   --primary-color: #0d1117;
@@ -18,6 +122,9 @@
   --color-colombia: #76b7b2;
   --color-panama: #e15759;
   --color-spain: #5470c6;
+  --color-chile: #59a14f;
+  --color-costarica: #f28e2b;
+  --color-argentina: #edc948;
 }
 
 * {

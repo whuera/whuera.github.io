@@ -11,6 +11,7 @@
     <!-- Include html2pdf library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -492,6 +493,138 @@
             iframe.style.display = 'none';
             loader.style.display = 'none';
             modal.style.display = 'none';
+        }
+
+        function initializeChart() {
+            const container = document.getElementById('worldMapContainer');
+            if (!container) return;
+
+            const svg = d3.select('#worldMap');
+            const tooltip = document.getElementById('mapTooltip');
+
+            svg.selectAll('*').remove();
+
+            const width = container.clientWidth || 800;
+            const height = Math.max(280, Math.min(420, width * 0.48));
+
+            svg.attr('width', width).attr('height', height);
+
+            const projection = d3.geoNaturalEarth1()
+                .scale(width / 6.5)
+                .translate([width / 2, height / 2]);
+
+            const path = d3.geoPath().projection(projection);
+
+            const countryData = {
+                218: { name: 'Ecuador',  color: '#4e79a7', url: 'ecuador.html',  label: '3 Proyectos', coords: [-78.1, -1.8]  },
+                170: { name: 'Colombia', color: '#76b7b2', url: 'colombia.html', label: '1 Proyecto',  coords: [-74.3,  4.5]  },
+                591: { name: 'Panamá',   color: '#e15759', url: 'panama.html',   label: '1 Proyecto',  coords: [-79.5,  8.9]  },
+                724: { name: 'España',   color: '#5470c6', url: 'spain.html',    label: '1 Proyecto',  coords: [-3.7,  40.4]  },
+                152: { name: 'Chile',      color: '#59a14f', url: 'chile.html',      label: 'Proyectos', coords: [-70.6, -33.4] },
+                188: { name: 'Costa Rica', color: '#f28e2b', url: 'costarica.html', label: 'Proyectos', coords: [-84.1,   9.9] },
+                 32: { name: 'Argentina',  color: '#edc948', url: 'argentina.html', label: 'Proyectos', coords: [-58.4, -34.6] }
+            };
+
+            // Graticule (grid lines)
+            svg.append('path')
+                .datum(d3.geoGraticule()())
+                .attr('d', path)
+                .attr('fill', 'none')
+                .attr('stroke', 'rgba(255,255,255,0.04)')
+                .attr('stroke-width', 0.5);
+
+            fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+                .then(r => r.json())
+                .then(world => {
+                    const features = topojson.feature(world, world.objects.countries).features;
+
+                    svg.selectAll('.country')
+                        .data(features)
+                        .enter()
+                        .append('path')
+                        .attr('class', 'country')
+                        .attr('d', path)
+                        .attr('fill', d => {
+                            const info = countryData[+d.id];
+                            return info ? info.color : 'rgba(255,255,255,0.04)';
+                        })
+                        .attr('stroke', 'rgba(255,255,255,0.08)')
+                        .attr('stroke-width', 0.4)
+                        .style('cursor', d => countryData[+d.id] ? 'pointer' : 'default')
+                        .on('mouseover', function(event, d) {
+                            const info = countryData[+d.id];
+                            if (!info) return;
+                            d3.select(this).attr('fill', d3.color(info.color).brighter(0.7).toString());
+                            const rect = container.getBoundingClientRect();
+                            tooltip.style.display = 'block';
+                            tooltip.style.left = (event.clientX - rect.left + 14) + 'px';
+                            tooltip.style.top  = (event.clientY - rect.top  - 48) + 'px';
+                            tooltip.innerHTML  = `<strong>${info.name}</strong><br><span>${info.label}</span>`;
+                        })
+                        .on('mousemove', function(event, d) {
+                            if (!countryData[+d.id]) return;
+                            const rect = container.getBoundingClientRect();
+                            tooltip.style.left = (event.clientX - rect.left + 14) + 'px';
+                            tooltip.style.top  = (event.clientY - rect.top  - 48) + 'px';
+                        })
+                        .on('mouseout', function(event, d) {
+                            const info = countryData[+d.id];
+                            if (info) d3.select(this).attr('fill', info.color);
+                            tooltip.style.display = 'none';
+                        })
+                        .on('click', function(event, d) {
+                            const info = countryData[+d.id];
+                            if (info) window.location.href = info.url;
+                        });
+
+                    // Pulsing markers on each highlighted country
+                    Object.values(countryData).forEach(country => {
+                        const [cx, cy] = projection(country.coords);
+                        if (!isFinite(cx) || !isFinite(cy)) return;
+
+                        const g = svg.append('g')
+                            .attr('class', 'map-marker')
+                            .style('cursor', 'pointer')
+                            .on('click', () => window.location.href = country.url);
+
+                        g.append('circle')
+                            .attr('cx', cx).attr('cy', cy)
+                            .attr('r', 8)
+                            .attr('fill', 'none')
+                            .attr('stroke', country.color)
+                            .attr('stroke-width', 1.5)
+                            .attr('class', 'pulse-ring');
+
+                        g.append('circle')
+                            .attr('cx', cx).attr('cy', cy)
+                            .attr('r', 3.5)
+                            .attr('fill', '#fff')
+                            .attr('stroke', country.color)
+                            .attr('stroke-width', 1.5);
+                    });
+                })
+                .catch(err => console.error('Error al cargar el mapa:', err));
+
+            // Also (re)init 3D tilt on glass-cards (exclude world map card)
+            document.querySelectorAll('.glass-card:not(.world-map-card)').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const r = card.getBoundingClientRect();
+                    const rotX = ((e.clientY - r.top  - r.height / 2) / (r.height / 2)) * -8;
+                    const rotY = ((e.clientX - r.left - r.width  / 2) / (r.width  / 2)) *  8;
+                    card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02,1.02,1.02)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+                });
+            });
+
+            // Resize handler (debounced)
+            if (window._mapResizeTimer) clearTimeout(window._mapResizeTimer);
+            window._mapResizeHandler && window.removeEventListener('resize', window._mapResizeHandler);
+            window._mapResizeHandler = () => {
+                window._mapResizeTimer = setTimeout(initializeChart, 150);
+            };
+            window.addEventListener('resize', window._mapResizeHandler);
         }
 
         // Click off modal to close

@@ -462,6 +462,29 @@
         });
 
         // Modal Logic
+        function openCountryModal(url) {
+            const modal   = document.getElementById('countryModal');
+            const iframe  = document.getElementById('countryIframe');
+            const loader  = document.getElementById('countryLoader');
+            loader.style.display = 'flex';
+            iframe.style.display = 'none';
+            iframe.src = url;
+            modal.style.display = 'flex';
+            iframe.onload = function() {
+                loader.style.display = 'none';
+                iframe.style.display = 'block';
+            };
+        }
+
+        function closeCountryModal() {
+            const modal  = document.getElementById('countryModal');
+            const iframe = document.getElementById('countryIframe');
+            modal.style.display = 'none';
+            iframe.src = '';
+            iframe.style.display = 'none';
+            document.getElementById('countryLoader').style.display = 'none';
+        }
+
         function openCertModal(docUrl) {
             if (!docUrl.toLowerCase().endsWith('.pdf')) {
                 window.open(docUrl, '_blank');
@@ -574,7 +597,7 @@
                         })
                         .on('click', function(event, d) {
                             const info = countryData[+d.id];
-                            if (info) window.location.href = info.url;
+                            if (info) openCountryModal(info.url);
                         });
 
                     // Pulsing markers on each highlighted country
@@ -585,7 +608,7 @@
                         const g = svg.append('g')
                             .attr('class', 'map-marker')
                             .style('cursor', 'pointer')
-                            .on('click', () => window.location.href = country.url);
+                            .on('click', () => openCountryModal(country.url));
 
                         g.append('circle')
                             .attr('cx', cx).attr('cy', cy)
@@ -605,18 +628,6 @@
                 })
                 .catch(err => console.error('Error al cargar el mapa:', err));
 
-            // Also (re)init 3D tilt on glass-cards (exclude world map card)
-            document.querySelectorAll('.glass-card:not(.world-map-card)').forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const r = card.getBoundingClientRect();
-                    const rotX = ((e.clientY - r.top  - r.height / 2) / (r.height / 2)) * -8;
-                    const rotY = ((e.clientX - r.left - r.width  / 2) / (r.width  / 2)) *  8;
-                    card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02,1.02,1.02)`;
-                });
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
-                });
-            });
 
             // Resize handler (debounced)
             if (window._mapResizeTimer) clearTimeout(window._mapResizeTimer);
@@ -629,12 +640,27 @@
 
         // Click off modal to close
         window.onclick = function (event) {
-            const modal = document.getElementById('certModal');
-            if (event.target == modal) {
-                closeCertModal();
-            }
+            const certModal    = document.getElementById('certModal');
+            const countryModal = document.getElementById('countryModal');
+            if (event.target == certModal)    closeCertModal();
+            if (event.target == countryModal) closeCountryModal();
         }
     </script>
+
+    <!-- Modal for Country Detail Pages -->
+    <div id="countryModal" class="modal">
+        <div class="modal-content glass-card" style="width:90%;max-width:1000px;height:85vh;display:flex;flex-direction:column;">
+            <span class="close-modal" onclick="closeCountryModal()"><i class="fas fa-times"></i></span>
+            <div class="modal-body" style="flex:1;overflow:hidden;padding:0;margin-top:12px;">
+                <div id="countryLoader" class="modal-loader">
+                    <div class="spinner"></div>
+                    <p>Cargando proyectos...</p>
+                </div>
+                <iframe id="countryIframe" src="" frameborder="0"
+                    style="display:none;width:100%;height:100%;border-radius:8px;"></iframe>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal for Certificates -->
     <div id="certModal" class="modal">

@@ -42,35 +42,35 @@
             <div id="mapTooltip" class="map-tooltip"></div>
         </div>
         <div class="map-legend">
-            <div class="legend-item" onclick="window.location.href='ecuador.html'">
+            <div class="legend-item" onclick="openCountryModal('ecuador.html')">
                 <span class="legend-dot" style="background:#4e79a7;box-shadow:0 0 6px #4e79a7aa"></span>
                 <span>Ecuador</span>
                 <span class="legend-count">3</span>
             </div>
-            <div class="legend-item" onclick="window.location.href='colombia.html'">
+            <div class="legend-item" onclick="openCountryModal('colombia.html')">
                 <span class="legend-dot" style="background:#76b7b2;box-shadow:0 0 6px #76b7b2aa"></span>
                 <span>Colombia</span>
                 <span class="legend-count">1</span>
             </div>
-            <div class="legend-item" onclick="window.location.href='panama.html'">
+            <div class="legend-item" onclick="openCountryModal('panama.html')">
                 <span class="legend-dot" style="background:#e15759;box-shadow:0 0 6px #e15759aa"></span>
                 <span>Panamá</span>
                 <span class="legend-count">1</span>
             </div>
-            <div class="legend-item" onclick="window.location.href='spain.html'">
+            <div class="legend-item" onclick="openCountryModal('spain.html')">
                 <span class="legend-dot" style="background:#5470c6;box-shadow:0 0 6px #5470c6aa"></span>
                 <span>España</span>
                 <span class="legend-count">1</span>
             </div>
-            <div class="legend-item" onclick="window.location.href='chile.html'">
+            <div class="legend-item" onclick="openCountryModal('chile.html')">
                 <span class="legend-dot" style="background:#59a14f;box-shadow:0 0 6px #59a14faa"></span>
                 <span>Chile</span>
             </div>
-            <div class="legend-item" onclick="window.location.href='costarica.html'">
+            <div class="legend-item" onclick="openCountryModal('costarica.html')">
                 <span class="legend-dot" style="background:#f28e2b;box-shadow:0 0 6px #f28e2baa"></span>
                 <span>Costa Rica</span>
             </div>
-            <div class="legend-item" onclick="window.location.href='argentina.html'">
+            <div class="legend-item" onclick="openCountryModal('argentina.html')">
                 <span class="legend-dot" style="background:#edc948;box-shadow:0 0 6px #edc948aa"></span>
                 <span>Argentina</span>
             </div>
@@ -82,49 +82,49 @@
     <h3>Countries Breakdown</h3>
     <!-- Countries Grid -->
     <div class="countries-grid">
-        <div class="country-card glass-card" onclick="window.location.href='ecuador.html'">
+        <div class="country-card glass-card" onclick="openCountryModal('ecuador.html')">
             <div class="country-icon"><img src="https://flagcdn.com/w40/ec.png" alt="Ecuador"></div>
             <div class="country-content">
                 <h4>Ecuador</h4>
                 <p>3 Projects</p>
             </div>
         </div>
-        <div class="country-card glass-card" onclick="window.location.href='colombia.html'">
+        <div class="country-card glass-card" onclick="openCountryModal('colombia.html')">
             <div class="country-icon"><img src="https://flagcdn.com/w40/co.png" alt="Colombia"></div>
             <div class="country-content">
                 <h4>Colombia</h4>
                 <p>1 Project</p>
             </div>
         </div>
-        <div class="country-card glass-card" onclick="window.location.href='panama.html'">
+        <div class="country-card glass-card" onclick="openCountryModal('panama.html')">
             <div class="country-icon"><img src="https://flagcdn.com/w40/pa.png" alt="Panama"></div>
             <div class="country-content">
                 <h4>Panama</h4>
                 <p>1 Project</p>
             </div>
         </div>
-        <div class="country-card glass-card" onclick="window.location.href='spain.html'">
+        <div class="country-card glass-card" onclick="openCountryModal('spain.html')">
             <div class="country-icon"><img src="https://flagcdn.com/w40/es.png" alt="Spain"></div>
             <div class="country-content">
                 <h4>Spain</h4>
                 <p>1 Project</p>
             </div>
         </div>
-        <div class="country-card glass-card" onclick="window.location.href='chile.html'">
+        <div class="country-card glass-card" onclick="openCountryModal('chile.html')">
             <div class="country-icon"><img src="https://flagcdn.com/w40/cl.png" alt="Chile"></div>
             <div class="country-content">
                 <h4>Chile</h4>
                 <p>Proyectos</p>
             </div>
         </div>
-        <div class="country-card glass-card" onclick="window.location.href='costarica.html'">
+        <div class="country-card glass-card" onclick="openCountryModal('costarica.html')">
             <div class="country-icon"><img src="https://flagcdn.com/w40/cr.png" alt="Costa Rica"></div>
             <div class="country-content">
                 <h4>Costa Rica</h4>
                 <p>Proyectos</p>
             </div>
         </div>
-        <div class="country-card glass-card" onclick="window.location.href='argentina.html'">
+        <div class="country-card glass-card" onclick="openCountryModal('argentina.html')">
             <div class="country-icon"><img src="https://flagcdn.com/w40/ar.png" alt="Argentina"></div>
             <div class="country-content">
                 <h4>Argentina</h4>
@@ -134,27 +134,3 @@
     </div>
 </div>
 
-<script>
-    // Initialize 3D Tilt Effect on newly loaded cards
-    setTimeout(() => {
-        const cards = document.querySelectorAll('.glass-card:not(.world-map-card)');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                const rotateX = ((y - centerY) / centerY) * -10;
-                const rotateY = ((x - centerX) / centerX) * 10;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-            });
-        });
-    }, 100);
-</script>

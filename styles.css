@@ -1071,3 +1071,119 @@ footer {
     font-size: 0.85rem;
   }
 }
+
+/* ─── Download Modal ─────────────────────────────────── */
+.download-disclaimer {
+  background: rgba(88, 166, 255, 0.07);
+  border-left: 3px solid var(--secondary-color);
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-bottom: 22px;
+  color: #c9d1d9;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.download-disclaimer p {
+  margin: 0 0 10px;
+}
+
+.download-disclaimer p:last-child {
+  margin-bottom: 0;
+}
+
+.disclaimer-icon {
+  display: block;
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 12px;
+}
+
+.captcha-section {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+
+.captcha-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--secondary-color);
+  margin: 0 0 12px;
+}
+
+.captcha-label i {
+  margin-right: 6px;
+}
+
+.captcha-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.captcha-question {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #e6edf3;
+  white-space: nowrap;
+}
+
+.captcha-input {
+  width: 90px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  color: #e6edf3;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.captcha-input:focus {
+  border-color: var(--secondary-color);
+}
+
+.captcha-status {
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-width: 80px;
+}
+
+.captcha-ok  { color: #3fb950; }
+.captcha-err { color: #f85149; }
+
+.confirm-download-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.06);
+  color: #6e7681;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.confirm-download-btn.ready {
+  background: linear-gradient(135deg, var(--secondary-color), #1a73e8);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(88, 166, 255, 0.35);
+}
+
+.confirm-download-btn.ready:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(88, 166, 255, 0.5);
+}

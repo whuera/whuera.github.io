@@ -111,11 +111,10 @@
                 <span style="color: var(--menu-text)">CV - William Eduardo Huera Ortiz</span>
             </div>
             <div class="toolbar-right">
-                <a href="CV Resume William Huera.pdf" download="CV Resume William Huera.pdf" class="download-btn"
-                    id="downloadPdf" style="text-decoration: none;">
+                <button class="download-btn" id="downloadPdf" onclick="openDownloadModal()">
                     <i class="fas fa-download"></i>
                     Download PDF
-                </a>
+                </button>
             </div>
         </div>
         <div class="tabs-bar">
@@ -638,14 +637,99 @@
             window.addEventListener('resize', window._mapResizeHandler);
         }
 
+        // Download Modal
+        let captchaA, captchaB, captchaAnswer;
+
+        function openDownloadModal() {
+            captchaA = Math.floor(Math.random() * 9) + 1;
+            captchaB = Math.floor(Math.random() * 9) + 1;
+            captchaAnswer = captchaA + captchaB;
+            document.getElementById('captchaQuestion').textContent = `¿Cuánto es ${captchaA} + ${captchaB}?`;
+            document.getElementById('captchaAnswer').value = '';
+            document.getElementById('captchaStatus').textContent = '';
+            document.getElementById('captchaStatus').className = 'captcha-status';
+            const btn = document.getElementById('confirmDownloadBtn');
+            btn.disabled = true;
+            btn.classList.remove('ready');
+            document.getElementById('downloadBtnIcon').className = 'fas fa-lock';
+            document.getElementById('downloadBtnText').textContent = 'Verificando...';
+            document.getElementById('downloadModal').style.display = 'flex';
+        }
+
+        function closeDownloadModal() {
+            document.getElementById('downloadModal').style.display = 'none';
+        }
+
+        function validateCaptcha() {
+            const input = parseInt(document.getElementById('captchaAnswer').value, 10);
+            const status = document.getElementById('captchaStatus');
+            const btn = document.getElementById('confirmDownloadBtn');
+            if (input === captchaAnswer) {
+                status.textContent = '✓ Correcto';
+                status.className = 'captcha-status captcha-ok';
+                btn.disabled = false;
+                btn.classList.add('ready');
+                document.getElementById('downloadBtnIcon').className = 'fas fa-download';
+                document.getElementById('downloadBtnText').textContent = 'Descargar PDF';
+            } else {
+                status.textContent = document.getElementById('captchaAnswer').value ? '✗ Incorrecto' : '';
+                status.className = 'captcha-status captcha-err';
+                btn.disabled = true;
+                btn.classList.remove('ready');
+                document.getElementById('downloadBtnIcon').className = 'fas fa-lock';
+                document.getElementById('downloadBtnText').textContent = 'Verificando...';
+            }
+        }
+
+        function triggerDownload() {
+            const a = document.createElement('a');
+            a.href = 'CV Resume William Huera.pdf';
+            a.download = 'CV Resume William Huera.pdf';
+            a.click();
+            closeDownloadModal();
+        }
+
         // Click off modal to close
         window.onclick = function (event) {
-            const certModal    = document.getElementById('certModal');
-            const countryModal = document.getElementById('countryModal');
-            if (event.target == certModal)    closeCertModal();
-            if (event.target == countryModal) closeCountryModal();
+            const certModal     = document.getElementById('certModal');
+            const countryModal  = document.getElementById('countryModal');
+            const downloadModal = document.getElementById('downloadModal');
+            if (event.target == certModal)     closeCertModal();
+            if (event.target == countryModal)  closeCountryModal();
+            if (event.target == downloadModal) closeDownloadModal();
         }
     </script>
+
+    <!-- Modal for Download Verification -->
+    <div id="downloadModal" class="modal">
+        <div class="modal-content glass-card" style="max-width:500px;width:90%;">
+            <span class="close-modal" onclick="closeDownloadModal()"><i class="fas fa-times"></i></span>
+            <div class="modal-header">
+                <h3><i class="fas fa-download" style="margin-right:8px;color:var(--secondary-color);"></i>Descargar CV</h3>
+            </div>
+            <div class="modal-body" style="padding-top:0;">
+                <div class="download-disclaimer">
+                    <i class="fas fa-info-circle disclaimer-icon"></i>
+                    <p>Hola, muchas gracias por tu interés.</p>
+                    <p>Si vas a descargar mi información, te agradecería que primero revises bien mi perfil completo en mi página bio, donde encontrarás más detalles sobre mi experiencia y trabajos.</p>
+                    <p>Una vez que lo hayas revisado, me encantaría poder concretar una reunión (meet) para conversar sobre la oferta de trabajo.</p>
+                    <p>Quedo atento a tu respuesta. ¡Saludos!</p>
+                </div>
+                <div class="captcha-section">
+                    <p class="captcha-label"><i class="fas fa-shield-alt"></i> Verificación humana</p>
+                    <div class="captcha-box">
+                        <span class="captcha-question" id="captchaQuestion"></span>
+                        <input type="number" id="captchaAnswer" class="captcha-input" placeholder="Tu respuesta" oninput="validateCaptcha()" />
+                        <span class="captcha-status" id="captchaStatus"></span>
+                    </div>
+                </div>
+                <button id="confirmDownloadBtn" class="confirm-download-btn" disabled onclick="triggerDownload()">
+                    <i class="fas fa-lock" id="downloadBtnIcon"></i>
+                    <span id="downloadBtnText">Verificando...</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal for Country Detail Pages -->
     <div id="countryModal" class="modal">

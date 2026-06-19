@@ -1187,3 +1187,158 @@ footer {
   transform: translateY(-1px);
   box-shadow: 0 6px 24px rgba(88, 166, 255, 0.5);
 }
+
+/* ============================== */
+/* Welcome Registration Modal     */
+/* ============================== */
+.welcome-modal-content {
+  max-width: 480px;
+  width: 90%;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85), 0 0 50px rgba(88, 166, 255, 0.1);
+  animation: welcomeIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes welcomeIn {
+  from { opacity: 0; transform: translateY(-28px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0)     scale(1);    }
+}
+
+.welcome-modal-header {
+  background: linear-gradient(135deg, rgba(88, 166, 255, 0.13), rgba(31, 111, 235, 0.08));
+  padding: 32px 32px 22px;
+  text-align: center;
+  border-bottom: 1px solid rgba(88, 166, 255, 0.12);
+}
+
+.welcome-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(88, 166, 255, 0.22), rgba(31, 111, 235, 0.22));
+  border: 2px solid rgba(88, 166, 255, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 2rem;
+  color: #58a6ff;
+  box-shadow: 0 0 24px rgba(88, 166, 255, 0.2);
+}
+
+.welcome-modal-header h2 {
+  color: #e6edf3;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.welcome-subtitle {
+  color: #8b949e;
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.welcome-form-body {
+  padding: 26px 32px 28px;
+}
+
+.welcome-form-group {
+  margin-bottom: 17px;
+}
+
+.welcome-form-group label {
+  display: block;
+  color: #8b949e;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 7px;
+}
+
+.welcome-form-group label i {
+  color: #58a6ff;
+  margin-right: 6px;
+}
+
+.welcome-form-group input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 11px 14px;
+  color: #e6edf3;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  outline: none;
+}
+
+.welcome-form-group input:focus {
+  border-color: rgba(88, 166, 255, 0.55);
+  background: rgba(88, 166, 255, 0.05);
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.12);
+}
+
+.welcome-form-group input::placeholder {
+  color: rgba(139, 148, 158, 0.5);
+}
+
+.welcome-submit-btn {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, #1f6feb, #58a6ff);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+}
+
+.welcome-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(88, 166, 255, 0.4);
+}
+
+.welcome-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.welcome-status-msg {
+  text-align: center;
+  font-size: 0.83rem;
+  margin-top: 12px;
+  min-height: 18px;
+}
+
+.welcome-skip-link {
+  display: block;
+  text-align: center;
+  margin-top: 14px;
+  font-size: 0.78rem;
+  color: rgba(139, 148, 158, 0.5);
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.welcome-skip-link:hover {
+  color: #8b949e;
+  text-decoration-color: #8b949e;
+}

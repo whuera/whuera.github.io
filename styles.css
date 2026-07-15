@@ -850,6 +850,279 @@ footer {
   }
 }
 
+/* IA Implementations Modal - Custom Scrollbar (auto-hide) */
+#iaModal .modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.3s;
+}
+
+#iaModal .modal-content:hover {
+  scrollbar-color: var(--secondary-color) rgba(255, 255, 255, 0.05);
+}
+
+#iaModal .modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+#iaModal .modal-content::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+
+#iaModal .modal-content::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 3px;
+  transition: background 0.3s;
+}
+
+#iaModal .modal-content.scrolling::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+}
+
+#iaModal .modal-content.scrolling::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* PM Metrics Modal - Custom Scrollbar (auto-hide) */
+#pmModal .modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.3s;
+}
+
+#pmModal .modal-content:hover {
+  scrollbar-color: var(--secondary-color) rgba(255, 255, 255, 0.05);
+}
+
+#pmModal .modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+#pmModal .modal-content::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+
+#pmModal .modal-content::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 3px;
+}
+
+#pmModal .modal-content.scrolling::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+}
+
+#pmModal .modal-content.scrolling::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* PM Table */
+.pm-table-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.pm-table thead {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.pm-table th {
+  padding: 12px 14px;
+  text-align: left;
+  color: var(--secondary-color);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pm-table td {
+  padding: 14px;
+  color: #c9d1d9;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  vertical-align: middle;
+}
+
+.pm-table tbody tr {
+  transition: background 0.2s;
+}
+
+.pm-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.pm-project-name {
+  font-weight: 600;
+  color: #e6edf3;
+  margin-bottom: 2px;
+}
+
+.pm-project-client {
+  font-size: 0.78rem;
+  color: #8b949e;
+}
+
+.pm-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-right: 6px;
+}
+
+.pm-badge-national {
+  background: rgba(56, 139, 253, 0.15);
+  color: #58a6ff;
+  border: 1px solid rgba(56, 139, 253, 0.25);
+}
+
+.pm-badge-international {
+  background: rgba(163, 113, 247, 0.15);
+  color: #bc8cff;
+  border: 1px solid rgba(163, 113, 247, 0.25);
+}
+
+.pm-status-success {
+  color: #4aea8b;
+  font-weight: 600;
+  font-size: 0.83rem;
+  white-space: nowrap;
+}
+
+.pm-status-success i {
+  margin-right: 4px;
+}
+
+.pm-metric {
+  color: var(--secondary-color);
+  font-weight: 700;
+}
+
+/* PM Summary Cards */
+.pm-summary {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.pm-summary-item {
+  flex: 1;
+  min-width: 120px;
+  text-align: center;
+  padding: 16px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pm-summary-number {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--secondary-color);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.pm-summary-label {
+  font-size: 0.78rem;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.ia-profinance-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4aea8b;
+  background: rgba(74, 234, 139, 0.1);
+  border: 1px solid rgba(74, 234, 139, 0.3);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.ia-profinance-btn:hover {
+  background: rgba(74, 234, 139, 0.2);
+  border-color: rgba(74, 234, 139, 0.5);
+  box-shadow: 0 0 15px rgba(74, 234, 139, 0.15);
+  color: #6ff5a5;
+}
+
+/* IA Implementations Modal */
+.ia-impl-section {
+  margin-bottom: 28px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ia-impl-section:last-child {
+  margin-bottom: 0;
+}
+
+.ia-impl-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ia-impl-step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.ia-impl-step h4 {
+  margin: 0;
+  color: #e6edf3;
+  font-size: 1.05rem;
+}
+
+.ia-impl-desc {
+  color: #8b949e;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.ia-impl-img {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
 /* ============================== */
 /* Responsive - Tablet (<=768px) */
 /* ============================== */

@@ -781,10 +781,18 @@
 
         function openPmModal() {
             document.getElementById('pmModal').style.display = 'flex';
+            document.getElementById('pmLoader').style.display = 'flex';
+            document.getElementById('pmIframe').style.display = 'none';
+            document.getElementById('pmIframe').src = 'metrics.html';
+            document.getElementById('pmIframe').onload = function () {
+                document.getElementById('pmLoader').style.display = 'none';
+                document.getElementById('pmIframe').style.display = 'block';
+            };
         }
 
         function closePmModal() {
             document.getElementById('pmModal').style.display = 'none';
+            document.getElementById('pmIframe').src = '';
         }
 
         let iaScrollTimer;
@@ -1000,113 +1008,14 @@
 
     <!-- Modal for Project Manager Metrics -->
     <div id="pmModal" class="modal">
-        <div class="modal-content glass-card" style="max-width:1100px;width:94%;max-height:85vh;overflow-y:auto;">
+        <div class="modal-content glass-card" style="max-width:1100px;width:94%;height:85vh;display:flex;flex-direction:column;">
             <span class="close-modal" onclick="closePmModal()"><i class="fas fa-times"></i></span>
-            <div class="modal-header">
-                <h3><i class="fas fa-chart-bar" style="margin-right:8px;color:var(--secondary-color);"></i>Portfolio de Proyectos — Casos de Éxito</h3>
-                <p style="color:#8b949e;font-size:0.85rem;margin-top:8px;">Proyectos liderados como Project Manager / Architect en el sector financiero y medios de pago a nivel internacional.</p>
-            </div>
-            <div class="modal-body">
-                <div class="pm-table-wrapper">
-                    <table class="pm-table">
-                        <thead>
-                            <tr>
-                                <th>Proyecto</th>
-                                <th>Alcance</th>
-                                <th>Rol de Gestión</th>
-                                <th>Rol Técnico</th>
-                                <th>Estado</th>
-                                <th>Impacto Estimado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="pm-project-name">ATM Payment Hub</div>
-                                    <div class="pm-project-client">Banco Santander Chile</div>
-                                </td>
-                                <td><span class="pm-badge pm-badge-national">Nacional</span> Chile</td>
-                                <td>Project Manager</td>
-                                <td>Transactional Architect & Lead</td>
-                                <td><span class="pm-status-success"><i class="fas fa-check-circle"></i> Entregado</span></td>
-                                <td><span class="pm-metric">+3M txns/mes</span> procesadas en red ATM</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="pm-project-name">Fusión BICE — Security</div>
-                                    <div class="pm-project-client">Banco BICE Chile</div>
-                                </td>
-                                <td><span class="pm-badge pm-badge-national">Nacional</span> Chile</td>
-                                <td>Project Manager</td>
-                                <td>Solutions Architect & Lead</td>
-                                <td><span class="pm-status-success"><i class="fas fa-check-circle"></i> Entregado</span></td>
-                                <td><span class="pm-metric">2 bancos</span> unificados en una sola plataforma</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="pm-project-name">Tarjeta Prepago</div>
-                                    <div class="pm-project-client">Banco Pichincha</div>
-                                </td>
-                                <td><span class="pm-badge pm-badge-national">Nacional</span> Ecuador</td>
-                                <td>Project Manager</td>
-                                <td>Technical Lead & Sr. Developer</td>
-                                <td><span class="pm-status-success"><i class="fas fa-check-circle"></i> Entregado</span></td>
-                                <td><span class="pm-metric">+500K clientes</span> con acceso a canales ATM/CNB</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="pm-project-name">Remesas MoneyGram</div>
-                                    <div class="pm-project-client">Banco Pichincha / MoneyGram</div>
-                                </td>
-                                <td><span class="pm-badge pm-badge-international">Internacional</span> Ecuador — USA</td>
-                                <td>Project Manager</td>
-                                <td>Technical Lead & Sr. Developer</td>
-                                <td><span class="pm-status-success"><i class="fas fa-check-circle"></i> Entregado</span></td>
-                                <td><span class="pm-metric">+200K remesas/año</span> en tiempo real</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="pm-project-name">Módulo Autenticación & Seguridad</div>
-                                    <div class="pm-project-client">Grupo Banco Davivienda</div>
-                                </td>
-                                <td><span class="pm-badge pm-badge-international">Internacional</span> Colombia — Panamá</td>
-                                <td>Project Manager</td>
-                                <td>Senior Developer</td>
-                                <td><span class="pm-status-success"><i class="fas fa-check-circle"></i> Entregado</span></td>
-                                <td><span class="pm-metric">+1M usuarios</span> con MFA y seguridad RSA</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="pm-project-name">Modernización Core Bancario</div>
-                                    <div class="pm-project-client">Banco Pichincha</div>
-                                </td>
-                                <td><span class="pm-badge pm-badge-international">Internacional</span> Ecuador — España</td>
-                                <td>Project Manager</td>
-                                <td>Technical Lead & Sr. Developer</td>
-                                <td><span class="pm-status-success"><i class="fas fa-check-circle"></i> Entregado</span></td>
-                                <td><span class="pm-metric">4 años, +10 módulos</span> migración SOA completa</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="modal-body" style="flex:1;overflow:hidden;padding:0;margin-top:12px;">
+                <div id="pmLoader" class="modal-loader">
+                    <div class="spinner"></div>
+                    <p>Cargando métricas...</p>
                 </div>
-                <div class="pm-summary">
-                    <div class="pm-summary-item">
-                        <div class="pm-summary-number">+50</div>
-                        <div class="pm-summary-label">Proyectos entregados</div>
-                    </div>
-                    <div class="pm-summary-item">
-                        <div class="pm-summary-number">100%</div>
-                        <div class="pm-summary-label">Tasa de éxito</div>
-                    </div>
-                    <div class="pm-summary-item">
-                        <div class="pm-summary-number">5</div>
-                        <div class="pm-summary-label">Países impactados</div>
-                    </div>
-                    <div class="pm-summary-item">
-                        <div class="pm-summary-number">+15</div>
-                        <div class="pm-summary-label">Años de experiencia</div>
-                    </div>
-                </div>
+                <iframe id="pmIframe" src="" frameborder="0" style="display:none;width:100%;height:100%;border-radius:8px;"></iframe>
             </div>
         </div>
     </div>

@@ -379,12 +379,18 @@
                     <div class="role-card">
                         <h3><i class="fas fa-brain"></i> Experto IA</h3>
                         <p>Experto en IA, Machine Learning y Data Science aplicados a soluciones financieras. Flujos automatizados con <strong>LLMs</strong>, arquitecturas <strong>RAG</strong> (n8n, Pinecone, OpenAI/Gemini) y agentes cognitivos para procesamiento inteligente de documentos.</p>
-                        <div style="margin-top: 15px; text-align: right;"><a href="https://viewdiagram-git-master-whueras-projects.vercel.app/" target="_blank" rel="noopener noreferrer"><button class="cert-btn"><i class="fas fa-project-diagram"></i> Ver Diagramas</button></a></div>
+                        <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;">
+                            <a href="https://viewdiagram-git-master-whueras-projects.vercel.app/" target="_blank" rel="noopener noreferrer"><button class="cert-btn"><i class="fas fa-project-diagram"></i> Ver Diagramas</button></a>
+                            <button class="cert-btn" onclick="openIaModal()"><i class="fas fa-robot"></i> Implementaciones IA</button>
+                        </div>
                     </div>
 
                     <div class="role-card">
                         <h3><i class="fas fa-tasks"></i> Project Manager</h3>
                         <p>Más de <strong>10 años</strong> liderando proyectos de misión crítica en el sector financiero y de medios de pago. Gestión integral del ciclo de vida de proyectos de implementación, migración y certificación de switches transaccionales, coordinando equipos multidisciplinarios y stakeholders en múltiples países. Experiencia comprobada en planificación estratégica, control de alcance, gestión de riesgos y entrega de soluciones bancarias complejas dentro de cronograma y presupuesto, bajo metodologías ágiles y tradicionales.</p>
+                        <div style="margin-top: 15px; text-align: right;">
+                            <button class="cert-btn" onclick="openPmModal()"><i class="fas fa-chart-bar"></i> Métricas de Proyectos</button>
+                        </div>
                     </div>
 
                     <div class="role-card">
@@ -773,6 +779,38 @@
             document.getElementById('downloadModal').style.display = 'none';
         }
 
+        function openPmModal() {
+            document.getElementById('pmModal').style.display = 'flex';
+        }
+
+        function closePmModal() {
+            document.getElementById('pmModal').style.display = 'none';
+        }
+
+        let iaScrollTimer;
+        function openIaModal() {
+            document.getElementById('iaModal').style.display = 'flex';
+        }
+
+        function closeIaModal() {
+            document.getElementById('iaModal').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var modalsWithScroll = ['#iaModal .modal-content', '#pmModal .modal-content'];
+            modalsWithScroll.forEach(function (sel) {
+                var el = document.querySelector(sel);
+                var timer;
+                el.addEventListener('scroll', function () {
+                    el.classList.add('scrolling');
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        el.classList.remove('scrolling');
+                    }, 1000);
+                });
+            });
+        });
+
         function validateCaptcha() {
             const input = parseInt(document.getElementById('captchaAnswer').value, 10);
             const status = document.getElementById('captchaStatus');
@@ -807,10 +845,14 @@
             const certModal = document.getElementById('certModal');
             const countryModal = document.getElementById('countryModal');
             const downloadModal = document.getElementById('downloadModal');
+            const iaModal = document.getElementById('iaModal');
+            const pmModal = document.getElementById('pmModal');
             // welcomeModal is intentionally excluded — user must interact with it
             if (event.target == certModal) closeCertModal();
             if (event.target == countryModal) closeCountryModal();
             if (event.target == downloadModal) closeDownloadModal();
+            if (event.target == iaModal) closeIaModal();
+            if (event.target == pmModal) closePmModal();
         }
 
         // ── Welcome Registration Modal ────────────────────────────────────
@@ -952,6 +994,148 @@
                     <p class="welcome-status-msg" id="welcomeStatusMsg"></p>
                 </form>
                 <a class="welcome-skip-link" onclick="skipWelcomeModal()">Continuar sin registrarme</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Project Manager Metrics -->
+    <div id="pmModal" class="modal">
+        <div class="modal-content glass-card" style="max-width:1100px;width:94%;max-height:85vh;overflow-y:auto;">
+            <span class="close-modal" onclick="closePmModal()"><i class="fas fa-times"></i></span>
+            <div class="modal-header">
+                <h3><i class="fas fa-chart-bar" style="margin-right:8px;color:var(--secondary-color);"></i>Portfolio de Proyectos — Casos de Éxito</h3>
+                <p style="color:#8b949e;font-size:0.85rem;margin-top:8px;">Proyectos liderados como Project Manager / Architect en el sector financiero y medios de pago a nivel internacional.</p>
+            </div>
+            <div class="modal-body">
+                <div class="pm-table-wrapper">
+                    <table class="pm-table">
+                        <thead>
+                            <tr>
+                                <th>Proyecto</th>
+                                <th>Alcance</th>
+                                <th>Rol de Gestión</th>
+                                <th>Rol Técnico</th>
+                                <th>Estado</th>
+                                <th>Impacto Estimado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="pm-project-name">ATM Payment Hub</div>
+                                    <div class="pm-project-client">Banco Santander Chile</div>
+                                </td>
+                                <td><span class="pm-badge pm-badge-national">Nacional</span> Chile</td>
+                                <td>Project Manager</td>
+                                <td>Transactional Architect & Lead</td>
+                                <td><span class="pm-status-success"><i class="fas fa-check-circle"></i> Entregado</span></td>
+                                <td><span class="pm-metric">+3M txns/mes</span> procesadas en red ATM</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="pm-project-name">Fusión BICE — Security</div>
+                                    <div class="pm-project-client">Banco BICE Chile</div>
+                                </td>
+                                <td><span class="pm-badge pm-badge-national">Nacional</span> Chile</td>
+                                <td>Project Manager</td>
+                                <td>Solutions Architect & Lead</td>
+                                <td><span class="pm-status-success"><i class="fas fa-check-circle"></i> Entregado</span></td>
+                                <td><span class="pm-metric">2 bancos</span> unificados en una sola plataforma</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="pm-project-name">Tarjeta Prepago</div>
+                                    <div class="pm-project-client">Banco Pichincha</div>
+                                </td>
+                                <td><span class="pm-badge pm-badge-national">Nacional</span> Ecuador</td>
+                                <td>Project Manager</td>
+                                <td>Technical Lead & Sr. Developer</td>
+                                <td><span class="pm-status-success"><i class="fas fa-check-circle"></i> Entregado</span></td>
+                                <td><span class="pm-metric">+500K clientes</span> con acceso a canales ATM/CNB</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="pm-project-name">Remesas MoneyGram</div>
+                                    <div class="pm-project-client">Banco Pichincha / MoneyGram</div>
+                                </td>
+                                <td><span class="pm-badge pm-badge-international">Internacional</span> Ecuador — USA</td>
+                                <td>Project Manager</td>
+                                <td>Technical Lead & Sr. Developer</td>
+                                <td><span class="pm-status-success"><i class="fas fa-check-circle"></i> Entregado</span></td>
+                                <td><span class="pm-metric">+200K remesas/año</span> en tiempo real</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="pm-project-name">Módulo Autenticación & Seguridad</div>
+                                    <div class="pm-project-client">Grupo Banco Davivienda</div>
+                                </td>
+                                <td><span class="pm-badge pm-badge-international">Internacional</span> Colombia — Panamá</td>
+                                <td>Project Manager</td>
+                                <td>Senior Developer</td>
+                                <td><span class="pm-status-success"><i class="fas fa-check-circle"></i> Entregado</span></td>
+                                <td><span class="pm-metric">+1M usuarios</span> con MFA y seguridad RSA</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="pm-project-name">Modernización Core Bancario</div>
+                                    <div class="pm-project-client">Banco Pichincha</div>
+                                </td>
+                                <td><span class="pm-badge pm-badge-international">Internacional</span> Ecuador — España</td>
+                                <td>Project Manager</td>
+                                <td>Technical Lead & Sr. Developer</td>
+                                <td><span class="pm-status-success"><i class="fas fa-check-circle"></i> Entregado</span></td>
+                                <td><span class="pm-metric">4 años, +10 módulos</span> migración SOA completa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pm-summary">
+                    <div class="pm-summary-item">
+                        <div class="pm-summary-number">+50</div>
+                        <div class="pm-summary-label">Proyectos entregados</div>
+                    </div>
+                    <div class="pm-summary-item">
+                        <div class="pm-summary-number">100%</div>
+                        <div class="pm-summary-label">Tasa de éxito</div>
+                    </div>
+                    <div class="pm-summary-item">
+                        <div class="pm-summary-number">5</div>
+                        <div class="pm-summary-label">Países impactados</div>
+                    </div>
+                    <div class="pm-summary-item">
+                        <div class="pm-summary-number">+15</div>
+                        <div class="pm-summary-label">Años de experiencia</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for IA Implementations -->
+    <div id="iaModal" class="modal">
+        <div class="modal-content glass-card" style="max-width:950px;width:92%;max-height:85vh;overflow-y:auto;">
+            <span class="close-modal" onclick="closeIaModal()"><i class="fas fa-times"></i></span>
+            <div class="modal-header">
+                <h3><i class="fas fa-robot" style="margin-right:8px;color:var(--secondary-color);"></i>Implementaciones IA - Detección de Fraude</h3>
+                <a href="https://pro-bank-five.vercel.app/" target="_blank" rel="noopener noreferrer" class="ia-profinance-btn"><i class="fas fa-external-link-alt"></i> Ver ProFinance en vivo</a>
+            </div>
+            <div class="modal-body">
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">1</div>
+                        <h4>Captura Transaccional en Tiempo Real</h4>
+                    </div>
+                    <p class="ia-impl-desc">Diseñé e implementé un módulo transaccional que captura los datos de cada transferencia (destinatario, monto, frecuencia, dispositivo) y los envía de forma asíncrona al pipeline de evaluación de riesgo. El feature engineering extrae variables comportamentales del cliente — como promedios históricos, patrones de horario y grafos de relación entre cuentas — que alimentan el modelo predictivo de detección de fraude en milisegundos, sin impactar la experiencia del usuario.</p>
+                    <img src="images/ia-transferencia.png" alt="Módulo transaccional con captura de features para ML" class="ia-impl-img" />
+                </div>
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">2</div>
+                        <h4>Scoring de Riesgo y Bloqueo Preventivo</h4>
+                    </div>
+                    <p class="ia-impl-desc">Implementé un modelo de Machine Learning (gradient boosting + redes neuronales) que calcula un score de riesgo en tiempo real para cada transacción. Cuando el score supera el umbral configurado, el sistema bloquea preventivamente la operación y activa una verificación de múltiples factores (MFA) mediante tokens de seguridad. Los factores evaluados incluyen desviación del monto respecto al comportamiento habitual, ausencia de relación previa con el destinatario y superación de umbrales dinámicos — reduciendo el fraude transaccional de manera significativa sin generar fricción en operaciones legítimas.</p>
+                    <img src="images/ia-fraude-deteccion.png" alt="Scoring ML y bloqueo preventivo con MFA" class="ia-impl-img" />
+                </div>
             </div>
         </div>
     </div>

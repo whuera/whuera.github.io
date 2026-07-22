@@ -1256,6 +1256,46 @@ footer {
 }
 
 /* ============================== */
+/* Interview Button (profile)     */
+/* ============================== */
+.interview-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #4aea8b;
+  background: rgba(74, 234, 139, 0.08);
+  border: 1px solid rgba(74, 234, 139, 0.25);
+  border-radius: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.interview-btn:hover {
+  background: rgba(74, 234, 139, 0.18);
+  border-color: rgba(74, 234, 139, 0.5);
+  box-shadow: 0 0 12px rgba(74, 234, 139, 0.15);
+  transform: translateY(-1px);
+}
+
+.online-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4aea8b;
+  display: inline-block;
+  animation: onlinePulse 2s ease-in-out infinite;
+}
+
+@keyframes onlinePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(74, 234, 139, 0.5); }
+  50% { box-shadow: 0 0 0 5px rgba(74, 234, 139, 0); }
+}
+
+/* ============================== */
 /* Responsive - Phone (<=480px) */
 /* ============================== */
 @media (max-width: 480px) {

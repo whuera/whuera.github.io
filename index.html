@@ -162,6 +162,10 @@
             <i class="fas fa-envelope nav-icon"></i>
             <span>Contacto</span>
         </a>
+        <a href="javascript:void(0)" class="nav-item" onclick="openAssistantModal()" style="margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px;">
+            <i class="fas fa-robot nav-icon" style="color: #58a6ff;"></i>
+            <span>Entrevista Virtual</span>
+        </a>
     </nav>
 
     <div class="container">
@@ -251,6 +255,15 @@
                                         style="margin-right: 8px; color: #8b949e;"></i>MobilPymes.cl</a></p>
                         </div>
 
+                        <!-- Entrevista Virtual -->
+                        <div style="background: linear-gradient(135deg, rgba(31,111,235,0.12), rgba(88,166,255,0.06)); border: 1px solid rgba(88,166,255,0.2); border-radius: 10px; padding: 20px;">
+                            <h4 style="color: var(--secondary-color); margin-bottom: 14px; font-size: 1rem;"><i class="fas fa-robot"></i> Entrevista Virtual</h4>
+                            <p style="font-size: 0.85rem; color: #8b949e; margin-bottom: 14px;">Realice una entrevista técnica inmediata conmigo. Un asistente con IA, entrenado con mi documentación profesional, está disponible para responder en tiempo real cualquier consulta sobre mi conocimiento técnico, experiencia en arquitectura transaccional, soluciones cloud e inteligencia artificial.</p>
+                            <a href="javascript:void(0)" onclick="openAssistantModal()" style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent-color); color: #fff; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#58a6ff';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#1f6feb';this.style.transform='translateY(0)'">
+                                <i class="fas fa-comments"></i> Entrevístame
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -317,7 +330,10 @@
                         <img src="profile-photo.jpg" alt="William Eduardo Huera Ortiz" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid var(--secondary-color); box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
                         <div>
                             <h3 style="margin: 0 0 5px; color: #fff; font-size: 1.4rem;">William Eduardo Huera Ortiz</h3>
-                            <p style="margin: 0; color: var(--secondary-color); font-size: 1rem;">Transactional Architect | Solutions Architect</p>
+                            <p style="margin: 0 0 10px; color: var(--secondary-color); font-size: 1rem;">Transactional Architect | Solutions Architect</p>
+                            <a href="javascript:void(0)" onclick="openAssistantModal()" class="interview-btn">
+                                <span class="online-dot"></span> Entrevístame
+                            </a>
                         </div>
                     </div>
                     <div class="profile-info">
@@ -533,6 +549,15 @@
                                 <p style="margin-bottom: 8px;"><a href="https://www.linkedin.com/in/williamhuera/" target="_blank" rel="noopener noreferrer" style="color: #58a6ff; text-decoration: none;"><i class="fab fa-linkedin" style="margin-right: 8px; color: #8b949e;"></i>LinkedIn</a></p>
                                 <p style="margin-bottom: 8px;"><a href="https://github.com/whuera" target="_blank" rel="noopener noreferrer" style="color: #58a6ff; text-decoration: none;"><i class="fab fa-github" style="margin-right: 8px; color: #8b949e;"></i>GitHub</a></p>
                                 <p style="margin-bottom: 0;"><a href="https://mobilpymes.cl/" target="_blank" rel="noopener noreferrer" style="color: #58a6ff; text-decoration: none;"><i class="fas fa-building" style="margin-right: 8px; color: #8b949e;"></i>MobilPymes.cl</a></p>
+                            </div>
+
+                            <!-- Entrevista Virtual -->
+                            <div style="background: linear-gradient(135deg, rgba(31,111,235,0.12), rgba(88,166,255,0.06)); border: 1px solid rgba(88,166,255,0.2); border-radius: 10px; padding: 20px;">
+                                <h4 style="color: var(--secondary-color); margin-bottom: 14px; font-size: 1rem;"><i class="fas fa-robot"></i> Entrevista Virtual</h4>
+                                <p style="font-size: 0.85rem; color: #8b949e; margin-bottom: 14px;">Realice una entrevista técnica inmediata conmigo. Un asistente con IA, entrenado con mi documentación profesional, está disponible para responder en tiempo real cualquier consulta sobre mi conocimiento técnico, experiencia en arquitectura transaccional, soluciones cloud e inteligencia artificial.</p>
+                                <a href="javascript:void(0)" onclick="openAssistantModal()" style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent-color); color: #fff; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#58a6ff';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#1f6feb';this.style.transform='translateY(0)'">
+                                    <i class="fas fa-comments"></i> Entrevístame
+                                </a>
                             </div>
 
                         </div>
@@ -804,6 +829,22 @@
             document.getElementById('iaModal').style.display = 'none';
         }
 
+        function openAssistantModal() {
+            document.getElementById('assistantModal').style.display = 'flex';
+            document.getElementById('assistantLoader').style.display = 'flex';
+            document.getElementById('assistantIframe').style.display = 'none';
+            document.getElementById('assistantIframe').src = 'https://mobilpymes.cl/interview.html';
+            document.getElementById('assistantIframe').onload = function () {
+                document.getElementById('assistantLoader').style.display = 'none';
+                document.getElementById('assistantIframe').style.display = 'block';
+            };
+        }
+
+        function closeAssistantModal() {
+            document.getElementById('assistantModal').style.display = 'none';
+            document.getElementById('assistantIframe').src = '';
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             var modalsWithScroll = ['#iaModal .modal-content', '#pmModal .modal-content'];
             modalsWithScroll.forEach(function (sel) {
@@ -855,12 +896,14 @@
             const downloadModal = document.getElementById('downloadModal');
             const iaModal = document.getElementById('iaModal');
             const pmModal = document.getElementById('pmModal');
+            const assistantModal = document.getElementById('assistantModal');
             // welcomeModal is intentionally excluded — user must interact with it
             if (event.target == certModal) closeCertModal();
             if (event.target == countryModal) closeCountryModal();
             if (event.target == downloadModal) closeDownloadModal();
             if (event.target == iaModal) closeIaModal();
             if (event.target == pmModal) closePmModal();
+            if (event.target == assistantModal) closeAssistantModal();
         }
 
         // ── Welcome Registration Modal ────────────────────────────────────
@@ -1045,6 +1088,20 @@
                     <p class="ia-impl-desc">Implementé un modelo de Machine Learning (gradient boosting + redes neuronales) que calcula un score de riesgo en tiempo real para cada transacción. Cuando el score supera el umbral configurado, el sistema bloquea preventivamente la operación y activa una verificación de múltiples factores (MFA) mediante tokens de seguridad. Los factores evaluados incluyen desviación del monto respecto al comportamiento habitual, ausencia de relación previa con el destinatario y superación de umbrales dinámicos — reduciendo el fraude transaccional de manera significativa sin generar fricción en operaciones legítimas.</p>
                     <img src="images/ia-fraude-deteccion.png" alt="Scoring ML y bloqueo preventivo con MFA" class="ia-impl-img" />
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Entrevista Virtual -->
+    <div id="assistantModal" class="modal">
+        <div class="modal-content glass-card" style="max-width:900px;width:94%;height:88vh;display:flex;flex-direction:column;">
+            <span class="close-modal" onclick="closeAssistantModal()"><i class="fas fa-times"></i></span>
+            <div class="modal-body" style="flex:1;overflow:hidden;padding:0;margin-top:12px;">
+                <div id="assistantLoader" class="modal-loader">
+                    <div class="spinner"></div>
+                    <p>Cargando entrevista virtual...</p>
+                </div>
+                <iframe id="assistantIframe" src="" frameborder="0" style="display:none;width:100%;height:100%;border-radius:8px;" allow="microphone"></iframe>
             </div>
         </div>
     </div>

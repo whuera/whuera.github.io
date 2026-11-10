@@ -5,102 +5,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CV - William Eduardo Huera Ortiz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Include Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <!-- Include html2pdf library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20261110e">
+    <script>
+        // Tema: light por defecto; se recuerda la elección del visitante
+        try { if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
+        function toggleTheme() {
+            const dark = document.documentElement.dataset.theme !== 'dark';
+            if (dark) document.documentElement.dataset.theme = 'dark';
+            else delete document.documentElement.dataset.theme;
+            try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+        }
+    </script>
 </head>
 
 <body>
-    <!-- Particle network wallpaper -->
-    <canvas id="bgCanvas"></canvas>
-    <script>
-        (function () {
-            const canvas = document.getElementById('bgCanvas');
-            const ctx = canvas.getContext('2d');
-            let W, H;
-
-            function resize() {
-                W = canvas.width = window.innerWidth;
-                H = canvas.height = window.innerHeight;
-            }
-            resize();
-            window.addEventListener('resize', resize);
-
-            // Palette: azules y blancos fríos
-            const palette = [
-                [88, 166, 255],   // azul principal
-                [64, 144, 239],   // azul profundo
-                [120, 190, 255],   // azul claro
-                [200, 225, 255],   // azul casi blanco
-                [160, 200, 255],   // celeste
-            ];
-
-            const N = 90;
-            const MAX_DIST = 160;
-
-            const pts = Array.from({ length: N }, () => {
-                const c = palette[Math.floor(Math.random() * palette.length)];
-                return {
-                    x: Math.random() * window.innerWidth,
-                    y: Math.random() * window.innerHeight,
-                    vx: (Math.random() - 0.5) * 0.45,
-                    vy: (Math.random() - 0.5) * 0.45,
-                    r: 2 + Math.random() * 2.5,
-                    c: c
-                };
-            });
-
-            function frame() {
-                ctx.clearRect(0, 0, W, H);
-
-                // Líneas de conexión
-                for (let i = 0; i < N; i++) {
-                    for (let j = i + 1; j < N; j++) {
-                        const dx = pts[i].x - pts[j].x;
-                        const dy = pts[i].y - pts[j].y;
-                        const d = Math.sqrt(dx * dx + dy * dy);
-                        if (d < MAX_DIST) {
-                            const a = (1 - d / MAX_DIST) * 0.45;
-                            ctx.strokeStyle = `rgba(88,166,255,${a})`;
-                            ctx.lineWidth = 0.8;
-                            ctx.beginPath();
-                            ctx.moveTo(pts[i].x, pts[i].y);
-                            ctx.lineTo(pts[j].x, pts[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-
-                // Puntos
-                for (const p of pts) {
-                    const [r, g, b] = p.c;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, 6.2832);
-                    ctx.fillStyle = `rgba(${r},${g},${b},0.95)`;
-                    ctx.fill();
-
-                    // Halo suave
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r * 3, 0, 6.2832);
-                    ctx.fillStyle = `rgba(${r},${g},${b},0.12)`;
-                    ctx.fill();
-
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    if (p.x < 0 || p.x > W) p.vx = -p.vx;
-                    if (p.y < 0 || p.y > H) p.vy = -p.vy;
-                }
-
-                requestAnimationFrame(frame);
-            }
-            frame();
-        })();
-    </script>
 
     <header>
         <div class="top-bar">
@@ -111,6 +36,9 @@
                 <span style="color: var(--menu-text)">CV - William Eduardo Huera Ortiz</span>
             </div>
             <div class="toolbar-right">
+                <button class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
+                    <i class="fas fa-moon"></i><i class="fas fa-sun"></i>
+                </button>
                 <button class="download-btn" id="downloadPdf" onclick="openDownloadModal()">
                     <i class="fas fa-download"></i>
                     Download PDF
@@ -158,12 +86,16 @@
             <i class="fas fa-chalkboard-teacher nav-icon"></i>
             <span>Certificaciones y Cursos</span>
         </a>
+        <a href="#habilitantes" class="nav-item">
+            <i class="fas fa-folder-open nav-icon"></i>
+            <span>Habilitantes</span>
+        </a>
         <a href="#contact" class="nav-item">
             <i class="fas fa-envelope nav-icon"></i>
             <span>Contacto</span>
         </a>
-        <a href="javascript:void(0)" class="nav-item" onclick="openAssistantModal()" style="margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px;">
-            <i class="fas fa-robot nav-icon" style="color: #58a6ff;"></i>
+        <a href="javascript:void(0)" class="nav-item" onclick="openAssistantModal()" style="margin-top: 12px; border-top: 1px solid var(--hairline); padding-top: 16px;">
+            <i class="fas fa-robot nav-icon" style="color: var(--secondary-color);"></i>
             <span>Entrevista Virtual</span>
         </a>
     </nav>
@@ -201,7 +133,7 @@
                 <h2>Contacto</h2>
                 <div class="role-card">
                     <h3><i class="fas fa-address-card"></i> Información de Contacto</h3>
-                    <p style="font-size: 0.9rem; color: #8b949e; margin-bottom: 20px;">Si desea conocer más sobre mi
+                    <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 20px;">Si desea conocer más sobre mi
                         experiencia profesional, discutir oportunidades de colaboración o solicitar información
                         adicional, no dude en contactarme a través de cualquiera de los siguientes canales.</p>
 
@@ -209,57 +141,57 @@
 
                         <!-- Correos Electrónicos -->
                         <div
-                            style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px;">
+                            style="background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; padding: 20px;">
                             <h4 style="color: var(--secondary-color); margin-bottom: 14px; font-size: 1rem;"><i
                                     class="fas fa-envelope"></i> Correo Electrónico</h4>
                             <p style="margin-bottom: 8px;"><a href="mailto:whuera@gmail.com"
-                                    style="color: #58a6ff; text-decoration: none;"><i class="fas fa-at"
-                                        style="margin-right: 8px; color: #8b949e;"></i>whuera@gmail.com</a></p>
+                                    style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-at"
+                                        style="margin-right: 8px; color: var(--muted);"></i>whuera@gmail.com</a></p>
                             <p style="margin-bottom: 8px;"><a href="mailto:eduardohuera@gmail.com"
-                                    style="color: #58a6ff; text-decoration: none;"><i class="fas fa-at"
-                                        style="margin-right: 8px; color: #8b949e;"></i>eduardohuera@gmail.com</a></p>
+                                    style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-at"
+                                        style="margin-right: 8px; color: var(--muted);"></i>eduardohuera@gmail.com</a></p>
                             <p style="margin-bottom: 0;"><a href="mailto:william.huera@outlook.com"
-                                    style="color: #58a6ff; text-decoration: none;"><i class="fas fa-at"
-                                        style="margin-right: 8px; color: #8b949e;"></i>william.huera@outlook.com</a></p>
+                                    style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-at"
+                                        style="margin-right: 8px; color: var(--muted);"></i>william.huera@outlook.com</a></p>
                         </div>
 
                         <!-- Teléfonos -->
                         <div
-                            style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px;">
+                            style="background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; padding: 20px;">
                             <h4 style="color: var(--secondary-color); margin-bottom: 14px; font-size: 1rem;"><i
                                     class="fas fa-phone-alt"></i> Teléfono</h4>
                             <p style="margin-bottom: 8px;"><a href="tel:+56985689661"
-                                    style="color: #58a6ff; text-decoration: none;"><i class="fas fa-flag"
-                                        style="margin-right: 8px; color: #8b949e;"></i>Chile: +56 9 8568 9661</a></p>
+                                    style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-flag"
+                                        style="margin-right: 8px; color: var(--muted);"></i>Chile: +56 9 8568 9661</a></p>
                             <p style="margin-bottom: 0;"><a href="tel:+593995331328"
-                                    style="color: #58a6ff; text-decoration: none;"><i class="fas fa-flag"
-                                        style="margin-right: 8px; color: #8b949e;"></i>Ecuador: +593 99 533 1328</a></p>
+                                    style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-flag"
+                                        style="margin-right: 8px; color: var(--muted);"></i>Ecuador: +593 99 533 1328</a></p>
                         </div>
 
                         <!-- Redes y Web -->
                         <div
-                            style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px;">
+                            style="background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; padding: 20px;">
                             <h4 style="color: var(--secondary-color); margin-bottom: 14px; font-size: 1rem;"><i
                                     class="fas fa-globe"></i> Presencia Digital</h4>
                             <p style="margin-bottom: 8px;"><a href="https://www.linkedin.com/in/williamhuera/"
                                     target="_blank" rel="noopener noreferrer"
-                                    style="color: #58a6ff; text-decoration: none;"><i class="fab fa-linkedin"
-                                        style="margin-right: 8px; color: #8b949e;"></i>LinkedIn</a></p>
+                                    style="color: var(--secondary-color); text-decoration: none;"><i class="fab fa-linkedin"
+                                        style="margin-right: 8px; color: var(--muted);"></i>LinkedIn</a></p>
                             <p style="margin-bottom: 8px;"><a href="https://github.com/whuera" target="_blank"
-                                    rel="noopener noreferrer" style="color: #58a6ff; text-decoration: none;"><i
-                                        class="fab fa-github" style="margin-right: 8px; color: #8b949e;"></i>GitHub</a>
+                                    rel="noopener noreferrer" style="color: var(--secondary-color); text-decoration: none;"><i
+                                        class="fab fa-github" style="margin-right: 8px; color: var(--muted);"></i>GitHub</a>
                             </p>
                             <p style="margin-bottom: 0;"><a href="https://mobilpymes.cl/" target="_blank"
-                                    rel="noopener noreferrer" style="color: #58a6ff; text-decoration: none;"><i
+                                    rel="noopener noreferrer" style="color: var(--secondary-color); text-decoration: none;"><i
                                         class="fas fa-building"
-                                        style="margin-right: 8px; color: #8b949e;"></i>MobilPymes.cl</a></p>
+                                        style="margin-right: 8px; color: var(--muted);"></i>MobilPymes.cl</a></p>
                         </div>
 
                         <!-- Entrevista Virtual -->
                         <div style="background: linear-gradient(135deg, rgba(31,111,235,0.12), rgba(88,166,255,0.06)); border: 1px solid rgba(88,166,255,0.2); border-radius: 10px; padding: 20px;">
                             <h4 style="color: var(--secondary-color); margin-bottom: 14px; font-size: 1rem;"><i class="fas fa-robot"></i> Entrevista Virtual</h4>
-                            <p style="font-size: 0.85rem; color: #8b949e; margin-bottom: 14px;">Realice una entrevista técnica inmediata conmigo. Un asistente con IA, entrenado con mi documentación profesional, está disponible para responder en tiempo real cualquier consulta sobre mi conocimiento técnico, experiencia en arquitectura transaccional, soluciones cloud e inteligencia artificial.</p>
-                            <a href="javascript:void(0)" onclick="openAssistantModal()" style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent-color); color: #fff; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#58a6ff';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#1f6feb';this.style.transform='translateY(0)'">
+                            <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 14px;">Realice una entrevista técnica inmediata conmigo. Un asistente con IA, entrenado con mi documentación profesional, está disponible para responder en tiempo real cualquier consulta sobre mi conocimiento técnico, experiencia en arquitectura transaccional, soluciones cloud e inteligencia artificial.</p>
+                            <a href="javascript:void(0)" onclick="openAssistantModal()" style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent-color); color: #fff; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='var(--secondary-color)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--accent-color)';this.style.transform='translateY(0)'">
                                 <i class="fas fa-comments"></i> Entrevístame
                             </a>
                         </div>
@@ -280,12 +212,15 @@
 
     <script>
 
+        // Navegación lateral: abre la pestaña de la sección (vista única, sin scroll de página)
         document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
             anchor.addEventListener("click", function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute("href")).scrollIntoView({
-                    behavior: "smooth",
-                });
+                const id = this.getAttribute("href").slice(1);
+                if (id && !document.getElementById(id)) loadCvContent();
+                const first = dynamicContent.querySelector(':scope > .section');
+                showSection(id || (first && first.id));
+                if (window.innerWidth <= 768) sidebar.classList.add("hidden");
             });
         });
 
@@ -320,16 +255,73 @@
         const cvTab = document.getElementById("cvTab");
         const dynamicContent = document.getElementById("dynamicContent");
 
+        // Control segmentado estilo macOS: una pestaña por sección
+        function buildSectionTabs() {
+            const sections = [...dynamicContent.querySelectorAll(':scope > .section')];
+            if (!sections.length) return;
+            const nav = document.createElement('nav');
+            nav.className = 'seg-control';
+            nav.setAttribute('role', 'tablist');
+            nav.innerHTML = '<span class="seg-thumb" aria-hidden="true"></span>';
+            sections.forEach((sec, i) => {
+                if (!sec.id) sec.id = 'sec-' + i;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.setAttribute('role', 'tab');
+                btn.dataset.target = sec.id;
+                const icon = document.createElement('i');
+                icon.className = 'fas ' + (sec.dataset.icon || 'fa-circle');
+                const label = document.createElement('span');
+                label.textContent = sec.dataset.tab || (sec.querySelector('h2,h3') || {}).textContent || 'Sección';
+                btn.append(icon, label);
+                btn.addEventListener('click', () => showSection(sec.id));
+                nav.appendChild(btn);
+            });
+            dynamicContent.prepend(nav);
+            showSection(sections[0].id);
+        }
+
+        function moveSegThumb() {
+            const nav = dynamicContent.querySelector('.seg-control');
+            const btn = nav && nav.querySelector('button.active');
+            if (!btn) return;
+            const thumb = nav.querySelector('.seg-thumb');
+            thumb.style.width = btn.offsetWidth + 'px';
+            thumb.style.transform = 'translateX(' + btn.offsetLeft + 'px)';
+        }
+        window.addEventListener('resize', moveSegThumb);
+
+        function showSection(id) {
+            const target = id && document.getElementById(id);
+            if (!target || !target.classList.contains('section')) return false;
+            dynamicContent.querySelectorAll(':scope > .section').forEach(s => s.classList.toggle('is-active', s === target));
+            dynamicContent.querySelectorAll('.seg-control button').forEach(b => {
+                const on = b.dataset.target === id;
+                b.classList.toggle('active', on);
+                b.setAttribute('aria-selected', on);
+                if (on) b.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+            });
+            moveSegThumb();
+            target.scrollTop = 0;
+            if (target.querySelector('#worldMapContainer')) initializeChart();
+            return true;
+        }
+
+        function setTopTab(tab) {
+            [cvTab, portfolioTab].forEach(t => t.classList.toggle('active', t === tab));
+        }
+
         // Función para cargar el contenido del currículum
         function loadCvContent() {
+            setTopTab(cvTab);
             dynamicContent.innerHTML = `
                 <!-- Datos Básicos -->
-                <section class="section" id="about" style="animation-delay: 0.1s;">
+                <section class="section" id="about" data-tab="Datos" data-icon="fa-id-card">
                     <h2>Datos Básicos</h2>
                     <div style="display: flex; align-items: center; gap: 30px; flex-wrap: wrap; margin-bottom: 20px;">
                         <img src="profile-photo.jpg" alt="William Eduardo Huera Ortiz" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid var(--secondary-color); box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
                         <div>
-                            <h3 style="margin: 0 0 5px; color: #fff; font-size: 1.4rem;">William Eduardo Huera Ortiz</h3>
+                            <h3 style="margin: 0 0 5px; color: var(--ink); font-size: 1.4rem;">William Eduardo Huera Ortiz</h3>
                             <p style="margin: 0 0 10px; color: var(--secondary-color); font-size: 1rem;">Transactional Architect | Solutions Architect</p>
                             <a href="javascript:void(0)" onclick="openAssistantModal()" class="interview-btn">
                                 <span class="online-dot"></span> Entrevístame
@@ -352,33 +344,34 @@
                     </div>
                 </section>            
                 <!-- Datos Estudios -->
-                <section class="section" id="education" style="animation-delay: 0.2s;">
+                <section class="section" id="education" data-tab="Formación" data-icon="fa-graduation-cap">
                     <h2>Formación Académica</h2>
                     <div class="profile-info">
                         <p><strong>Ingeniería de Sistemas</strong><br>Universidad: E.S.P.E</p>
                         <p><strong>Tecnología Administración</strong><br>Universidad: E.S.P.E. (en curso)</p>
                         <p><strong>Diplomado Cloud Computing</strong><br>Udla Ecuador (finalizado)</p>
                         <p><strong>Data Scientist</strong><br>IPP Chile (finalizado)</p>
+                        <p><strong>Diplomado Inteligencia Artificial y Data Science</strong><br>Universidad de Chile (finalizado)</p>
                     </div>
                 </section>
                 <!-- Datos Profesionales / Enfoque -->
-                <section class="section" id="experience" style="animation-delay: 0.3s;">
+                <section class="section" id="experience" data-tab="Perfil" data-icon="fa-user-tie">
                     <h2>Perfil Profesional & Especialidades</h2>
 
                     <!-- Resumen Ejecutivo -->
                     <div class="role-card" style="border-left: 3px solid var(--secondary-color);">
-                        <p style="font-size: 1.05rem; color: #c9d1d9; line-height: 1.7; margin-bottom: 0;">
-                            Arquitecto Transaccional y de Soluciones con más de <strong style="color: #58a6ff;">15 años</strong> diseñando la infraestructura de pagos que mueve millones de transacciones bancarias en Latinoamérica. Especialista en sistemas transaccionales financieros sobre <strong style="color: #58a6ff;">ACI Base24-eps y UPF</strong> para redes <strong>VISA</strong> y <strong>Mastercard</strong>, con proyectos de alto impacto entregados en <strong style="color: #58a6ff;">7 países</strong> (Ecuador, Chile, Colombia, Panamá, Argentina, Costa Rica y España) para instituciones como <strong>Redbanc</strong>, <strong>Banco Pichincha</strong>, <strong>Banred</strong> y <strong>Grupo Davivienda</strong>.
+                        <p style="font-size: 1.05rem; color: var(--text-color); line-height: 1.7; margin-bottom: 0;">
+                            Arquitecto Transaccional y de Soluciones con más de <strong style="color: var(--secondary-color);">15 años</strong> diseñando la infraestructura de pagos que mueve millones de transacciones bancarias en Latinoamérica. Especialista en sistemas transaccionales financieros sobre <strong style="color: var(--secondary-color);">ACI Base24-eps y UPF</strong> para redes <strong>VISA</strong> y <strong>Mastercard</strong>, con proyectos de alto impacto entregados en <strong style="color: var(--secondary-color);">7 países</strong> (Ecuador, Chile, Colombia, Panamá, Argentina, Costa Rica y España) para instituciones como <strong>Redbanc</strong>, <strong>Banco Pichincha</strong>, <strong>Banred</strong> y <strong>Grupo Davivienda</strong>.
                         </p>
                     </div>
 
-                    <h3 style="color: #8b949e; text-align: center; margin: 35px 0 25px; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;">Áreas de Especialidad</h3>
+                    <h3 style="color: var(--muted); text-align: center; margin: 35px 0 25px; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;">Áreas de Especialidad</h3>
 
                     <div class="role-card">
                         <h3><i class="fas fa-network-wired"></i> Arquitecto Transaccional</h3>
                         <p>Experto en sistemas distribuidos, microservicios y alta concurrencia para switches que operan 24/7 con tolerancia a fallos y latencia ultrabaja. Experto en <strong>BASE24-eps (C++/Java)</strong>, <strong>UPF</strong>, <strong>Oracle (PL/SQL)</strong> e integridad transaccional bajo <strong>ISO 8583</strong>, en canales ATM y POS a escala bancaria.</p>
-                        <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                            <p style="font-size: 0.85rem; color: #8b949e; margin-bottom: 12px;"><i class="fas fa-info-circle" style="color: var(--secondary-color);"></i> Para una revisión más detallada de los diseños de arquitectura, diagramas técnicos y soluciones implementadas en los proyectos en los que he participado, lo invito a consultar el siguiente recurso interactivo.</p>
+                        <div style="margin-top: 15px; border-top: 1px solid var(--hairline); padding-top: 15px;">
+                            <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;"><i class="fas fa-info-circle" style="color: var(--secondary-color);"></i> Para una revisión más detallada de los diseños de arquitectura, diagramas técnicos y soluciones implementadas en los proyectos en los que he participado, lo invito a consultar el siguiente recurso interactivo.</p>
                             <div style="text-align: right;"><a href="https://viewdiagram-git-master-whueras-projects.vercel.app/" target="_blank" rel="noopener noreferrer"><button class="cert-btn"><i class="fas fa-project-diagram"></i> Ver Diagramas de Arquitectura</button></a></div>
                         </div>
                     </div>
@@ -386,8 +379,8 @@
                     <div class="role-card">
                         <h3><i class="fas fa-layer-group"></i> Arquitecto de Soluciones</h3>
                         <p>Experto en diseño de Arquitecturas end-to-end integrando core bancario, middleware y switch transaccional, con despliegues en <strong>AWS</strong>, <strong>Azure</strong> y <strong>GCP</strong>. He liderado integraciones complejas multi-institución (banco + switch + remesadoras/redes internacionales) entregadas en cronograma.</p>
-                        <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                            <p style="font-size: 0.85rem; color: #8b949e; margin-bottom: 12px;"><i class="fas fa-info-circle" style="color: var(--secondary-color);"></i> Puede explorar en detalle las arquitecturas de solución, diagramas de integración y documentación técnica de los proyectos corporativos y personales en los que he contribuido como arquitecto.</p>
+                        <div style="margin-top: 15px; border-top: 1px solid var(--hairline); padding-top: 15px;">
+                            <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;"><i class="fas fa-info-circle" style="color: var(--secondary-color);"></i> Puede explorar en detalle las arquitecturas de solución, diagramas de integración y documentación técnica de los proyectos corporativos y personales en los que he contribuido como arquitecto.</p>
                             <div style="text-align: right;"><a href="https://viewdiagram-git-master-whueras-projects.vercel.app/" target="_blank" rel="noopener noreferrer"><button class="cert-btn"><i class="fas fa-project-diagram"></i> Ver Diagramas de Arquitectura</button></a></div>
                         </div>
                     </div>
@@ -416,7 +409,7 @@
                     </div>
                 </section>
                 <!-- Estadísticas -->
-                <section class="section" id="skills" style="animation-delay: 0.4s;">
+                <section class="section" id="skills" data-tab="Habilidades" data-icon="fa-code">
                     <h2>Estadísticas y Habilidades</h2>
                     
                     <div class="chart-container">
@@ -483,7 +476,7 @@
                     </div>
                 </section>
                 <!-- Certificaciones y Cursos -->
-                <section class="section" id="cursos" style="animation-delay: 0.5s;">
+                <section class="section" id="cursos" data-tab="Certificaciones" data-icon="fa-certificate">
                     <h2>Certificaciones Destacadas</h2>
                     <table>
                         <tr>
@@ -520,42 +513,110 @@
                     </table>
                 </section>
                 <!-- Contacto -->
-                <section class="section" id="contact" style="animation-delay: 0.6s;">
+                <section class="section" id="habilitantes" data-tab="Habilitantes" data-icon="fa-folder-open">
+                    <h2>Documentos Habilitantes</h2>
+                    <div class="role-card doc-card">
+                        <p class="doc-intro"><i class="fas fa-info-circle"></i> Toda la documentación de respaldo en un solo lugar, para armar mi ficha de candidato. Los documentos marcados como <em>bajo solicitud</em> se envían por correo.</p>
+                        <ul class="doc-list">
+                            <li class="doc-item">
+                                <span class="doc-icon"><i class="fas fa-file-pdf"></i></span>
+                                <div class="doc-text"><strong>Curriculum Vitae</strong><small>PDF · William Eduardo Huera Ortiz</small></div>
+                                <span class="doc-status ok">Disponible</span>
+                                <div class="doc-actions"><button type="button" class="doc-action primary" onclick="openDownloadModal()"><i class="fas fa-download"></i> Descargar</button></div>
+                            </li>
+                            <li class="doc-item">
+                                <span class="doc-icon"><i class="fas fa-credit-card"></i></span>
+                                <div class="doc-text"><strong>Certificaciones ACI Worldwide</strong><small>BASE24-eps · UP Framework · ISO 8583 Endpoints · Sessions · Entities</small></div>
+                                <span class="doc-status ok">Disponible</span>
+                                <div class="doc-actions"><a class="doc-action" href="https://raw.githubusercontent.com/whuera/aci-certificates/master/Certificados_B24_eps_UP_Framework_William_Huera.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-eye"></i> Ver</a><a class="doc-action" href="https://github.com/whuera/aci-certificates" target="_blank" rel="noopener noreferrer"><i class="fas fa-folder-open"></i> Todas</a></div>
+                            </li>
+                            <li class="doc-item">
+                                <span class="doc-icon"><i class="fas fa-server"></i></span>
+                                <div class="doc-text"><strong>Certificaciones IBM</strong><small>WebSphere Portlet Factory · Portal Developer · Codificación Segura</small></div>
+                                <span class="doc-status ok">Disponible</span>
+                                <div class="doc-actions"><a class="doc-action" href="https://raw.githubusercontent.com/whuera/IBM-certificates/master/ibm_webpshere_portal_porlet_developer.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-eye"></i> Ver</a><a class="doc-action" href="https://github.com/whuera/IBM-certificates" target="_blank" rel="noopener noreferrer"><i class="fas fa-folder-open"></i> Todas</a></div>
+                            </li>
+                            <li class="doc-item">
+                                <span class="doc-icon"><i class="fas fa-coffee"></i></span>
+                                <div class="doc-text"><strong>Certificaciones Java</strong><small>Java EE / JSF Web Applications · Sun Oracle / TANDI Corp</small></div>
+                                <span class="doc-status">Bajo solicitud</span>
+                                <div class="doc-actions"><a class="doc-action" href="mailto:whuera@gmail.com?subject=Solicitud%20de%20documento%3A%20Certificaciones%20Java"><i class="fas fa-paper-plane"></i> Solicitar</a></div>
+                            </li>
+                            <li class="doc-item">
+                                <span class="doc-icon"><i class="fas fa-cloud"></i></span>
+                                <div class="doc-text"><strong>Certificaciones Google Cloud (GCP)</strong><small>Cloud Computing</small></div>
+                                <span class="doc-status">Bajo solicitud</span>
+                                <div class="doc-actions"><a class="doc-action" href="mailto:whuera@gmail.com?subject=Solicitud%20de%20documento%3A%20Certificaciones%20GCP"><i class="fas fa-paper-plane"></i> Solicitar</a></div>
+                            </li>
+                            <li class="doc-item">
+                                <span class="doc-icon"><i class="fab fa-aws"></i></span>
+                                <div class="doc-text"><strong>Certificaciones AWS</strong><small>Amazon Web Services</small></div>
+                                <span class="doc-status">Bajo solicitud</span>
+                                <div class="doc-actions"><a class="doc-action" href="mailto:whuera@gmail.com?subject=Solicitud%20de%20documento%3A%20Certificaciones%20AWS"><i class="fas fa-paper-plane"></i> Solicitar</a></div>
+                            </li>
+                            <li class="doc-item">
+                                <span class="doc-icon"><i class="fas fa-graduation-cap"></i></span>
+                                <div class="doc-text"><strong>Título de Ingeniería de Sistemas</strong><small>Universidad de las Fuerzas Armadas E.S.P.E.</small></div>
+                                <span class="doc-status">Bajo solicitud</span>
+                                <div class="doc-actions"><a class="doc-action" href="mailto:whuera@gmail.com?subject=Solicitud%20de%20documento%3A%20T%C3%ADtulo%20de%20Ingenier%C3%ADa%20de%20Sistemas"><i class="fas fa-paper-plane"></i> Solicitar</a></div>
+                            </li>
+                            <li class="doc-item">
+                                <span class="doc-icon"><i class="fas fa-brain"></i></span>
+                                <div class="doc-text"><strong>Título de Data Scientist</strong><small>IPP Chile</small></div>
+                                <span class="doc-status">Bajo solicitud</span>
+                                <div class="doc-actions"><a class="doc-action" href="mailto:whuera@gmail.com?subject=Solicitud%20de%20documento%3A%20T%C3%ADtulo%20de%20Data%20Scientist"><i class="fas fa-paper-plane"></i> Solicitar</a></div>
+                            </li>
+                            <li class="doc-item">
+                                <span class="doc-icon"><i class="fas fa-cloud-upload-alt"></i></span>
+                                <div class="doc-text"><strong>Diplomado en Cloud Computing</strong><small>Universidad de las Américas (UDLA) · Ecuador</small></div>
+                                <span class="doc-status">Bajo solicitud</span>
+                                <div class="doc-actions"><a class="doc-action" href="mailto:whuera@gmail.com?subject=Solicitud%20de%20documento%3A%20Diplomado%20en%20Cloud%20Computing%20(UDLA)"><i class="fas fa-paper-plane"></i> Solicitar</a></div>
+                            </li>
+                            <li class="doc-item">
+                                <span class="doc-icon"><i class="fas fa-robot"></i></span>
+                                <div class="doc-text"><strong>Diplomado en Inteligencia Artificial y Data Science</strong><small>Universidad de Chile</small></div>
+                                <span class="doc-status">Bajo solicitud</span>
+                                <div class="doc-actions"><a class="doc-action" href="mailto:whuera@gmail.com?subject=Solicitud%20de%20documento%3A%20Diplomado%20en%20Inteligencia%20Artificial%20y%20Data%20Science%20(Universidad%20de%20Chile)"><i class="fas fa-paper-plane"></i> Solicitar</a></div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="section" id="contact" data-tab="Contacto" data-icon="fa-envelope">
                     <h2>Contacto</h2>
                     <div class="role-card">
                         <h3><i class="fas fa-address-card"></i> Información de Contacto</h3>
-                        <p style="font-size: 0.9rem; color: #8b949e; margin-bottom: 20px;">Si desea conocer más sobre mi experiencia profesional, discutir oportunidades de colaboración o solicitar información adicional, no dude en contactarme a través de cualquiera de los siguientes canales.</p>
+                        <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 20px;">Si desea conocer más sobre mi experiencia profesional, discutir oportunidades de colaboración o solicitar información adicional, no dude en contactarme a través de cualquiera de los siguientes canales.</p>
 
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
 
                             <!-- Correos Electrónicos -->
-                            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px;">
+                            <div style="background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; padding: 20px;">
                                 <h4 style="color: var(--secondary-color); margin-bottom: 14px; font-size: 1rem;"><i class="fas fa-envelope"></i> Correo Electrónico</h4>
-                                <p style="margin-bottom: 8px;"><a href="mailto:whuera@gmail.com" style="color: #58a6ff; text-decoration: none;"><i class="fas fa-at" style="margin-right: 8px; color: #8b949e;"></i>whuera@gmail.com</a></p>
-                                <p style="margin-bottom: 8px;"><a href="mailto:eduardohuera@gmail.com" style="color: #58a6ff; text-decoration: none;"><i class="fas fa-at" style="margin-right: 8px; color: #8b949e;"></i>eduardohuera@gmail.com</a></p>
-                                <p style="margin-bottom: 0;"><a href="mailto:william.huera@outlook.com" style="color: #58a6ff; text-decoration: none;"><i class="fas fa-at" style="margin-right: 8px; color: #8b949e;"></i>william.huera@outlook.com</a></p>
+                                <p style="margin-bottom: 8px;"><a href="mailto:whuera@gmail.com" style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-at" style="margin-right: 8px; color: var(--muted);"></i>whuera@gmail.com</a></p>
+                                <p style="margin-bottom: 8px;"><a href="mailto:eduardohuera@gmail.com" style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-at" style="margin-right: 8px; color: var(--muted);"></i>eduardohuera@gmail.com</a></p>
+                                <p style="margin-bottom: 0;"><a href="mailto:william.huera@outlook.com" style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-at" style="margin-right: 8px; color: var(--muted);"></i>william.huera@outlook.com</a></p>
                             </div>
 
                             <!-- Teléfonos -->
-                            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px;">
+                            <div style="background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; padding: 20px;">
                                 <h4 style="color: var(--secondary-color); margin-bottom: 14px; font-size: 1rem;"><i class="fas fa-phone-alt"></i> Teléfono</h4>
-                                <p style="margin-bottom: 8px;"><a href="tel:+56985689661" style="color: #58a6ff; text-decoration: none;"><i class="fas fa-flag" style="margin-right: 8px; color: #8b949e;"></i>Chile: +56 9 8568 9661</a></p>
-                                <p style="margin-bottom: 0;"><a href="tel:+593995331328" style="color: #58a6ff; text-decoration: none;"><i class="fas fa-flag" style="margin-right: 8px; color: #8b949e;"></i>Ecuador: +593 99 533 1328</a></p>
+                                <p style="margin-bottom: 8px;"><a href="tel:+56985689661" style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-flag" style="margin-right: 8px; color: var(--muted);"></i>Chile: +56 9 8568 9661</a></p>
+                                <p style="margin-bottom: 0;"><a href="tel:+593995331328" style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-flag" style="margin-right: 8px; color: var(--muted);"></i>Ecuador: +593 99 533 1328</a></p>
                             </div>
 
                             <!-- Redes y Web -->
-                            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px;">
+                            <div style="background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; padding: 20px;">
                                 <h4 style="color: var(--secondary-color); margin-bottom: 14px; font-size: 1rem;"><i class="fas fa-globe"></i> Presencia Digital</h4>
-                                <p style="margin-bottom: 8px;"><a href="https://www.linkedin.com/in/williamhuera/" target="_blank" rel="noopener noreferrer" style="color: #58a6ff; text-decoration: none;"><i class="fab fa-linkedin" style="margin-right: 8px; color: #8b949e;"></i>LinkedIn</a></p>
-                                <p style="margin-bottom: 8px;"><a href="https://github.com/whuera" target="_blank" rel="noopener noreferrer" style="color: #58a6ff; text-decoration: none;"><i class="fab fa-github" style="margin-right: 8px; color: #8b949e;"></i>GitHub</a></p>
-                                <p style="margin-bottom: 0;"><a href="https://mobilpymes.cl/" target="_blank" rel="noopener noreferrer" style="color: #58a6ff; text-decoration: none;"><i class="fas fa-building" style="margin-right: 8px; color: #8b949e;"></i>MobilPymes.cl</a></p>
+                                <p style="margin-bottom: 8px;"><a href="https://www.linkedin.com/in/williamhuera/" target="_blank" rel="noopener noreferrer" style="color: var(--secondary-color); text-decoration: none;"><i class="fab fa-linkedin" style="margin-right: 8px; color: var(--muted);"></i>LinkedIn</a></p>
+                                <p style="margin-bottom: 8px;"><a href="https://github.com/whuera" target="_blank" rel="noopener noreferrer" style="color: var(--secondary-color); text-decoration: none;"><i class="fab fa-github" style="margin-right: 8px; color: var(--muted);"></i>GitHub</a></p>
+                                <p style="margin-bottom: 0;"><a href="https://mobilpymes.cl/" target="_blank" rel="noopener noreferrer" style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-building" style="margin-right: 8px; color: var(--muted);"></i>MobilPymes.cl</a></p>
                             </div>
 
                             <!-- Entrevista Virtual -->
                             <div style="background: linear-gradient(135deg, rgba(31,111,235,0.12), rgba(88,166,255,0.06)); border: 1px solid rgba(88,166,255,0.2); border-radius: 10px; padding: 20px;">
                                 <h4 style="color: var(--secondary-color); margin-bottom: 14px; font-size: 1rem;"><i class="fas fa-robot"></i> Entrevista Virtual</h4>
-                                <p style="font-size: 0.85rem; color: #8b949e; margin-bottom: 14px;">Realice una entrevista técnica inmediata conmigo. Un asistente con IA, entrenado con mi documentación profesional, está disponible para responder en tiempo real cualquier consulta sobre mi conocimiento técnico, experiencia en arquitectura transaccional, soluciones cloud e inteligencia artificial.</p>
-                                <a href="javascript:void(0)" onclick="openAssistantModal()" style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent-color); color: #fff; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#58a6ff';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#1f6feb';this.style.transform='translateY(0)'">
+                                <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 14px;">Realice una entrevista técnica inmediata conmigo. Un asistente con IA, entrenado con mi documentación profesional, está disponible para responder en tiempo real cualquier consulta sobre mi conocimiento técnico, experiencia en arquitectura transaccional, soluciones cloud e inteligencia artificial.</p>
+                                <a href="javascript:void(0)" onclick="openAssistantModal()" style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent-color); color: #fff; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='var(--secondary-color)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--accent-color)';this.style.transform='translateY(0)'">
                                     <i class="fas fa-comments"></i> Entrevístame
                                 </a>
                             </div>
@@ -564,6 +625,7 @@
                     </div>
                 </section>
             `;
+            buildSectionTabs();
         }
 
         // Función para cargar contenido dinámico del portfolio
@@ -578,6 +640,8 @@
                 .then((html) => {
                     // Inserta el contenido en el contenedor dinámico
                     dynamicContent.innerHTML = html;
+                    setTopTab(portfolioTab);
+                    buildSectionTabs();
 
                     // Espera a que el contenido se cargue completamente y luego inicializa el chart
                     setTimeout(() => {
@@ -696,7 +760,7 @@
                 .datum(d3.geoGraticule()())
                 .attr('d', path)
                 .attr('fill', 'none')
-                .attr('stroke', 'rgba(255,255,255,0.04)')
+                .attr('class', 'graticule')
                 .attr('stroke-width', 0.5);
 
             fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
@@ -708,13 +772,13 @@
                         .data(features)
                         .enter()
                         .append('path')
-                        .attr('class', 'country')
+                        .attr('class', d => countryData[+d.id] ? 'country' : 'country land')
                         .attr('d', path)
                         .attr('fill', d => {
                             const info = countryData[+d.id];
-                            return info ? info.color : 'rgba(255,255,255,0.04)';
+                            return info ? info.color : null;
                         })
-                        .attr('stroke', 'rgba(255,255,255,0.08)')
+                        .attr('stroke', 'var(--hairline)')
                         .attr('stroke-width', 0.4)
                         .style('cursor', d => countryData[+d.id] ? 'pointer' : 'default')
                         .on('mouseover', function (event, d) {

@@ -12,7 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
-    <link rel="stylesheet" href="styles.css?v=20261110e">
+    <link rel="stylesheet" href="styles.css?v=20261112b">
     <script>
         // Tema: light por defecto; se recuerda la elección del visitante
         try { if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
@@ -27,80 +27,11 @@
 
 <body>
 
-    <header>
-        <div class="top-bar">
-            <div class="toolbar-left">
-                <button class="toolbar-button" id="toggleMenu">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <span style="color: var(--menu-text)">CV - William Eduardo Huera Ortiz</span>
-            </div>
-            <div class="toolbar-right">
-                <button class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
-                    <i class="fas fa-moon"></i><i class="fas fa-sun"></i>
-                </button>
-                <button class="download-btn" id="downloadPdf" onclick="openDownloadModal()">
-                    <i class="fas fa-download"></i>
-                    Download PDF
-                </button>
-            </div>
-        </div>
-        <div class="tabs-bar">
-            <div class="tab" id="cvTab">
-                <i class="fas fa-file-alt"></i>
-                &nbsp;Curriculum Vitae
-            </div>
-            <div class="tab" id="portfolioTab">
-                <i class="fas fa-file-alt"></i>
-                &nbsp;Portfolio de Proyectos
-            </div>
-        </div>
-    </header>
-
-    <nav class="sidebar">
-        <a href="#" class="nav-item">
-            <i class="fas fa-chevron-up nav-icon"></i>
-            <span>Inicio</span>
-        </a>
-        <a href="#about" class="nav-item">
-            <i class="fas fa-id-card nav-icon"></i>
-            <span>Datos Básicos</span>
-        </a>
-        <a href="#experience" class="nav-item">
-            <i class="fas fa-user nav-icon"></i>
-            <span>Perfil</span>
-        </a>
-        <a href="#education" class="nav-item">
-            <i class="fas fa-graduation-cap nav-icon"></i>
-            <span>Educación</span>
-        </a>
-        <a href="#experience" class="nav-item">
-            <i class="fas fa-briefcase nav-icon"></i>
-            <span>Experiencia</span>
-        </a>
-        <a href="#skills" class="nav-item">
-            <i class="fas fa-code nav-icon"></i>
-            <span>Habilidades</span>
-        </a>
-        <a href="#cursos" class="nav-item">
-            <i class="fas fa-chalkboard-teacher nav-icon"></i>
-            <span>Certificaciones y Cursos</span>
-        </a>
-        <a href="#habilitantes" class="nav-item">
-            <i class="fas fa-folder-open nav-icon"></i>
-            <span>Habilitantes</span>
-        </a>
-        <a href="#contact" class="nav-item">
-            <i class="fas fa-envelope nav-icon"></i>
-            <span>Contacto</span>
-        </a>
-        <a href="javascript:void(0)" class="nav-item" onclick="openAssistantModal()" style="margin-top: 12px; border-top: 1px solid var(--hairline); padding-top: 16px;">
-            <i class="fas fa-robot nav-icon" style="color: var(--secondary-color);"></i>
-            <span>Entrevista Virtual</span>
-        </a>
-    </nav>
-
     <div class="container">
+        <!-- Menú único tipo píldora: secciones · Entrevístame · tema -->
+        <div class="app-bar">
+            <div id="segSlot" class="seg-slot"></div>
+        </div>
         <!-- Contenedor para cargar dinámicamente el contenido -->
         <div id="dynamicContent">
             <!-- Contenido inicial del Curriculum Vitae -->
@@ -212,47 +143,6 @@
 
     <script>
 
-        // Navegación lateral: abre la pestaña de la sección (vista única, sin scroll de página)
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-            anchor.addEventListener("click", function (e) {
-                e.preventDefault();
-                const id = this.getAttribute("href").slice(1);
-                if (id && !document.getElementById(id)) loadCvContent();
-                const first = dynamicContent.querySelector(':scope > .section');
-                showSection(id || (first && first.id));
-                if (window.innerWidth <= 768) sidebar.classList.add("hidden");
-            });
-        });
-
-        const toggleMenuButton = document.getElementById("toggleMenu");
-        const sidebar = document.querySelector(".sidebar");
-        const container = document.querySelector(".container");
-
-        // Start sidebar hidden on mobile
-        function checkMobile() {
-            if (window.innerWidth <= 768) {
-                sidebar.classList.add("hidden");
-                container.style.marginLeft = "0";
-            }
-        }
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-
-        toggleMenuButton.addEventListener("click", () => {
-            sidebar.classList.toggle("hidden");
-            if (window.innerWidth > 768) {
-                // Desktop: push content
-                if (sidebar.classList.contains("hidden")) {
-                    container.style.marginLeft = "0";
-                } else {
-                    container.style.marginLeft = "var(--sidebar-width)";
-                }
-            }
-            // Mobile: sidebar overlays, no margin change
-        });
-
-        const portfolioTab = document.getElementById("portfolioTab");
-        const cvTab = document.getElementById("cvTab");
         const dynamicContent = document.getElementById("dynamicContent");
 
         // Control segmentado estilo macOS: una pestaña por sección
@@ -277,13 +167,17 @@
                 btn.addEventListener('click', () => showSection(sec.id));
                 nav.appendChild(btn);
             });
-            dynamicContent.prepend(nav);
+            nav.insertAdjacentHTML('beforeend',
+                '<span class="seg-divider" aria-hidden="true"></span>' +
+                '<button type="button" class="seg-cta" onclick="openAssistantModal()"><i class="fas fa-robot"></i><span>Entrevístame</span></button>' +
+                '<button type="button" class="seg-icon theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema"><i class="fas fa-moon"></i><i class="fas fa-sun"></i></button>');
+            document.getElementById('segSlot').replaceChildren(nav);
             showSection(sections[0].id);
         }
 
         function moveSegThumb() {
-            const nav = dynamicContent.querySelector('.seg-control');
-            const btn = nav && nav.querySelector('button.active');
+            const nav = document.querySelector('.seg-control');
+            const btn = nav && nav.querySelector('button[role=tab].active');
             if (!btn) return;
             const thumb = nav.querySelector('.seg-thumb');
             thumb.style.width = btn.offsetWidth + 'px';
@@ -295,7 +189,7 @@
             const target = id && document.getElementById(id);
             if (!target || !target.classList.contains('section')) return false;
             dynamicContent.querySelectorAll(':scope > .section').forEach(s => s.classList.toggle('is-active', s === target));
-            dynamicContent.querySelectorAll('.seg-control button').forEach(b => {
+            document.querySelectorAll('.seg-control button[role=tab]').forEach(b => {
                 const on = b.dataset.target === id;
                 b.classList.toggle('active', on);
                 b.setAttribute('aria-selected', on);
@@ -307,13 +201,9 @@
             return true;
         }
 
-        function setTopTab(tab) {
-            [cvTab, portfolioTab].forEach(t => t.classList.toggle('active', t === tab));
-        }
 
         // Función para cargar el contenido del currículum
         function loadCvContent() {
-            setTopTab(cvTab);
             dynamicContent.innerHTML = `
                 <!-- Datos Básicos -->
                 <section class="section" id="about" data-tab="Datos" data-icon="fa-id-card">
@@ -513,6 +403,9 @@
                     </table>
                 </section>
                 <!-- Contacto -->
+                <section class="section" id="portfolio" data-tab="Portafolio" data-icon="fa-globe-americas">
+                    <div class="modal-loader"><div class="spinner"></div><p>Cargando portafolio...</p></div>
+                </section>
                 <section class="section" id="habilitantes" data-tab="Habilitantes" data-icon="fa-folder-open">
                     <h2>Documentos Habilitantes</h2>
                     <div class="role-card doc-card">
@@ -626,41 +519,26 @@
                 </section>
             `;
             buildSectionTabs();
+            loadPortfolioContent();
         }
 
-        // Función para cargar contenido dinámico del portfolio
+        // Portafolio: se carga dentro de su pestaña (index_fp.html)
         function loadPortfolioContent() {
+            const target = document.getElementById('portfolio');
             fetch("index_fp.html")
                 .then((response) => {
-                    if (!response.ok) {
-                        throw new Error("Error al cargar la página");
-                    }
+                    if (!response.ok) throw new Error("Error al cargar el portafolio");
                     return response.text();
                 })
                 .then((html) => {
-                    // Inserta el contenido en el contenedor dinámico
-                    dynamicContent.innerHTML = html;
-                    setTopTab(portfolioTab);
-                    buildSectionTabs();
-
-                    // Espera a que el contenido se cargue completamente y luego inicializa el chart
-                    setTimeout(() => {
-                        initializeChart();
-                    }, 0);
+                    target.innerHTML = html;
+                    if (target.classList.contains('is-active')) initializeChart();
                 })
                 .catch((error) => {
                     console.error("Error:", error);
-                    dynamicContent.innerHTML = "<p>Error al cargar el contenido.</p>";
+                    target.innerHTML = "<p>Error al cargar el portafolio.</p>";
                 });
         }
-
-
-
-        // Cargar contenido al hacer clic en la pestaña "Portfolio de Proyectos"
-        portfolioTab.addEventListener("click", loadPortfolioContent);
-
-        // Cargar contenido al hacer clic en la pestaña "Curriculum Vitae"
-        cvTab.addEventListener("click", loadCvContent);
 
         // Cargar contenido automáticamente al cargar la página
         document.addEventListener("DOMContentLoaded", () => {
@@ -1132,10 +1010,16 @@
         <div class="modal-content glass-card" style="max-width:950px;width:92%;max-height:85vh;overflow-y:auto;">
             <span class="close-modal" onclick="closeIaModal()"><i class="fas fa-times"></i></span>
             <div class="modal-header">
-                <h3><i class="fas fa-robot" style="margin-right:8px;color:var(--secondary-color);"></i>Implementaciones IA - Detección de Fraude</h3>
-                <a href="https://pro-bank-five.vercel.app/" target="_blank" rel="noopener noreferrer" class="ia-profinance-btn"><i class="fas fa-external-link-alt"></i> Ver ProFinance en vivo</a>
+                <h3><i class="fas fa-robot" style="margin-right:8px;color:var(--secondary-color);"></i>Implementaciones IA</h3>
             </div>
             <div class="modal-body">
+                <div class="ia-project-head">
+                    <div>
+                        <span class="ia-project-tag">Proyecto 1 · Banca</span>
+                        <h4>ProFinance — Detección de Fraude</h4>
+                    </div>
+                    <a href="https://pro-bank-five.vercel.app/" target="_blank" rel="noopener noreferrer" class="ia-profinance-btn"><i class="fas fa-external-link-alt"></i> Ver ProFinance en vivo</a>
+                </div>
                 <div class="ia-impl-section">
                     <div class="ia-impl-step">
                         <div class="ia-impl-step-number">1</div>
@@ -1151,6 +1035,57 @@
                     </div>
                     <p class="ia-impl-desc">Implementé un modelo de Machine Learning (gradient boosting + redes neuronales) que calcula un score de riesgo en tiempo real para cada transacción. Cuando el score supera el umbral configurado, el sistema bloquea preventivamente la operación y activa una verificación de múltiples factores (MFA) mediante tokens de seguridad. Los factores evaluados incluyen desviación del monto respecto al comportamiento habitual, ausencia de relación previa con el destinatario y superación de umbrales dinámicos — reduciendo el fraude transaccional de manera significativa sin generar fricción en operaciones legítimas.</p>
                     <img src="images/ia-fraude-deteccion.png" alt="Scoring ML y bloqueo preventivo con MFA" class="ia-impl-img" />
+                </div>
+
+                <div class="ia-project-head">
+                    <div>
+                        <span class="ia-project-tag">Proyecto 2 · Drones + IA</span>
+                        <h4>Orbix — Centro de Control de Drones con Machine Learning</h4>
+                    </div>
+                    <div class="ia-project-links">
+                        <a href="https://orbix.mobilpymes.store/" target="_blank" rel="noopener noreferrer" class="ia-profinance-btn"><i class="fas fa-external-link-alt"></i> Ver Orbix en vivo</a>
+                        <a href="https://lnkd.in/p/dm8EMcjy" target="_blank" rel="noopener noreferrer" class="ia-profinance-btn ia-linkedin-btn"><i class="fab fa-linkedin"></i> Publicación en LinkedIn</a>
+                    </div>
+                </div>
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">1</div>
+                        <h4>Centro de Control y Simulación de Vuelo</h4>
+                    </div>
+                    <p class="ia-impl-desc">Plataforma de servicios con drones (integración Dronex) con un centro de control web: simulación 3D del vuelo, telemetría en tiempo real (altitud, velocidad, rumbo y estado de vuelo), joysticks virtuales y teclado, y gestión de misiones con progreso, recursos y entregas. Cubre casos de uso de vigilancia, monitoreo, análisis y gestión de cultivos, operaciones en sitios de riesgo, análisis científico y reconocimiento aéreo.</p>
+                    <img src="images/orbix-centro-control.webp" alt="Centro de control de Orbix: simulación de vuelo, telemetría y detecciones de IA" class="ia-impl-img ia-impl-img-wide" loading="lazy" />
+                </div>
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">2</div>
+                        <h4>Red Neuronal y Detecciones de IA en Tiempo Real</h4>
+                    </div>
+                    <p class="ia-impl-desc">Durante la misión, una red neuronal convolucional (entrada 64×64×3, capas convolucionales, pooling y densas) clasifica las muestras capturadas por el dron —aire, agua, vegetación, aves, erosión de costa— y publica cada detección con su nivel de confianza en un panel en vivo. Así el análisis aéreo pasa de la captura a la clasificación sin intervención manual.</p>
+                </div>
+
+                <div class="ia-project-head">
+                    <div>
+                        <span class="ia-project-tag">Proyecto 3 · Inteligencia aérea</span>
+                        <h4>Dronex — Servicios con Drones, Sensores y Machine Learning</h4>
+                    </div>
+                    <div class="ia-project-links">
+                        <a href="https://dronex-kappa.vercel.app" target="_blank" rel="noopener noreferrer" class="ia-profinance-btn"><i class="fas fa-external-link-alt"></i> Ver Dronex en vivo</a>
+                    </div>
+                </div>
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">1</div>
+                        <h4>Plataforma de Servicios y Experiencia 3D</h4>
+                    </div>
+                    <p class="ia-impl-desc">Sitio de producto para una flota de drones con modelo 3D interactivo y estética Liquid Glass. Presenta seis líneas de servicio —vigilancia con visión térmica 24/7, monitoreo de obras y cultivos con series temporales, análisis de suelos multiespectral (NDVI), análisis científico de campo, reconocimiento aéreo con ML y servicios aeroespaciales (fotogrametría, LiDAR)— con operaciones conectadas por enlace satelital Starlink, demo de vuelo y solicitud de misiones en línea.</p>
+                    <img src="images/dronex-landing.webp" alt="Portada de Dronex: Inteligencia aérea, con dron 3D" class="ia-impl-img" loading="lazy" />
+                </div>
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">2</div>
+                        <h4>Del Vuelo al Dato con Machine Learning</h4>
+                    </div>
+                    <p class="ia-impl-desc">Flujo de punta a punta en cuatro etapas: <strong>planificar</strong> (área, sensores y permisos), <strong>volar</strong> (rutas autónomas y captura de alta resolución), <strong>procesar con ML</strong> (modelos de visión artificial que detectan, clasifican y cuentan objetos) y <strong>entregar</strong> informes, mapas y alertas listos para decidir. Se integra con el centro de control de Orbix para la operación de las misiones.</p>
                 </div>
             </div>
         </div>

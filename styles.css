@@ -2229,3 +2229,31 @@ html, body { height: 100%; overflow: hidden; }
   .iv-tabs { width: 100%; }
   .iv-tab { flex: 1; justify-content: center; padding: 8px 10px; font-size: 0.8rem; }
 }
+
+/* LinkedIn QR in Contacto > Presencia Digital */
+.qr-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hairline);
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-decoration: none;
+}
+.qr-card img {
+  flex-shrink: 0;
+  width: 112px;
+  height: 112px;
+  padding: 6px;
+  border-radius: 12px;
+  background: #fff; /* keeps the code scannable in dark mode */
+  border: 1px solid var(--hairline);
+  box-shadow: var(--box-shadow);
+  image-rendering: pixelated;
+  transition: transform 0.35s var(--spring);
+}
+.qr-card:hover img { transform: scale(1.04); }
+.qr-card:hover { color: var(--ink); }
+.qr-card i { color: #0a66c2; margin-right: 4px; }

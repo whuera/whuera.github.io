@@ -2170,3 +2170,62 @@ html, body { height: 100%; overflow: hidden; }
 .ia-impl-img-wide { width: 100%; }
 .ia-profinance-btn { color: var(--ok); background: rgba(31, 157, 107, 0.1); border-color: rgba(31, 157, 107, 0.3); }
 .ia-profinance-btn:hover { color: var(--ok); background: rgba(31, 157, 107, 0.18); border-color: rgba(31, 157, 107, 0.5); }
+#txModal .modal-content { scrollbar-width: thin; scrollbar-color: var(--hairline) transparent; }
+/* keep the close "×" in the top-right corner (glass layer sets children to relative) */
+.modal-content.glass-card > .close-modal { position: absolute; top: 18px; right: 22px; z-index: 2; }
+#solModal .modal-content { scrollbar-width: thin; scrollbar-color: var(--hairline) transparent; }
+
+/* Entrevístame modal — tabs (Agendar reunión / Entrevista virtual IA) */
+.iv-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-right: 40px; }
+.iv-tabs {
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+}
+.iv-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.iv-tab:hover { color: var(--ink); }
+.iv-tab.active { background: var(--seg-thumb); color: var(--ink); box-shadow: 0 1px 3px rgba(15, 30, 51, 0.12), 0 4px 10px rgba(15, 30, 51, 0.08); }
+.iv-tab.active i { color: var(--secondary-color); }
+.iv-tab:focus-visible { outline: 2px solid var(--secondary-color); outline-offset: 2px; }
+.iv-pane { height: 100%; display: flex; flex-direction: column; gap: 12px; }
+.iv-pane[hidden] { display: none; }
+.iv-pane .modal-loader { flex: 1; min-height: 0; }
+.iv-schedule-bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+}
+.iv-schedule-bar p { margin: 0; font-size: 0.85rem; color: var(--muted); }
+.iv-schedule-bar p i { color: var(--secondary-color); margin-right: 6px; }
+.iv-frame { flex: 1; min-height: 0; width: 100%; border: 0; border-radius: 12px; }
+.iv-frame-calendar { background: #fff; }
+@media (max-width: 768px) {
+  .iv-header { padding-right: 32px; }
+  .iv-tabs { width: 100%; }
+  .iv-tab { flex: 1; justify-content: center; padding: 8px 10px; font-size: 0.8rem; }
+}

@@ -12,7 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
-    <link rel="stylesheet" href="styles.css?v=20261112b">
+    <link rel="stylesheet" href="styles.css?v=20261112f">
     <script>
         // Tema: light por defecto; se recuerda la elección del visitante
         try { if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
@@ -262,7 +262,7 @@
                         <p>Experto en sistemas distribuidos, microservicios y alta concurrencia para switches que operan 24/7 con tolerancia a fallos y latencia ultrabaja. Experto en <strong>BASE24-eps (C++/Java)</strong>, <strong>UPF</strong>, <strong>Oracle (PL/SQL)</strong> e integridad transaccional bajo <strong>ISO 8583</strong>, en canales ATM y POS a escala bancaria.</p>
                         <div style="margin-top: 15px; border-top: 1px solid var(--hairline); padding-top: 15px;">
                             <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;"><i class="fas fa-info-circle" style="color: var(--secondary-color);"></i> Para una revisión más detallada de los diseños de arquitectura, diagramas técnicos y soluciones implementadas en los proyectos en los que he participado, lo invito a consultar el siguiente recurso interactivo.</p>
-                            <div style="text-align: right;"><a href="https://viewdiagram-git-master-whueras-projects.vercel.app/" target="_blank" rel="noopener noreferrer"><button class="cert-btn"><i class="fas fa-project-diagram"></i> Ver Diagramas de Arquitectura</button></a></div>
+                            <div style="display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap;"><a href="https://viewdiagram-git-master-whueras-projects.vercel.app/" target="_blank" rel="noopener noreferrer"><button class="cert-btn"><i class="fas fa-project-diagram"></i> Ver Diagramas de Arquitectura</button></a><button class="cert-btn" onclick="openTxModal()"><i class="fas fa-exchange-alt"></i> Implementaciones</button></div>
                         </div>
                     </div>
 
@@ -271,7 +271,7 @@
                         <p>Experto en diseño de Arquitecturas end-to-end integrando core bancario, middleware y switch transaccional, con despliegues en <strong>AWS</strong>, <strong>Azure</strong> y <strong>GCP</strong>. He liderado integraciones complejas multi-institución (banco + switch + remesadoras/redes internacionales) entregadas en cronograma.</p>
                         <div style="margin-top: 15px; border-top: 1px solid var(--hairline); padding-top: 15px;">
                             <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;"><i class="fas fa-info-circle" style="color: var(--secondary-color);"></i> Puede explorar en detalle las arquitecturas de solución, diagramas de integración y documentación técnica de los proyectos corporativos y personales en los que he contribuido como arquitecto.</p>
-                            <div style="text-align: right;"><a href="https://viewdiagram-git-master-whueras-projects.vercel.app/" target="_blank" rel="noopener noreferrer"><button class="cert-btn"><i class="fas fa-project-diagram"></i> Ver Diagramas de Arquitectura</button></a></div>
+                            <div style="display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap;"><a href="https://viewdiagram-git-master-whueras-projects.vercel.app/" target="_blank" rel="noopener noreferrer"><button class="cert-btn"><i class="fas fa-project-diagram"></i> Ver Diagramas de Arquitectura</button></a><button class="cert-btn" onclick="openSolModal()"><i class="fas fa-layer-group"></i> Implementaciones</button></div>
                         </div>
                     </div>
 
@@ -771,24 +771,62 @@
             document.getElementById('iaModal').style.display = 'none';
         }
 
-        function openAssistantModal() {
-            document.getElementById('assistantModal').style.display = 'flex';
-            document.getElementById('assistantLoader').style.display = 'flex';
-            document.getElementById('assistantIframe').style.display = 'none';
-            document.getElementById('assistantIframe').src = 'https://mobilpymes.cl/interview';
-            document.getElementById('assistantIframe').onload = function () {
-                document.getElementById('assistantLoader').style.display = 'none';
-                document.getElementById('assistantIframe').style.display = 'block';
+        function openTxModal() {
+            document.getElementById('txModal').style.display = 'flex';
+        }
+
+        function closeTxModal() {
+            document.getElementById('txModal').style.display = 'none';
+        }
+
+        function openSolModal() {
+            document.getElementById('solModal').style.display = 'flex';
+        }
+
+        function closeSolModal() {
+            document.getElementById('solModal').style.display = 'none';
+        }
+
+        // Entrevístame: pestaña 1 = agendar en Google Calendar, pestaña 2 = entrevista virtual con IA
+        const INTERVIEW_FRAMES = {
+            ivSchedule: { iframe: 'scheduleIframe', loader: 'scheduleLoader', src: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ17GYBqG8667tgUQ7xahuCbjYFAPjbKPFiu3kn5OnyjCn4UEh_hO07pbJYqX45YdWwkKedi5vbR?gv=true' },
+            ivAssistant: { iframe: 'assistantIframe', loader: 'assistantLoader', src: 'https://mobilpymes.cl/interview' }
+        };
+
+        function showInterviewTab(paneId) {
+            document.querySelectorAll('#assistantModal .iv-tab').forEach(b => {
+                const on = b.dataset.pane === paneId;
+                b.classList.toggle('active', on);
+                b.setAttribute('aria-selected', on);
+            });
+            document.querySelectorAll('#assistantModal .iv-pane').forEach(p => { p.hidden = p.id !== paneId; });
+            // Carga el iframe solo la primera vez que se abre la pestaña
+            const cfg = INTERVIEW_FRAMES[paneId];
+            const frame = document.getElementById(cfg.iframe);
+            if (frame.getAttribute('src')) return;
+            const loader = document.getElementById(cfg.loader);
+            loader.style.display = 'flex';
+            frame.style.display = 'none';
+            frame.onload = function () {
+                loader.style.display = 'none';
+                frame.style.display = 'block';
             };
+            frame.src = cfg.src;
+        }
+
+        function openAssistantModal(paneId) {
+            document.getElementById('assistantModal').style.display = 'flex';
+            showInterviewTab(paneId || 'ivSchedule');
         }
 
         function closeAssistantModal() {
             document.getElementById('assistantModal').style.display = 'none';
-            document.getElementById('assistantIframe').src = '';
+            // Libera los iframes (micrófono de la entrevista IA incluido)
+            Object.values(INTERVIEW_FRAMES).forEach(cfg => document.getElementById(cfg.iframe).removeAttribute('src'));
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-            var modalsWithScroll = ['#iaModal .modal-content', '#pmModal .modal-content'];
+            var modalsWithScroll = ['#iaModal .modal-content', '#txModal .modal-content', '#solModal .modal-content', '#pmModal .modal-content'];
             modalsWithScroll.forEach(function (sel) {
                 var el = document.querySelector(sel);
                 var timer;
@@ -837,6 +875,8 @@
             const countryModal = document.getElementById('countryModal');
             const downloadModal = document.getElementById('downloadModal');
             const iaModal = document.getElementById('iaModal');
+            const txModal = document.getElementById('txModal');
+            const solModal = document.getElementById('solModal');
             const pmModal = document.getElementById('pmModal');
             const assistantModal = document.getElementById('assistantModal');
             // welcomeModal is intentionally excluded — user must interact with it
@@ -844,6 +884,8 @@
             if (event.target == countryModal) closeCountryModal();
             if (event.target == downloadModal) closeDownloadModal();
             if (event.target == iaModal) closeIaModal();
+            if (event.target == txModal) closeTxModal();
+            if (event.target == solModal) closeSolModal();
             if (event.target == pmModal) closePmModal();
             if (event.target == assistantModal) closeAssistantModal();
         }
@@ -1091,16 +1133,160 @@
         </div>
     </div>
 
+    <!-- Modal: Implementaciones transaccionales -->
+    <div id="txModal" class="modal">
+        <div class="modal-content glass-card" style="max-width:950px;width:92%;max-height:85vh;overflow-y:auto;">
+            <span class="close-modal" onclick="closeTxModal()"><i class="fas fa-times"></i></span>
+            <div class="modal-header">
+                <h3><i class="fas fa-exchange-alt" style="margin-right:8px;color:var(--secondary-color);"></i>Implementaciones Transaccionales</h3>
+            </div>
+            <div class="modal-body">
+                <div class="ia-project-head">
+                    <div>
+                        <span class="ia-project-tag">Proyecto 1 · Canal ATM</span>
+                        <h4>ATM Simulator Platform</h4>
+                    </div>
+                    <div class="ia-project-links">
+                        <a href="https://atm-simulator-alpha.vercel.app/" target="_blank" rel="noopener noreferrer" class="ia-profinance-btn"><i class="fas fa-external-link-alt"></i> Ver ATM Simulator</a>
+                    </div>
+                </div>
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">1</div>
+                        <h4>Cajero Automático Completo para Entrenamiento</h4>
+                    </div>
+                    <p class="ia-impl-desc">Plataforma de entrenamiento que simula un cajero automático de punta a punta: pantalla con teclas de función, teclado PIN (EPP), lector de tarjeta y consola de eventos, con usuarios y panel de administración. Permite ejecutar transacciones de canal —como consulta de saldo— y ver al mismo tiempo cómo responde cada componente del ATM, ilustrado en una vista isométrica del equipo por dentro.</p>
+                    <img src="images/atm-simulator.webp" alt="ATM Simulator Platform: cajero, lector de tarjeta y flujo de la transacción" class="ia-impl-img ia-impl-img-wide" loading="lazy" />
+                </div>
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">2</div>
+                        <h4>Flujo Transaccional Paso a Paso: NDC ↔ ISO 8583</h4>
+                    </div>
+                    <p class="ia-impl-desc">Cada transacción se recorre en nueve etapas: lectura de tarjeta, <strong>PIN cifrado en el EPP</strong>, armado del mensaje <strong>NDC</strong>, seguridad con <strong>MAC y canal cifrado</strong>, envío al switch, conversión <strong>NDC → ISO 8583</strong>, autorización del emisor, regreso <strong>ISO 8583 → NDC</strong> y ejecución de la respuesta en el ATM (pantalla, comprobante y mensaje Ready al host).</p>
+                </div>
+
+                <div class="ia-project-head">
+                    <div>
+                        <span class="ia-project-tag">Proyecto 2 · Switch transaccional</span>
+                        <h4>BASE24-eps Simulator</h4>
+                    </div>
+                    <div class="ia-project-links">
+                        <a href="https://base24-eps-simulator.vercel.app/" target="_blank" rel="noopener noreferrer" class="ia-profinance-btn"><i class="fas fa-external-link-alt"></i> Ver BASE24-eps Simulator</a>
+                    </div>
+                </div>
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">1</div>
+                        <h4>Réplica de la Consola EPS Development / ESNCService</h4>
+                    </div>
+                    <p class="ia-impl-desc">Réplica didáctica de la consola de ACI BASE24-eps, con la experiencia de un IDE tipo Eclipse. Permite configurar el switch completo: <strong>Institution</strong> (emisores), <strong>Host / Interchange</strong> (interfaces ISO como VISA, Mastercard y STAR), <strong>Prefix</strong> (rangos BIN On-Us y Not-On-Us), <strong>Routing</strong> (Source y Destination Routing Profiles, route codes y relaciones), <strong>Limit Profiles</strong> y <strong>Card Management</strong> con saldos Positive Balance.</p>
+                    <img src="images/base24-eps-simulator.webp" alt="BASE24-eps Simulator: consola EPS Development con módulos de configuración" class="ia-impl-img ia-impl-img-wide" loading="lazy" />
+                </div>
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">2</div>
+                        <h4>Simulador de Autorizaciones ISO 8583 con Traza RTR</h4>
+                    </div>
+                    <p class="ia-impl-desc">El <strong>Transaction Simulator</strong> envía solicitudes de autorización ISO 8583 sobre la configuración creada y muestra la traza RTR completa del ruteo. Una guía de aprendizaje acompaña la ruta de configuración —de la institución emisora a la tarjeta de prueba— para entender cómo BASE24-eps autoriza y enruta cada transacción.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Implementaciones de arquitectura de soluciones -->
+    <div id="solModal" class="modal">
+        <div class="modal-content glass-card" style="max-width:950px;width:92%;max-height:85vh;overflow-y:auto;">
+            <span class="close-modal" onclick="closeSolModal()"><i class="fas fa-times"></i></span>
+            <div class="modal-header">
+                <h3><i class="fas fa-layer-group" style="margin-right:8px;color:var(--secondary-color);"></i>Implementaciones de Arquitectura de Soluciones</h3>
+            </div>
+            <div class="modal-body">
+                <div class="ia-project-head">
+                    <div>
+                        <span class="ia-project-tag">Proyecto 1 · Comercio digital B2B</span>
+                        <h4>Mobilpymes Store — Portal de Negocios y Compras</h4>
+                    </div>
+                    <div class="ia-project-links">
+                        <a href="https://www.mobilpymes.store" target="_blank" rel="noopener noreferrer" class="ia-profinance-btn"><i class="fas fa-external-link-alt"></i> Ver Mobilpymes Store</a>
+                    </div>
+                </div>
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">1</div>
+                        <h4>Marketplace sobre el Catálogo Real del Backend</h4>
+                    </div>
+                    <p class="ia-impl-desc">Red de empresas y compras seguras: un ecommerce que consume en vivo el catálogo del <strong>CRM Backend</strong> de Mobilpymes, con buscador, navegación por rubros (vinos, vehículos, camiones, frutos selectos), carrito y cuentas de comprador y vendedor. Integra los pagos con <strong>Pay Direct</strong> —la plataforma de pagos de ProFinance—, envíos a todo el país y protección de compra con devoluciones.</p>
+                    <img src="images/mobilpymes-store.webp" alt="Mobilpymes Store: portal de negocios con rubros, red de compradores y asistente de ventas IA" class="ia-impl-img ia-impl-img-wide" loading="lazy" />
+                </div>
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">2</div>
+                        <h4>Red de Compradores y Asistente de Ventas con IA</h4>
+                    </div>
+                    <p class="ia-impl-desc">Para los vendedores, la plataforma suma una <strong>red de compradores</strong> que usa IA para acercar compradores potenciales y verificados a cada tienda, y un <strong>asistente de ventas IA</strong> que sugiere cómo conseguir más compradores y mejorar las publicaciones.</p>
+                </div>
+
+                <div class="ia-project-head">
+                    <div>
+                        <span class="ia-project-tag">Proyecto 2 · Banca digital</span>
+                        <h4>ProFinance — Plataforma Bancaria Moderna</h4>
+                    </div>
+                    <div class="ia-project-links">
+                        <a href="https://pro-bank-five.vercel.app/#features" target="_blank" rel="noopener noreferrer" class="ia-profinance-btn"><i class="fas fa-external-link-alt"></i> Ver ProFinance</a>
+                    </div>
+                </div>
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">1</div>
+                        <h4>Banca Personas y Onboarding Digital</h4>
+                    </div>
+                    <p class="ia-impl-desc">Plataforma de banca digital con apertura de cuenta en línea, banca personas (cuentas de ahorro y préstamos personales) y soluciones para empresas. Seguridad por diseño con cifrado de datos y transacciones, transferencias instantáneas y analítica de gastos con informes impulsados por IA.</p>
+                    <img src="images/profinance-banca.webp" alt="ProFinance: sección Banca Personas" class="ia-impl-img ia-impl-img-wide" loading="lazy" />
+                </div>
+                <div class="ia-impl-section">
+                    <div class="ia-impl-step">
+                        <div class="ia-impl-step-number">2</div>
+                        <h4>Ecosistema Integrado: Banco, Pagos y Comercio</h4>
+                    </div>
+                    <p class="ia-impl-desc">ProFinance es el núcleo financiero del ecosistema: su plataforma <strong>Pay Direct</strong> procesa los pagos de Mobilpymes Store, y su módulo transaccional alimenta el motor de detección de fraude con Machine Learning (ver <em>Implementaciones IA</em>). Una arquitectura de soluciones end-to-end que conecta banca, medios de pago, comercio y CRM.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal for Entrevista Virtual -->
     <div id="assistantModal" class="modal">
         <div class="modal-content glass-card" style="max-width:900px;width:94%;height:88vh;display:flex;flex-direction:column;">
             <span class="close-modal" onclick="closeAssistantModal()"><i class="fas fa-times"></i></span>
-            <div class="modal-body" style="flex:1;overflow:hidden;padding:0;margin-top:12px;">
-                <div id="assistantLoader" class="modal-loader">
-                    <div class="spinner"></div>
-                    <p>Cargando entrevista virtual...</p>
+            <div class="modal-header iv-header">
+                <h3><i class="fas fa-comments" style="margin-right:8px;color:var(--secondary-color);"></i>Entrevístame</h3>
+                <div class="iv-tabs" role="tablist" aria-label="Opciones de entrevista">
+                    <button type="button" class="iv-tab" role="tab" data-pane="ivSchedule" onclick="showInterviewTab('ivSchedule')"><i class="fas fa-calendar-alt"></i> Agendar reunión</button>
+                    <button type="button" class="iv-tab" role="tab" data-pane="ivAssistant" onclick="showInterviewTab('ivAssistant')"><i class="fas fa-robot"></i> Entrevista virtual (IA)</button>
                 </div>
-                <iframe id="assistantIframe" src="" frameborder="0" style="display:none;width:100%;height:100%;border-radius:8px;" allow="microphone"></iframe>
+            </div>
+            <div class="modal-body" style="flex:1;overflow:hidden;padding:0;min-height:0;">
+                <!-- Tab 1: agendamiento con Google Calendar -->
+                <div id="ivSchedule" class="iv-pane" role="tabpanel">
+                    <div class="iv-schedule-bar">
+                        <p><i class="fas fa-info-circle"></i> Elige un horario disponible en mi calendario. Recibirás la invitación de Google Calendar con el enlace de la reunión.</p>
+                        <a class="cert-btn" href="https://calendar.app.google/XAxKpgkTgd7bmVFv6" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Abrir en Google Calendar</a>
+                    </div>
+                    <div id="scheduleLoader" class="modal-loader">
+                        <div class="spinner"></div>
+                        <p>Cargando calendario...</p>
+                    </div>
+                    <iframe id="scheduleIframe" class="iv-frame iv-frame-calendar" src="" title="Agendar una reunión con William Huera" style="display:none;"></iframe>
+                </div>
+                <!-- Tab 2: entrevista virtual con IA (funcionalidad existente) -->
+                <div id="ivAssistant" class="iv-pane" role="tabpanel" hidden>
+                    <div id="assistantLoader" class="modal-loader">
+                        <div class="spinner"></div>
+                        <p>Cargando entrevista virtual...</p>
+                    </div>
+                    <iframe id="assistantIframe" class="iv-frame" src="" title="Entrevista virtual con IA" style="display:none;" allow="microphone"></iframe>
+                </div>
             </div>
         </div>
     </div>
